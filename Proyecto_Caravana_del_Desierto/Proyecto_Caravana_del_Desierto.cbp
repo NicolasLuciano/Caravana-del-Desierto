@@ -31,7 +31,39 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="main.c">
+		<Unit filename="headers/arbol.h" />
+		<Unit filename="headers/archivos.h" />
+		<Unit filename="headers/bandido.h" />
+		<Unit filename="headers/cola.h" />
+		<Unit filename="headers/jugador.h" />
+		<Unit filename="headers/lista.h" />
+		<Unit filename="headers/menu.h" />
+		<Unit filename="headers/tablero.h" />
+		<Unit filename="sources/arbol.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sources/archivos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sources/bandido.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sources/cola.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sources/jugador.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sources/lista.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sources/main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sources/menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sources/tablero.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>
