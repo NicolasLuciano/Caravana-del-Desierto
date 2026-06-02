@@ -44,5 +44,5 @@ int insertarArbol(tArbol *arbol,void *dato,unsigned tam, int(*cmp)(void*,void*))
         return insertarArbol(&(*arbol)->nodoIzq,dato,tam,cmp);
     if(cmp(dato,(*arbol)->dato)>0)
         return insertarArbol(&(*arbol)->nodoDer,dato,tam,cmp);
-    return ERROR_DUPLICADO;
+    return DUPLICADO_ERROR;
 }

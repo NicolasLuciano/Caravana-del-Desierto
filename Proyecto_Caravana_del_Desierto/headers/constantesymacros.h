@@ -1,14 +1,14 @@
 #ifndef CONSTANTESYMACROS_H_INCLUDED
 #define CONSTANTESYMACROS_H_INCLUDED
 
-#define LIMITE_INVALIDO 1
+#define LIMITE_INVALIDO -5
 
 #define ADELANTE 1
+#define TODO_OK 1
 #define LISTA_ERROR -1
-#define SIN_MEM -2;
-#define TODO_OK 0
-#define ERROR_DUPLICADO -3
-#define ERROR_COLA -4
+#define SIN_MEM -2
+#define DUPLICADO_ERROR -3
+#define COLA_ERROR -4
 
 #define MIN(x,y)(x>y?y:x)
 

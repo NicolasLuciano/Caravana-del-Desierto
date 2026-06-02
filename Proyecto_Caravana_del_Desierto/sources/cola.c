@@ -33,7 +33,7 @@ int sacarDeCola(tCola* pc, void* dato, unsigned tam)
 {
     tNodo *auxPrimero=pc->pri;
     if(NULL==auxPrimero)
-        return ERROR_COLA;
+        return COLA_ERROR;
     pc->pri=auxPrimero->sig;
     memcpy(dato,auxPrimero->dato,MIN(tam,auxPrimero->tamDato));
     free(auxPrimero->dato);
