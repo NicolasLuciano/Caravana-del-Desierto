@@ -3,6 +3,7 @@
 
 #define LISTA_OK 0
 #define LISTA_ERROR -1
+#define ADELANTE 1
 #define SIN_MEM -2;
 
 #define MIN(x,y)(x>y?y:x)
@@ -14,7 +15,7 @@ void crearLista(tLista * lista)
 
 int insertarFinLis(tLista * lista, const void * dato, unsigned tam)
 {
-    tNodo * nuevoNodo, * nodoActual;
+    tNodoLista * nuevoNodo, * nodoActual;
 
     nuevoNodo=malloc(sizeof(tNodo));
     if(nuevoNodo==NULL)
@@ -53,25 +54,18 @@ int insertarFinLis(tLista * lista, const void * dato, unsigned tam)
     return LISTA_OK;
 }
 
-tNodo * moverAdelante(tNodo * pos,  unsigned pasos)
+tNodo * moverEnLista(tNodoLista * pos, unsigned pasos, int direccion)
 {
     int i;
-    for(i=0;i<pasos;i++)
-        pos=pos->nodoSig;
+    if(direccion==ADELANTE)
+    {
+        for(i=0;i<pasos;i++)
+            pos=pos->nodoSig;
+    }
+    else
+        for(i=0;i<pasos;i++)
+            pos=pos->nodoAnt;
 
     return pos;
 }
 
-tNodo * moverAtras(tNodo * pos,  unsigned pasos)
-{
-    int i;
-    for(i=0;i<pasos;i++)
-        pos=pos->nodoAnt;
-
-    return pos;
-}
-
-int eliminarPorClave(tLista * lista,const void * clave,  unsigned tam, int (*cmp)(const void *a,const void *b));
-{
-
-}
