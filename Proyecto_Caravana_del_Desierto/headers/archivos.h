@@ -20,5 +20,6 @@ typedef struct
 }tConfig;
 
 int cargarConfig(const char* nombreArch, tConfig* configuracion);
+void generaraArchivoTablero();
 
 #endif // ARCHIVOS_H_INCLUDED

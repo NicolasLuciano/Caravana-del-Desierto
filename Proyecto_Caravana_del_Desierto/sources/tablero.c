@@ -130,18 +130,23 @@ void grabarCasilla(FILE* fp, const void* dato)
 
     if(c->inicio)
         fprintf(fp, "I\n");
-    else if(c->salida)
-        fprintf(fp, "S\n");
-    else if(c->premio)
-        fprintf(fp, "P\n");
-    else if(c->vidaExtra)
-        fprintf(fp, "V\n");
-    else if(c->oasis)
-        fprintf(fp, "O\n");
-    else if(c->tormenta)
-        fprintf(fp, "T\n");
-    else
-        fprintf(fp, ".\n");
+    else 
+        if(c->salida)
+            fprintf(fp, "S\n");
+        else 
+            if(c->premio)
+                fprintf(fp, "P\n");
+            else 
+                if(c->vidaExtra)
+                    fprintf(fp, "V\n");
+                else 
+                    if(c->oasis)
+                        fprintf(fp, "O\n");
+                    else 
+                        if(c->tormenta)
+                            fprintf(fp, "T\n");
+                        else
+                            fprintf(fp, ".\n");
 }
 
 

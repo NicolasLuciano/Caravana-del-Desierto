@@ -1,6 +1,7 @@
 #include "../headers/lista.h"
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #define LISTA_OK 0
 #define LISTA_ERROR -1
@@ -55,19 +56,20 @@ int insertarFinLis(tLista * lista, const void * dato, unsigned tam)
     return LISTA_OK;
 }
 
-tNodoLista * moverEnLista(tNodoLista * pos, unsigned pasos, int direccion)
+void moverEnLista(tNodoLista **pos, unsigned pasos, int direccion)
 {
     int i;
-    if(direccion==ADELANTE)
+
+    if(direccion == ADELANTE)
     {
-        for(i=0;i<pasos;i++)
-            pos=pos->nodoSig;
+        for(i = 0; i < pasos; i++)
+            *pos = (*pos)->nodoSig;
     }
     else
-        for(i=0;i<pasos;i++)
-            pos=pos->nodoAnt;
-
-    return pos;
+    {
+        for(i = 0; i < pasos; i++)
+            *pos = (*pos)->nodoAnt;
+    }
 }
 
 
