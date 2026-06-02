@@ -6,10 +6,10 @@
 typedef struct
 {
     tNodoLista* posicion;
-    int vidas;
-    int puntos;
-    int protegido;
-    int pierdeTurno;
+    unsigned vidas;
+    unsigned puntos;
+    char protegido;
+    char pierdeTurno;
 } Jugador;
 
 #endif // JUGADOR_H_INCLUDED
