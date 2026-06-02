@@ -3,6 +3,13 @@
 
 #define LIMITE_INVALIDO 1
 
+#define ADELANTE 1
+#define LISTA_ERROR -1
+#define SIN_MEM -2;
 #define TODO_OK 0
+#define ERROR_DUPLICADO -3
+#define ERROR_COLA -4
+
+#define MIN(x,y)(x>y?y:x)
 
 #endif // CONSTANTESYMACROS_H_INCLUDED

@@ -1,11 +1,8 @@
 #include "../headers/cola.h"
+#include "../headers/constantesymacros.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-#define COLA_BIEN 1
-#define ERROR_COLA -3
-#define ERROR_MEMORIA -4
-#define MIN(x,y)(x<y?x:y)
 void crearCola(tCola* pc)
 {
     pc->pri = NULL;
@@ -15,12 +12,12 @@ int ponerEnCola(tCola* pc, const void* dato, unsigned tam)
 {
     tNodo *nue = malloc(sizeof(tNodo));
     if(NULL==nue)
-        return ERROR_MEMORIA;
+        return SIN_MEM;
     nue->dato = malloc(tam);
     if(NULL == nue->dato)
     {
         free(nue);
-        return ERROR_MEMORIA;
+        return SIN_MEM;
     }
     memcpy(nue->dato,dato,tam);
     nue->tamDato = tam;
@@ -30,7 +27,7 @@ int ponerEnCola(tCola* pc, const void* dato, unsigned tam)
     else
         pc->pri = nue;
     pc->ult = nue;
-    return COLA_BIEN;
+    return TODO_OK;
 }
 int sacarDeCola(tCola* pc, void* dato, unsigned tam)
 {
@@ -43,7 +40,7 @@ int sacarDeCola(tCola* pc, void* dato, unsigned tam)
     free(auxPrimero);
     if(NULL==pc->pri)
         pc->ult = NULL;
-    return COLA_BIEN;
+    return TODO_OK;
 }
 int colaVacia(const tCola* pc)
 {

@@ -2,9 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-#define ARBOL_BIEN 1
-#define ERROR_MEM -5
-#define ERROR_DUPLICADO -6
+#include "../headers/constantesymacros.h"
+
 void crearArbol(tArbol *arbol)
 {
     *arbol = NULL;
@@ -27,19 +26,19 @@ int insertarArbol(tArbol *arbol,void *dato,unsigned tam, int(*cmp)(void*,void*))
         tNodo *nodoAux;
         nodoAux = malloc(sizeof(tNodo));
         if(!nodoAux)
-            return ERROR_MEM;
+            return SIN_MEM;
         nodoAux->dato = malloc(tam);
         if(!nodoAux->dato)
         {
             free(nodoAux);
-            return ERROR_MEM;
+            return SIN_MEM;
         }
         memcpy(nodoAux->dato,dato,tam);
         nodoAux->tam=tam;
         nodoAux->nodoIzq=NULL;
         nodoAux->nodoDer=NULL;
         *arbol = nodoAux;
-        return ARBOL_BIEN;
+        return TODO_OK;
     }
     if(cmp(dato,(*arbol)->dato)<0)
         return insertarArbol(&(*arbol)->nodoIzq,dato,tam,cmp);

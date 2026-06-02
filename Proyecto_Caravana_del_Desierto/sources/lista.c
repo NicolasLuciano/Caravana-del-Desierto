@@ -2,13 +2,10 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "../headers/constantesymacros.h"
 
-#define LISTA_OK 0
-#define LISTA_ERROR -1
-#define ADELANTE 1
-#define SIN_MEM -2;
 
-#define MIN(x,y)(x>y?y:x)
+
 
 void crearLista(tLista * lista)
 {
@@ -38,7 +35,7 @@ int insertarFinLis(tLista * lista, const void * dato, unsigned tam)
         nuevoNodo->nodoSig=nuevoNodo;
         nuevoNodo->nodoAnt=nuevoNodo;
         *lista=nuevoNodo;
-        return LISTA_OK;
+        return TODO_OK;
     }
 
     nodoActual=*lista;
@@ -53,7 +50,7 @@ int insertarFinLis(tLista * lista, const void * dato, unsigned tam)
     (*lista)->nodoAnt=nuevoNodo;
 
 
-    return LISTA_OK;
+    return TODO_OK;
 }
 
 void moverEnLista(tNodoLista **pos, unsigned pasos, int direccion)
