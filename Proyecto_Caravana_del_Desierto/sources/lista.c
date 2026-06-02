@@ -1,5 +1,6 @@
 #include "../headers/lista.h"
 #include <string.h>
+#include <stdio.h>
 
 #define LISTA_OK 0
 #define LISTA_ERROR -1
@@ -17,7 +18,7 @@ int insertarFinLis(tLista * lista, const void * dato, unsigned tam)
 {
     tNodoLista * nuevoNodo, * nodoActual;
 
-    nuevoNodo=malloc(sizeof(tNodo));
+    nuevoNodo=malloc(sizeof(tNodoLista));
     if(nuevoNodo==NULL)
         return SIN_MEM;
 
@@ -54,7 +55,7 @@ int insertarFinLis(tLista * lista, const void * dato, unsigned tam)
     return LISTA_OK;
 }
 
-tNodo * moverEnLista(tNodoLista * pos, unsigned pasos, int direccion)
+tNodoLista * moverEnLista(tNodoLista * pos, unsigned pasos, int direccion)
 {
     int i;
     if(direccion==ADELANTE)
@@ -69,3 +70,35 @@ tNodo * moverEnLista(tNodoLista * pos, unsigned pasos, int direccion)
     return pos;
 }
 
+
+void* obtenerDatoPos(const tLista* lista, unsigned pos)
+{
+    tNodoLista* act;
+
+    if(*lista == NULL)
+        return NULL;
+
+    act = *lista;
+
+    while(pos--)
+        act = act->nodoSig;
+
+    return act->dato;
+}
+
+void recorrerListaArchivo(const tLista* lista,FILE* fp,void (*accion)(FILE* fp, const void* dato))
+{
+    tNodoLista* act;
+
+    if(*lista == NULL)
+        return;
+
+    act = *lista;
+
+    do
+    {
+        accion(fp, act->dato);
+        act = act->nodoSig;
+    }
+    while(act != *lista);
+}

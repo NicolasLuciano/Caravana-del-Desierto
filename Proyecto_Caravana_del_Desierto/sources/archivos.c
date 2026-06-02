@@ -1,4 +1,5 @@
 #include "../headers/archivos.h"
+#include "../headers/lista.h"
 
 int cargarConfig(const char* nombreArch, tConfig* configuracion)
 {
@@ -19,3 +20,4 @@ int cargarConfig(const char* nombreArch, tConfig* configuracion)
     fclose(fp);
     return TODO_OK;
 }
+
