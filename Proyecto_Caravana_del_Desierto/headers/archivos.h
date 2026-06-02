@@ -6,7 +6,7 @@
 
 #define ERR_ARCH 1
 #define TODO_OK 0
-typedef struct 
+typedef struct
 {
     int cantCasillas;
     int vidasIniciales;
@@ -18,5 +18,6 @@ typedef struct
 }tConfig;
 
 int cargarConfig(const char* nombreArch, tConfig* configuracion);
+void generaraArchivoTablero();
 
 #endif // ARCHIVOS_H_INCLUDED

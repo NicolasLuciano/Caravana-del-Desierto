@@ -15,7 +15,12 @@ int cargarConfig(const char* nombreArch, tConfig* configuracion)
     fscanf(fp, "maximo_oasis: %d\n", &configuracion->cantOasis);
     fscanf(fp, "maximo_tormentas: %d", &configuracion->cantTormentas);
 
-    
+
     fclose(fp);
     return TODO_OK;
+}
+
+void generaraArchivoTablero()
+{
+
 }
