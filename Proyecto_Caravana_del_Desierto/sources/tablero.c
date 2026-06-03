@@ -113,9 +113,17 @@ void distribuirTormentas(tLista* tablero, int cantTormentas, int ** vecPosicione
     }
 }
 
-void distribuirBandidos(tLista * tablero,tBandido * bandidos, int cantBandidos, int ** vecPosiciones)
+void distribuirBandidos(tLista * tablero, tBandido * bandidos, int cantBandidos, int ** vecPosiciones)
 {
+    int i;
+    tNodoLista * nodoMov;
 
+    for(i=0;i<cantBandidos;i++)
+    {
+        nodoMov=*tablero;
+        moverEnLista(nodoMov,**vecPosiciones,ADELANTE);
+        bandidos->posicion=nodoMov;
+    }
 }
 
 void mostrarCasilla(const void* dato)
