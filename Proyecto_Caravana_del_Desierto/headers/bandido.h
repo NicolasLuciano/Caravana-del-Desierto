@@ -5,6 +5,7 @@ typedef struct
 {
     tNodoLista *posicion;
     char vivo;
+    int direccion;
 } tBandido;
 
 tBandido * crearBandidos( unsigned cantBandidos);
