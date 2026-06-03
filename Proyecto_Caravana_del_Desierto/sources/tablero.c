@@ -31,6 +31,7 @@ int generarTablero(tLista *tablero,const tConfig configuracion, tBandido * bandi
     distribuirOasis(tablero,configuracion.cantOasis,&auxVec);
     distribuirTormentas(tablero,configuracion.cantTormentas,&auxVec);
     distribuirVidasExtra(tablero,configuracion.cantVidasExtra,&auxVec);
+    distribuirBandidos(tablero, bandidos, configuracion.cantBandidos,&auxVec);
     free(vecPosiciones);
     return 0;
 }
@@ -121,12 +122,38 @@ void distribuirBandidos(tLista * tablero, tBandido * bandidos, int cantBandidos,
     for(i=0;i<cantBandidos;i++)
     {
         nodoMov=*tablero;
-        moverEnLista(nodoMov,**vecPosiciones,ADELANTE);
-        bandidos->posicion=nodoMov;
+        (*vecPosiciones)++;
+        moverEnLista(&nodoMov,**vecPosiciones,ADELANTE);
+        (bandidos+i)->posicion=nodoMov;
+        (bandidos+i)->direccion=ADELANTE;
     }
 }
 
-void mostrarCasilla(const void* dato)
+void mostrarTablero(const tLista* tablero, const tBandido*bandidos, unsigned cantBandidos)
 {
-    printf("[%c]\n",*(char*)dato);
+    tNodoLista * tableroAux;
+    char casilla;
+    int i,contCasilla;
+
+    tableroAux=*tablero;
+    contCasilla=1;
+    while(tableroAux->nodoSig != *tablero )
+    {
+        i=0;
+        recuperarDatoLista(tableroAux,&casilla,sizeof(casilla));
+
+        while(i<cantBandidos && tableroAux!=(bandidos+i)->posicion)
+            i++;
+
+        if(tableroAux==(bandidos+i)->posicion)
+            printf("%02d:B\n",contCasilla);
+        else
+            printf("%02d:%c\n",contCasilla,casilla);
+
+        tableroAux=tableroAux->nodoSig;
+        contCasilla++;
+    }
+    recuperarDatoLista(tableroAux,&casilla,sizeof(casilla));
+    printf("%02d:%c\n",contCasilla,casilla);
+
 }

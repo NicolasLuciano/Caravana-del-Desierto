@@ -2,6 +2,7 @@
 #define CONSTANTESYMACROS_H_INCLUDED
 
 #define ADELANTE 1
+#define ATRAS -1
 #define TODO_OK 1
 #define LISTA_ERROR -1
 #define SIN_MEM -2

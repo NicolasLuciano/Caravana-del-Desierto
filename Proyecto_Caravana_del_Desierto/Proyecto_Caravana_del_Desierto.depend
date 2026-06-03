@@ -42,7 +42,7 @@
 	"../headers/bandido.h"
 	"../headers/constantesymacros.h"
 
-1780514544 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\main.c
+1780524369 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\main.c
 	"../headers/lista.h"
 	"../headers/archivos.h"
 	"../headers/tablero.h"
@@ -51,7 +51,7 @@
 
 1779835903 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\menu.c
 
-1780513759 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\tablero.c
+1780525149 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\tablero.c
 	"../headers/tablero.h"
 	"../headers/constantesymacros.h"
 	<time.h>
@@ -83,7 +83,7 @@
 
 1780429785 c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\headers\dado.h
 
-1780514446 c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\headers\constantesymacros.h
+1780515827 c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\headers\constantesymacros.h
 
 1780429222 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\jugador.c
 
@@ -124,20 +124,20 @@
 	"lista.h"
 	"archivos.h"
 
-1780510673 c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\headers\lista.h
+1780521093 c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\headers\lista.h
 	<string.h>
 	<stdio.h>
 	<stdlib.h>
 
-1780511326 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\lista.c
+1780517780 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\lista.c
 	"../headers/lista.h"
 	"../headers/constantesymacros.h"
 
-1780513922 c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\headers\tablero.h
+1780524761 c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\headers\tablero.h
 	"../headers/bandido.h"
 	<stdio.h>
 	"archivos.h"
 
-1780514558 c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\headers\bandido.h
+1780515715 c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\headers\bandido.h
 	"lista.h"
 

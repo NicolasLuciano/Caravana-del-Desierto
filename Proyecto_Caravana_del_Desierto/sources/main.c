@@ -17,7 +17,7 @@ int main()
     if( bandidos== NULL)
         perror("No hay memoria suficiente para crear bandidos");
     generarTablero(&tablero,configuracion,bandidos); //PARA MI NO HACE FALTA MANDARLO COMO PUNTERO
-    mostrarLista(&tablero,mostrarCasilla);
+    mostrarTablero(&tablero,bandidos,configuracion.cantBandidos);
 
     return 0;
 }

@@ -99,15 +99,7 @@ void recorrerListaArchivo(const tLista* lista,FILE* fp,void (*accion)(FILE* fp, 
     while(act != *lista);
 }
 
-void mostrarLista(const tLista* lista,void (*mostrar)(const void* dato))
+void recuperarDatoLista(tNodoLista * nodo,void * dato, unsigned tam)
 {
-    tNodoLista * nodoAux;
-    nodoAux=*lista;
-    while(nodoAux->nodoSig != *lista )
-    {
-        mostrar(nodoAux->dato);
-        nodoAux=nodoAux->nodoSig;
-    }
-    mostrar(nodoAux->dato);
+    memcpy(dato,nodo->dato,MIN(tam,nodo->tam));
 }
-
