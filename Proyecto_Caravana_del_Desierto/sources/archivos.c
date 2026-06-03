@@ -1,12 +1,13 @@
 #include "../headers/archivos.h"
 #include "../headers/lista.h"
+#include "../headers/constantesymacros.h"
 
 int cargarConfig(const char* nombreArch, tConfig* configuracion)
 {
     FILE *fp;
     fp=fopen(nombreArch, "rt");
     if(!fp)
-        return ERR_ARCH;
+        return ARCH_ERROR;
 
     fscanf(fp, "cantidad_posiciones: %d\n", &configuracion->cantCasillas);
     fscanf(fp, "vidas_inicio: %d\n", &configuracion->vidasIniciales);
@@ -21,3 +22,14 @@ int cargarConfig(const char* nombreArch, tConfig* configuracion)
     return TODO_OK;
 }
 
+int generarCaravana(const char* nombreArch,const tLista *tablero)
+{
+    FILE* fp;
+    fp= fopen(nombreArch, "wt");
+    if(!fp)
+        return ARCH_ERROR;
+
+
+    fclose(fp);
+    return TODO_OK;
+}

@@ -1,6 +1,10 @@
 #ifndef LISTA_H_INCLUDED
 #define LISTA_H_INCLUDED
 
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 typedef struct sNodo{
     void * dato;
     unsigned tam;

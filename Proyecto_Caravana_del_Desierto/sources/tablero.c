@@ -1,92 +1,83 @@
 #include "../headers/tablero.h"
-
-int casillaLibre(const tCasilla* c);
+#include "../headers/constantesymacros.h"
 
 int generarTablero(tLista *tablero,const tConfig *configuracion)
 {
+    int * vecPosiciones, *auxVec;
     tCasilla c;
+
+    vecPosiciones=malloc(sizeof(int)*configuracion->cantCasillas);
+    if(NULL==vecPosiciones)
+        return SIN_MEM;
+
     c.premio=0;
     c.vidaExtra=0;
     c.oasis=0;
     c.tormenta=0;
-    crearLista(tablero);
+    c.salida=0;
 
-    for(int i =0; i< configuracion->cantCasillas;i++)
-    {
-        c.inicio=0;
-        c.salida=0;
-        if(i==0)
-            c.inicio=1;
-        if(i==configuracion->cantCasillas-1)
-            c.salida=1;
-        if(insertarFinLis(tablero, &c, sizeof(tCasilla)) != 0)
-            return 1;
-    }
-    distribuirPremios(tablero,configuracion->cantCasillas,configuracion->cantPremios);
+
+    c.inicio=1;
+    insertarFinLis(tablero, &c, sizeof(tCasilla));
+    c.inicio=0;
+
+    for(int i =1; i< configuracion->cantCasillas-1; i++)
+        {
+            insertarFinLis(tablero, &c, sizeof(tCasilla));
+        }
+
+    c.salida=1;
+    insertarFinLis(tablero, &c, sizeof(tCasilla));
+
+    auxVec=vecPosiciones;
+
+    mezclarPosiciones(vecPosiciones,configuracion->cantCasillas);
+
+    distribuirPremios(tablero,configuracion->cantPremios,&auxVec);
+
     distribuirOasis(tablero,configuracion->cantCasillas,configuracion->cantOasis);
     distribuirTormentas(tablero,configuracion->cantCasillas,configuracion->cantTormentas);
     distribuirVidasExtra(tablero,configuracion->cantCasillas,configuracion->cantVidasMax);
     return 0;
 }
 
-tCasilla* obtenerCasillaLibreAleatoria(tLista* tablero,int cantCasillas)
+void mezclarPosiciones(int * vecPosiciones,int cantCasillas)
 {
-    int pos;
-    tCasilla* c;
+    int i,j,aux;
 
-    do
+    for(i=0;i<cantCasillas;i++)
+        vecPosiciones[i]=i;
+
+    for(i = cantCasillas-2; i > 0; i--)
     {
-        pos = rand() % cantCasillas;
+        j = rand() % (i + 1);
 
-        c = (tCasilla*)obtenerDatoPos(tablero, pos);
-
-    } while(!casillaLibre(c));
-
-    return c;
+        aux = vecPosiciones[i];
+        vecPosiciones[i] = vecPosiciones[j];
+        vecPosiciones[j] = aux;
+    }
 }
 
 
-void mostrarCasilla(const void* dato)
+void distribuirPremios(tLista* tablero,int cantPremios, int ** vecPosiciones)
 {
-    const tCasilla *c = (const tCasilla*)dato;
-
-     printf("[");
-
-    if(c->inicio)
-        printf("I");
-
-    if(c->salida)
-        printf("S");
-
-    if(c->premio)
-        printf("P");
-
-    if(c->vidaExtra)
-        printf("V");
-
-    if(c->oasis)
-        printf("O");
-
-    if(c->tormenta)
-        printf("T");
-
-    printf("] ");
-}
-
-
-int casillaLibre(const tCasilla* c)
-{
-    return (c->inicio==0 && c->salida==0 && c->premio==0 && c->vidaExtra==0 && c->oasis==0 && c->tormenta==0);
-}
-
-void distribuirPremios(tLista* tablero,int cantCasillas,int cantPremios)
-{
-    tCasilla* c;
+    tCasilla c;
+    tNodoLista * nodoConfig;
     int i;
+
+    c.premio=1;
+    c.vidaExtra=0;
+    c.oasis=0;
+    c.tormenta=0;
+    c.salida=0;
+    c.salida=0;
+
     for(i = 0; i < cantPremios; i++)
     {
-        c = obtenerCasillaLibreAleatoria(tablero,cantCasillas);
-        c->premio = 1;
+        nodoConfig=*tablero;
+        (*vecPosiciones)++;
+        moverEnLista(&nodoConfig,**vecPosiciones,ADELANTE);
+
     }
 }
 
@@ -123,43 +114,3 @@ void distribuirTormentas(tLista* tablero, int cantCasillas, int cantTormentas)
     }
 }
 
-
-void grabarCasilla(FILE* fp, const void* dato)
-{
-    const tCasilla* c = (const tCasilla*)dato;
-
-    if(c->inicio)
-        fprintf(fp, "I\n");
-    else 
-        if(c->salida)
-            fprintf(fp, "S\n");
-        else 
-            if(c->premio)
-                fprintf(fp, "P\n");
-            else 
-                if(c->vidaExtra)
-                    fprintf(fp, "V\n");
-                else 
-                    if(c->oasis)
-                        fprintf(fp, "O\n");
-                    else 
-                        if(c->tormenta)
-                            fprintf(fp, "T\n");
-                        else
-                            fprintf(fp, ".\n");
-}
-
-
-int generarCaravana(const char* nombreArch,const tLista *tablero)
-{
-    FILE* fp;
-    int pos=1;
-    fp= fopen(nombreArch, "wt");
-    if(!fp)
-        return ERR_ARCH;
-
-    recorrerListaArchivo(tablero, fp, grabarCasilla);
-
-    fclose(fp);
-    return TODO_OK;
-}

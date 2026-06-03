@@ -5,9 +5,6 @@
 #include <stdio.h>
 #include "../headers/lista.h"
 
-
-#define ERR_ARCH 1
-#define TODO_OK 0
 typedef struct
 {
     int cantCasillas;
