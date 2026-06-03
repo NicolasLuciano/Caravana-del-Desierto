@@ -7,13 +7,13 @@
 
 typedef struct
 {
-    int cantCasillas;
-    int vidasIniciales;
-    int cantPremios;
-    int cantOasis;
-    int cantTormentas;
-    int cantBandidos;
-    int cantVidasExtra;
+    unsigned cantCasillas;
+    unsigned vidasIniciales;
+    unsigned cantPremios;
+    unsigned cantOasis;
+    unsigned cantTormentas;
+    unsigned cantBandidos;
+    unsigned cantVidasExtra;
 }tConfig;
 
 int cargarConfig(const char* nombreArch, tConfig* configuracion);

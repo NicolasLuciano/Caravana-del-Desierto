@@ -10,6 +10,8 @@
 #define COLA_ERROR -4
 #define ARCH_ERROR -5
 #define LIMITE_INVALIDO -6
+#define DADO_BANDIDO 4
+#define SALIDA 'S'
 
 #define MIN(x,y)(x>y?y:x)
 
