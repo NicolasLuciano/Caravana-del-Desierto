@@ -5,11 +5,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct sNodo{
+typedef struct sNodoL{
     void * dato;
     unsigned tam;
-    struct sNodo * nodoSig;
-    struct sNodo * nodoAnt;
+    struct sNodoL * nodoSig;
+    struct sNodoL * nodoAnt;
 }tNodoLista;
 
 typedef tNodoLista * tLista;

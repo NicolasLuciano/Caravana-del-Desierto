@@ -1,12 +1,15 @@
 #include "../headers/tablero.h"
 #include "../headers/constantesymacros.h"
+#include <time.h>
 
-int generarTablero(tLista *tablero,const tConfig *configuracion)
+int generarTablero(tLista *tablero,const tConfig configuracion, tBandido * bandidos)
 {
     int * vecPosiciones, *auxVec;
     char casilla;
+    srand(time(NULL));
 
-    vecPosiciones=malloc(sizeof(int)*configuracion->cantCasillas);
+
+    vecPosiciones=malloc(sizeof(int)*configuracion.cantCasillas);
     if(NULL==vecPosiciones)
         return SIN_MEM;
 
@@ -15,21 +18,19 @@ int generarTablero(tLista *tablero,const tConfig *configuracion)
     insertarFinLis(tablero, &casilla, sizeof(casilla));
 
     casilla = '.';
-    for(int i =1; i< configuracion->cantCasillas-1; i++)
+    for(int i =1; i< configuracion.cantCasillas-1; i++)
             insertarFinLis(tablero, &casilla, sizeof(casilla));
 
-    casilla = 'F';
+    casilla = 'S';
     insertarFinLis(tablero, &casilla, sizeof(casilla));
 
     auxVec=vecPosiciones;
 
-    mezclarPosiciones(vecPosiciones,configuracion->cantCasillas);
-
-    distribuirPremios(tablero,configuracion->cantPremios,&auxVec);
-
-    distribuirOasis(tablero,configuracion->cantOasis,&auxVec);
-    distribuirTormentas(tablero,configuracion->cantTormentas,&auxVec);
-    distribuirVidasExtra(tablero,configuracion->cantVidasExtra,&auxVec);
+    mezclarPosiciones(vecPosiciones,configuracion.cantCasillas);
+    distribuirPremios(tablero,configuracion.cantPremios,&auxVec);
+    distribuirOasis(tablero,configuracion.cantOasis,&auxVec);
+    distribuirTormentas(tablero,configuracion.cantTormentas,&auxVec);
+    distribuirVidasExtra(tablero,configuracion.cantVidasExtra,&auxVec);
     free(vecPosiciones);
     return 0;
 }
@@ -41,9 +42,9 @@ void mezclarPosiciones(int * vecPosiciones,int cantCasillas)
     for(i=0;i<cantCasillas;i++)
         vecPosiciones[i]=i;
 
-    for(i = cantCasillas-2; i > 0; i--)
+    for(i = cantCasillas-2; i > 1; i--)
     {
-        j = rand() % (i + 1);
+        j = (rand() % i) + 1;
 
         aux = vecPosiciones[i];
         vecPosiciones[i] = vecPosiciones[j];
@@ -108,6 +109,16 @@ void distribuirTormentas(tLista* tablero, int cantTormentas, int ** vecPosicione
         nodoConfig=*tablero;
         (*vecPosiciones)++;
         moverEnLista(&nodoConfig,**vecPosiciones,ADELANTE);
-        memcpy(nodoConfig->dato,&casilla,sizeof(casilla));
+        memcpy(nodoConfig->dato,&casilla,sizeof(casilla)); //CAMBIAR PARA NO ACCEDER DIRECTAMENTE AL DATO
     }
+}
+
+void distribuirBandidos(tLista * tablero,tBandido * bandidos, int cantBandidos, int ** vecPosiciones)
+{
+
+}
+
+void mostrarCasilla(const void* dato)
+{
+    printf("[%c]\n",*(char*)dato);
 }

@@ -1,11 +1,11 @@
 #ifndef COLA_H_INCLUDED
 #define COLA_H_INCLUDED
 
-typedef struct sNodo
+typedef struct sNodoC
 {
     void *dato;
     unsigned tamDato;
-    struct sNodo *sig;
+    struct sNodoC *sig;
 }tNodo;
 
 typedef struct

@@ -35,6 +35,8 @@
 		<Unit filename="headers/archivos.h" />
 		<Unit filename="headers/bandido.h" />
 		<Unit filename="headers/cola.h" />
+		<Unit filename="headers/constantesymacros.h" />
+		<Unit filename="headers/dado.h" />
 		<Unit filename="headers/jugador.h" />
 		<Unit filename="headers/lista.h" />
 		<Unit filename="headers/menu.h" />
@@ -49,6 +51,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="sources/cola.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sources/dado.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="sources/jugador.c">

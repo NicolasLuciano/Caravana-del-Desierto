@@ -98,3 +98,16 @@ void recorrerListaArchivo(const tLista* lista,FILE* fp,void (*accion)(FILE* fp, 
     }
     while(act != *lista);
 }
+
+void mostrarLista(const tLista* lista,void (*mostrar)(const void* dato))
+{
+    tNodoLista * nodoAux;
+    nodoAux=*lista;
+    while(nodoAux->nodoSig != *lista )
+    {
+        mostrar(nodoAux->dato);
+        nodoAux=nodoAux->nodoSig;
+    }
+    mostrar(nodoAux->dato);
+}
+
