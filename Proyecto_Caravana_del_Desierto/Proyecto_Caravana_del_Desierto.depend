@@ -1,23 +1,23 @@
 # depslib dependency file v1.0
-1780195793 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\arbol.c
+1780441521 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\arbol.c
 	"../headers/arbol.h"
 	<string.h>
 	<stdlib.h>
 	<stdio.h>
+	"../headers/constantesymacros.h"
 
-1780437553 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\archivos.c
+1780448914 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\archivos.c
 	"../headers/archivos.h"
 	"../headers/lista.h"
+	"../headers/constantesymacros.h"
 
 1780183685 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\bandido.c
 
 1780183685 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\jugador.c
 
-1780437553 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\lista.c
+1780448914 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\lista.c
 	"../headers/lista.h"
-	<string.h>
-	<stdio.h>
-	<stdlib.h>
+	"../headers/constantesymacros.h"
 
 1780183685 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\main.c
 	<stdio.h>
@@ -25,10 +25,13 @@
 
 1780183685 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\menu.c
 
-1780183685 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\tablero.c
+1780448914 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\tablero.c
+	"../headers/tablero.h"
+	"../headers/constantesymacros.h"
 
-1780195793 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\cola.c
+1780441478 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\cola.c
 	"../headers/cola.h"
+	"../headers/constantesymacros.h"
 	<string.h>
 	<stdlib.h>
 	<stdio.h>
@@ -83,10 +86,28 @@
 
 1780195793 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\arbol.h
 
-1780437553 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\archivos.h
+1780448914 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\archivos.h
 	<stdlib.h>
 	<stdio.h>
 	"../headers/lista.h"
 
-1780437553 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\lista.h
+1780448914 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\lista.h
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+
+1780448914 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\constantesymacros.h
+
+1780437553 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\dado.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"../headers/dado.h"
+	"../headers/constantesymacros.h"
+
+1780437553 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\dado.h
+
+1780449247 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\tablero.h
+	"lista.h"
+	"archivos.h"
 

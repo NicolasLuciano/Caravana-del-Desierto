@@ -4,30 +4,22 @@
 int generarTablero(tLista *tablero,const tConfig *configuracion)
 {
     int * vecPosiciones, *auxVec;
-    tCasilla c;
+    char casilla;
 
     vecPosiciones=malloc(sizeof(int)*configuracion->cantCasillas);
     if(NULL==vecPosiciones)
         return SIN_MEM;
 
-    c.premio=0;
-    c.vidaExtra=0;
-    c.oasis=0;
-    c.tormenta=0;
-    c.salida=0;
 
+    casilla = 'I';
+    insertarFinLis(tablero, &casilla, sizeof(casilla));
 
-    c.inicio=1;
-    insertarFinLis(tablero, &c, sizeof(tCasilla));
-    c.inicio=0;
-
+    casilla = '.';
     for(int i =1; i< configuracion->cantCasillas-1; i++)
-        {
-            insertarFinLis(tablero, &c, sizeof(tCasilla));
-        }
+            insertarFinLis(tablero, &casilla, sizeof(casilla));
 
-    c.salida=1;
-    insertarFinLis(tablero, &c, sizeof(tCasilla));
+    casilla = 'F';
+    insertarFinLis(tablero, &casilla, sizeof(casilla));
 
     auxVec=vecPosiciones;
 
@@ -35,9 +27,10 @@ int generarTablero(tLista *tablero,const tConfig *configuracion)
 
     distribuirPremios(tablero,configuracion->cantPremios,&auxVec);
 
-    distribuirOasis(tablero,configuracion->cantCasillas,configuracion->cantOasis);
-    distribuirTormentas(tablero,configuracion->cantCasillas,configuracion->cantTormentas);
-    distribuirVidasExtra(tablero,configuracion->cantCasillas,configuracion->cantVidasMax);
+    distribuirOasis(tablero,configuracion->cantOasis,&auxVec);
+    distribuirTormentas(tablero,configuracion->cantTormentas,&auxVec);
+    distribuirVidasExtra(tablero,configuracion->cantVidasExtra,&auxVec);
+    free(vecPosiciones);
     return 0;
 }
 
@@ -61,56 +54,60 @@ void mezclarPosiciones(int * vecPosiciones,int cantCasillas)
 
 void distribuirPremios(tLista* tablero,int cantPremios, int ** vecPosiciones)
 {
-    tCasilla c;
+    char casilla;
     tNodoLista * nodoConfig;
     int i;
-
-    c.premio=1;
-    c.vidaExtra=0;
-    c.oasis=0;
-    c.tormenta=0;
-    c.salida=0;
-    c.salida=0;
-
+    casilla = 'P';
     for(i = 0; i < cantPremios; i++)
     {
         nodoConfig=*tablero;
         (*vecPosiciones)++;
         moverEnLista(&nodoConfig,**vecPosiciones,ADELANTE);
-
+        memcpy(nodoConfig->dato,&casilla,sizeof(casilla));
     }
 }
 
-void distribuirOasis(tLista* tablero,int cantCasillas,int cantOasis)
+void distribuirOasis(tLista* tablero,int cantOasis,int ** vecPosiciones)
 {
-    tCasilla* c;
+    char casilla;
+    tNodoLista * nodoConfig;
     int i;
+    casilla = 'O';
     for(i = 0; i < cantOasis; i++)
     {
-        c = obtenerCasillaLibreAleatoria(tablero,cantCasillas);
-        c->oasis = 1;
+        nodoConfig=*tablero;
+        (*vecPosiciones)++;
+        moverEnLista(&nodoConfig,**vecPosiciones,ADELANTE);
+        memcpy(nodoConfig->dato,&casilla,sizeof(casilla));
     }
 }
 
-void distribuirVidasExtra(tLista* tablero,int cantCasillas,int cantVidasExtra)
+void distribuirVidasExtra(tLista* tablero,int cantVidasExtras,int ** vecPosiciones)
 {
-    tCasilla* c;
+    char casilla;
+    tNodoLista * nodoConfig;
     int i;
-    for(i = 0; i < cantVidasExtra; i++)
+    casilla = 'V';
+    for(i = 0; i < cantVidasExtras; i++)
     {
-        c = obtenerCasillaLibreAleatoria(tablero,cantCasillas);
-        c->vidaExtra = 1;
+        nodoConfig=*tablero;
+        (*vecPosiciones)++;
+        moverEnLista(&nodoConfig,**vecPosiciones,ADELANTE);
+        memcpy(nodoConfig->dato,&casilla,sizeof(casilla));
     }
 }
 
-void distribuirTormentas(tLista* tablero, int cantCasillas, int cantTormentas)
+void distribuirTormentas(tLista* tablero, int cantTormentas, int ** vecPosiciones)
 {
-    tCasilla* c;
+    char casilla;
+    tNodoLista * nodoConfig;
     int i;
+    casilla = 'T';
     for(i = 0; i < cantTormentas; i++)
     {
-        c = obtenerCasillaLibreAleatoria(tablero,cantCasillas);
-        c->tormenta = 1;
+        nodoConfig=*tablero;
+        (*vecPosiciones)++;
+        moverEnLista(&nodoConfig,**vecPosiciones,ADELANTE);
+        memcpy(nodoConfig->dato,&casilla,sizeof(casilla));
     }
 }
-

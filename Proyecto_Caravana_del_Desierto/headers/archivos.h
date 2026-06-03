@@ -13,7 +13,7 @@ typedef struct
     int cantOasis;
     int cantTormentas;
     int cantBandidos;
-    int cantVidasMax;
+    int cantVidasExtra;
 }tConfig;
 
 int cargarConfig(const char* nombreArch, tConfig* configuracion);
