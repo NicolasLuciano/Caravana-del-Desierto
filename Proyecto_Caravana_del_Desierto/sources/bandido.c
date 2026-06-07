@@ -23,7 +23,7 @@ void moverBandidos(tLista *tablero, tBandido *vBandidos,tCola *colaMovimientos,u
             dadoBandido = tirar_dado(DADO_BANDIDO);
             moverEnLista(&(vBandidos+i)->posicion,dadoBandido,(vBandidos+i)->direccion);
         //falta la funcion de recuperar casilla
-       // recuperarDatoLista(tableroAux,&casilla,sizeof(casilla));
+            recuperarDatoLista((vBandidos+i)->posicion,&casilla,sizeof(casilla));
             if(SALIDA==casilla)
                 moverEnLista(&(vBandidos+i)->posicion,ADELANTE,(vBandidos+i)->direccion);
 

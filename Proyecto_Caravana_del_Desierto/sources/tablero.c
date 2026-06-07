@@ -4,8 +4,8 @@
 
 int generarTablero(tLista *tablero,const tConfig configuracion, tBandido * bandidos)
 {
-    int * vecPosiciones, *auxVec;
-    char casilla;
+    int * vecPosiciones, *auxVec,i;
+    tCasilla casilla;
     srand(time(NULL));
 
 
@@ -14,15 +14,20 @@ int generarTablero(tLista *tablero,const tConfig configuracion, tBandido * bandi
         return SIN_MEM;
 
 
-    casilla = 'I';
-    insertarFinLis(tablero, &casilla, sizeof(casilla));
+    casilla.tipo = 'I';
+    casilla.numCasilla=1;
+    insertarFinLis(tablero, &casilla, sizeof(tCasilla));
 
-    casilla = '.';
-    for(int i =1; i< configuracion.cantCasillas-1; i++)
-            insertarFinLis(tablero, &casilla, sizeof(casilla));
+    casilla.tipo = '.';
+    for( i =1; i< configuracion.cantCasillas-1; i++)
+    {
+        casilla.numCasilla=i+1;
+        insertarFinLis(tablero, &casilla, sizeof(tCasilla));
+    }
 
-    casilla = 'S';
-    insertarFinLis(tablero, &casilla, sizeof(casilla));
+    casilla.numCasilla=configuracion.cantCasillas;
+    casilla.tipo = 'S';
+    insertarFinLis(tablero, &casilla, sizeof(tCasilla));
 
     auxVec=vecPosiciones;
 
@@ -132,28 +137,26 @@ void distribuirBandidos(tLista * tablero, tBandido * bandidos, int cantBandidos,
 void mostrarTablero(const tLista* tablero, const tBandido*bandidos, unsigned cantBandidos)
 {
     tNodoLista * tableroAux;
-    char casilla;
-    int i,contCasilla;
+    tCasilla casilla;
+    int i;
 
     tableroAux=*tablero;
-    contCasilla=1;
     while(tableroAux->nodoSig != *tablero )
     {
         i=0;
-        recuperarDatoLista(tableroAux,&casilla,sizeof(casilla));
+        recuperarDatoLista(tableroAux,&casilla,sizeof(tCasilla));
 
         while(i<cantBandidos && tableroAux!=(bandidos+i)->posicion)
             i++;
 
         if(tableroAux==(bandidos+i)->posicion)
-            printf("%02d:B\n",contCasilla);
+            printf("%02d:B\n",casilla.numCasilla);
         else
-            printf("%02d:%c\n",contCasilla,casilla);
+            printf("%02d:%c\n",casilla.numCasilla,casilla.tipo);
 
         tableroAux=tableroAux->nodoSig;
-        contCasilla++;
     }
-    recuperarDatoLista(tableroAux,&casilla,sizeof(casilla));
-    printf("%02d:%c\n",contCasilla,casilla);
+    recuperarDatoLista(tableroAux,&casilla,sizeof(tCasilla));
+    printf("%02d:%c\n",casilla.numCasilla,casilla.tipo);
 
 }
