@@ -131,6 +131,7 @@ void distribuirBandidos(tLista * tablero, tBandido * bandidos, int cantBandidos,
         moverEnLista(&nodoMov,**vecPosiciones,ADELANTE);
         (bandidos+i)->posicion=nodoMov;
         (bandidos+i)->direccion=ADELANTE;
+        (bandidos+i)->vivo=VIVO;
     }
 }
 
@@ -149,7 +150,7 @@ void mostrarTablero(const tLista* tablero, const tBandido*bandidos, unsigned can
         while(i<cantBandidos && tableroAux!=(bandidos+i)->posicion)
             i++;
 
-        if(tableroAux==(bandidos+i)->posicion)
+        if(i<cantBandidos)
             printf("%02d:B\n",casilla.numCasilla);
         else
             printf("%02d:%c\n",casilla.numCasilla,casilla.tipo);

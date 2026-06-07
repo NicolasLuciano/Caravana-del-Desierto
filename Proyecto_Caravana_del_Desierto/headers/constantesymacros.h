@@ -12,6 +12,8 @@
 #define LIMITE_INVALIDO -6
 #define DADO_BANDIDO 4
 #define SALIDA 'S'
+#define VIVO 1
+#define MUERTO 0
 
 #define MIN(x,y)(x>y?y:x)
 

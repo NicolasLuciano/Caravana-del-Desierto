@@ -8,6 +8,13 @@ tBandido * crearBandidos( unsigned cantBandidos)
     if(vecBandidos==NULL)
         return NULL;
 
+    for(int i=0; i<cantBandidos; i++)
+    {
+        (vecBandidos->vivo=MUERTO);
+        (vecBandidos->posicion=NULL;
+        (vecBandidos->direccion=ADELANTE);
+    }
+
     return vecBandidos;
 }
 
@@ -18,7 +25,7 @@ void moverBandidos(tLista *tablero, tBandido *vBandidos,tCola *colaMovimientos,u
     char casilla;
     for(i=0;i<cantBandidos;i++)
     {
-        if('T'==(vBandidos+i)->vivo)
+        if(VIVO==(vBandidos+i)->vivo)
         {
             dadoBandido = tirar_dado(DADO_BANDIDO);
             moverEnLista(&(vBandidos+i)->posicion,dadoBandido,(vBandidos+i)->direccion);

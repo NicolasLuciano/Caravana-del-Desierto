@@ -1,7 +1,10 @@
 #ifndef BANDIDO_H_INCLUDED
 #define BANDIDO_H_INCLUDED
-#include "lista.h"
-#include "cola.h"
+#include "../headers/lista.h"
+#include "../headers/cola.h"
+#include "../headers/constantesymacros.h"
+
+
 typedef struct
 {
     tNodoLista *posicion;
