@@ -61,61 +61,68 @@ void mezclarPosiciones(int * vecPosiciones,int cantCasillas)
 
 void distribuirPremios(tLista* tablero,int cantPremios, int ** vecPosiciones)
 {
-    char casilla;
+    tCasilla casilla;
     tNodoLista * nodoConfig;
     int i;
-    casilla = 'P';
+
     for(i = 0; i < cantPremios; i++)
     {
         nodoConfig=*tablero;
         (*vecPosiciones)++;
         moverEnLista(&nodoConfig,**vecPosiciones,ADELANTE);
-        memcpy(nodoConfig->dato,&casilla,sizeof(casilla));
+        recuperarDatoLista(nodoConfig, &casilla, sizeof(tCasilla));
+        casilla.tipo= 'P';
+        actualizarDatoLista(nodoConfig, &casilla, sizeof(tCasilla));
     }
 }
 
 void distribuirOasis(tLista* tablero,int cantOasis,int ** vecPosiciones)
 {
-    char casilla;
+    tCasilla casilla;
     tNodoLista * nodoConfig;
     int i;
-    casilla = 'O';
+
     for(i = 0; i < cantOasis; i++)
     {
         nodoConfig=*tablero;
         (*vecPosiciones)++;
         moverEnLista(&nodoConfig,**vecPosiciones,ADELANTE);
-        memcpy(nodoConfig->dato,&casilla,sizeof(casilla));
+        recuperarDatoLista(nodoConfig, &casilla, sizeof(tCasilla));
+        casilla.tipo= 'O';
+        actualizarDatoLista(nodoConfig, &casilla, sizeof(tCasilla));
     }
 }
 
 void distribuirVidasExtra(tLista* tablero,int cantVidasExtras,int ** vecPosiciones)
 {
-    char casilla;
+    tCasilla casilla;
     tNodoLista * nodoConfig;
     int i;
-    casilla = 'V';
     for(i = 0; i < cantVidasExtras; i++)
     {
         nodoConfig=*tablero;
         (*vecPosiciones)++;
         moverEnLista(&nodoConfig,**vecPosiciones,ADELANTE);
-        memcpy(nodoConfig->dato,&casilla,sizeof(casilla));
+        recuperarDatoLista(nodoConfig, &casilla, sizeof(tCasilla));
+        casilla.tipo= 'V';
+        actualizarDatoLista(nodoConfig, &casilla, sizeof(tCasilla));
     }
 }
 
 void distribuirTormentas(tLista* tablero, int cantTormentas, int ** vecPosiciones)
 {
-    char casilla;
+    tCasilla casilla;
     tNodoLista * nodoConfig;
     int i;
-    casilla = 'T';
+
     for(i = 0; i < cantTormentas; i++)
     {
         nodoConfig=*tablero;
         (*vecPosiciones)++;
         moverEnLista(&nodoConfig,**vecPosiciones,ADELANTE);
-        memcpy(nodoConfig->dato,&casilla,sizeof(casilla)); //CAMBIAR PARA NO ACCEDER DIRECTAMENTE AL DATO
+        recuperarDatoLista(nodoConfig, &casilla, sizeof(tCasilla));
+        casilla.tipo= 'T';
+        actualizarDatoLista(nodoConfig, &casilla, sizeof(tCasilla));
     }
 }
 

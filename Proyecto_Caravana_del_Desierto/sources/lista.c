@@ -103,3 +103,8 @@ void recuperarDatoLista(tNodoLista * nodo,void * dato, unsigned tam)
 {
     memcpy(dato,nodo->dato,MIN(tam,nodo->tam));
 }
+
+void actualizarDatoLista(tNodoLista* nodo, const void* dato, unsigned tam)
+{
+    memcpy(nodo->dato, dato, MIN(tam, nodo->tam));
+}

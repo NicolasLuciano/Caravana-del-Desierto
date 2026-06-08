@@ -20,5 +20,6 @@ void* obtenerDatoPos(const tLista* lista, unsigned pos);
 void recorrerListaArchivo(const tLista* lista,FILE*fp,void (*accion)(FILE* fp,const void* dato));
 void moverEnLista(tNodoLista ** pos, unsigned pasos, int direccion);
 void recuperarDatoLista(tNodoLista * nodo,void * dato, unsigned tam);
+void actualizarDatoLista(tNodoLista* nodo, const void* dato, unsigned tam);
 
 #endif // LISTA_H_INCLUDED

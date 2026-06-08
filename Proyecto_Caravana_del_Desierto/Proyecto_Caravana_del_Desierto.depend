@@ -158,7 +158,7 @@
 
 1780541829 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\arbol.h
 
-1780541829 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\constantesymacros.h
+1780872270 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\constantesymacros.h
 
 1780541829 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\archivos.c
 	"../headers/archivos.h"
@@ -170,19 +170,20 @@
 	<stdio.h>
 	"../headers/lista.h"
 
-1780541829 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\lista.h
+1780895559 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\lista.h
 	<string.h>
 	<stdio.h>
 	<stdlib.h>
 
-1780869529 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\bandido.c
+1780895141 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\bandido.c
 	"../headers/bandido.h"
 	"../headers/constantesymacros.h"
 	"../headers/dado.h"
 
-1780541829 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\bandido.h
-	"lista.h"
-	"cola.h"
+1780872004 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\bandido.h
+	"../headers/lista.h"
+	"../headers/cola.h"
+	"../headers/constantesymacros.h"
 
 1780541829 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\cola.h
 
@@ -217,7 +218,7 @@
 	<stdio.h>
 	"archivos.h"
 
-1780541829 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\lista.c
+1780895579 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\lista.c
 	"../headers/lista.h"
 	"../headers/constantesymacros.h"
 
@@ -230,7 +231,7 @@
 
 1780541829 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\menu.c
 
-1780869529 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\tablero.c
+1780872081 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\tablero.c
 	"../headers/tablero.h"
 	"../headers/constantesymacros.h"
 	<time.h>
