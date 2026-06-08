@@ -4,14 +4,16 @@
 
 int generarTablero(tLista *tablero,const tConfig configuracion, tBandido * bandidos)
 {
-    int * vecPosiciones,i;
+    int * vecPosiciones,i, *posBandidos;
     tCasilla casilla;
     char *cadPosiciones;
     srand(time(NULL));
 
-
     vecPosiciones=malloc(sizeof(int)*configuracion.cantCasillas);
     if(NULL==vecPosiciones)
+        return SIN_MEM;
+    posBandidos=malloc(sizeof(int)*configuracion.cantBandidos);
+    if(NULL==posBandidos)
         return SIN_MEM;
     cadPosiciones = malloc(configuracion.cantCasillas);
     if(NULL==cadPosiciones)
@@ -22,9 +24,8 @@ int generarTablero(tLista *tablero,const tConfig configuracion, tBandido * bandi
     insertarFinLis(tablero, &casilla, sizeof(tCasilla));
 
     mezclarPosiciones(vecPosiciones,configuracion.cantCasillas);
-    distribuirCasillas(vecPosiciones,cadPosiciones,configuracion);
-    for(i = 0; i < configuracion.cantCasillas; i++)
-    printf("%d -> %c\n", i, cadPosiciones[i]);
+    distribuirCasillas(vecPosiciones,cadPosiciones,configuracion, posBandidos);
+
 
     for(i=0;i<configuracion.cantCasillas-2;i++)
     {
@@ -59,13 +60,13 @@ void mezclarPosiciones(int *vecPosiciones, int cantCasillas)
     }
 }
 //FALTA DISTRIBUIR BANDIDOS
-void distribuirCasillas(int *vecPos,char *cadPos, tConfig config)
+void distribuirCasillas(int *vecPos,char *cadPos, tConfig config, int *posBandidos)
 {
-    int i, *auxVec, casillasVacias = config.cantCasillas - (
-                                                 config.cantOasis +
-                                                 config.cantPremios +
-                                                 config.cantTormentas +
-                                                 config.cantVidasExtra+2);
+    int i, *auxVec;
+
+    for(i=0;i<config.cantCasillas;i++)
+        *(cadPos+i)=VACIA;
+
     auxVec= vecPos;
     for(i=0;i<config.cantOasis;i++)
     {
@@ -87,35 +88,54 @@ void distribuirCasillas(int *vecPos,char *cadPos, tConfig config)
         *(cadPos + *auxVec)= VIDAEXTRA;
         auxVec++;
     }
-    for(i=0;i<casillasVacias;i++)
+    for(i=0;i<config.cantBandidos;i++)
     {
-        *(cadPos + *auxVec)= VACIA;
+        *(posBandidos+i)=*auxVec;
         auxVec++;
     }
 }
+//void mostrarTablero(const tLista* tablero, const tBandido*bandidos, unsigned cantBandidos)
+//{
+//    tNodoLista * tableroAux;
+//    tCasilla casilla;
+//    int i;
+//
+//    tableroAux=*tablero;
+//    while(tableroAux->nodoSig != *tablero )
+//    {
+//        i=0;
+//        recuperarDatoLista(tableroAux,&casilla,sizeof(tCasilla));
+//
+//        while(i<cantBandidos && tableroAux!=(bandidos+i)->posicion)
+//            i++;
+//
+//        if(i<cantBandidos)
+//            printf("%02d:B\n",casilla.numCasilla);
+//        else
+//            printf("%02d:%c\n",casilla.numCasilla,casilla.tipo);
+//
+//        tableroAux=tableroAux->nodoSig;
+//    }
+//    recuperarDatoLista(tableroAux,&casilla,sizeof(tCasilla));
+//    printf("%02d:%c\n",casilla.numCasilla,casilla.tipo);
+//
+//}
 void mostrarTablero(const tLista* tablero, const tBandido*bandidos, unsigned cantBandidos)
 {
-    tNodoLista * tableroAux;
-    tCasilla casilla;
     int i;
-
-    tableroAux=*tablero;
-    while(tableroAux->nodoSig != *tablero )
+    char casilla;
+    for(i=0; i<cantCasillas; i++)
     {
-        i=0;
-        recuperarDatoLista(tableroAux,&casilla,sizeof(tCasilla));
+        recuperarDatoLista(tablero,i,&casilla,sizeof(char));
 
-        while(i<cantBandidos && tableroAux!=(bandidos+i)->posicion)
-            i++;
-
-        if(i<cantBandidos)
-            printf("%02d:B\n",casilla.numCasilla);
-        else
-            printf("%02d:%c\n",casilla.numCasilla,casilla.tipo);
-
-        tableroAux=tableroAux->nodoSig;
     }
-    recuperarDatoLista(tableroAux,&casilla,sizeof(tCasilla));
-    printf("%02d:%c\n",casilla.numCasilla,casilla.tipo);
+}
 
+void distribuirBandidos(const tLista *tablero, tBandido *vBandidos, unsigned cantBandidos, int *posBandidos)
+{
+    int i;
+    for(i=0;i<cantBandidos;i++)
+    {
+        posicionarEnLista(tablero,&((vBandidos+i)->posicion),*(posBandidos+i));
+    }
 }

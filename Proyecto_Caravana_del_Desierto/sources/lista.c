@@ -50,7 +50,7 @@ int insertarFinLis(tLista * lista, const void * dato, unsigned tam)
     return TODO_OK;
 }
 
-void moverEnLista(tNodoLista **pos, unsigned pasos, int direccion)
+void moverEnLista(const tLista *lista,tNodoLista **pos, unsigned pasos, int direccion)
 {
     int i;
 
@@ -66,7 +66,13 @@ void moverEnLista(tNodoLista **pos, unsigned pasos, int direccion)
     }
 }
 
-
+void posicionarEnLista(const tLista *lista,tNodoLista **pos, unsigned pasos)
+{
+    int i;
+    *pos=*lista;
+    for(i = 0; i < pasos; i++)
+        *pos = (*pos)->nodoSig;
+}
 void* obtenerDatoPos(const tLista* lista, unsigned pos)
 {
     tNodoLista* act;
@@ -99,12 +105,20 @@ void recorrerListaArchivo(const tLista* lista,FILE* fp,void (*accion)(FILE* fp, 
     while(act != *lista);
 }
 
-void recuperarDatoLista(tNodoLista * nodo,void * dato, unsigned tam)
+int recuperarDatoLista(tLista *lista,unsigned pos,void * dato, unsigned tam)
 {
-    memcpy(dato,nodo->dato,MIN(tam,nodo->tam));
+    tNodoLista *auxNodo = *lista;
+    unsigned i=0;
+    while(i<pos && auxNodo->nodoSig != *lista)
+    {
+        auxNodo=&(*(auxNodo)->nodoSig);
+        i++;
+    }
+    if(i==pos)
+    {
+        memcpy(dato,auxNodo->dato,MIN(tam,auxNodo->tam));
+        return TODO_OK;
+    }
+    return LISTA_ERROR;
 }
 
-void actualizarDatoLista(tNodoLista* nodo, const void* dato, unsigned tam)
-{
-    memcpy(nodo->dato, dato, MIN(tam, nodo->tam));
-}
