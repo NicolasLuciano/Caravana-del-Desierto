@@ -17,6 +17,14 @@
 ///CONSTANTES DE MENU
 #define MENSAJE_MENU "R - Ver el ranking de jugadores\nP - Jugar una nueva partida\nQ - Salir del juego\n-> "
 #define OPCIONES_MENU "RPQ"
+///CONSTANTES DE TABLERO
+#define OASIS 'O'
+#define VIDAEXTRA 'V'
+#define TORMENTA 'T'
+#define PREMIO 'P'
+#define INICIO 'I'
+#define SALIDA 'S'
+#define VACIA '.'
 ///CONSTANTES DE ARCHIVOS
 #define ARCH_ERROR -5
 #define NOMARCH "config.txt"

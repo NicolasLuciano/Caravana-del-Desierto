@@ -4,144 +4,95 @@
 
 int generarTablero(tLista *tablero,const tConfig configuracion, tBandido * bandidos)
 {
-    int * vecPosiciones, *auxVec,i;
+    int * vecPosiciones,i;
     tCasilla casilla;
+    char *cadPosiciones;
     srand(time(NULL));
 
 
     vecPosiciones=malloc(sizeof(int)*configuracion.cantCasillas);
     if(NULL==vecPosiciones)
         return SIN_MEM;
+    cadPosiciones = malloc(configuracion.cantCasillas);
+    if(NULL==cadPosiciones)
+        return SIN_MEM;
 
-
-    casilla.tipo = 'I';
+    casilla.tipo = INICIO;
     casilla.numCasilla=1;
     insertarFinLis(tablero, &casilla, sizeof(tCasilla));
 
-    casilla.tipo = '.';
-    for( i =1; i< configuracion.cantCasillas-1; i++)
+    mezclarPosiciones(vecPosiciones,configuracion.cantCasillas);
+    distribuirCasillas(vecPosiciones,cadPosiciones,configuracion);
+    for(i = 0; i < configuracion.cantCasillas; i++)
+    printf("%d -> %c\n", i, cadPosiciones[i]);
+
+    for(i=0;i<configuracion.cantCasillas-2;i++)
     {
-        casilla.numCasilla=i+1;
+        casilla.tipo= (char)(*(cadPosiciones+i));
+        casilla.numCasilla++;
         insertarFinLis(tablero, &casilla, sizeof(tCasilla));
     }
-
+    casilla.tipo = SALIDA;
     casilla.numCasilla=configuracion.cantCasillas;
-    casilla.tipo = 'S';
     insertarFinLis(tablero, &casilla, sizeof(tCasilla));
 
-    auxVec=vecPosiciones;
 
-    mezclarPosiciones(vecPosiciones,configuracion.cantCasillas);
-    distribuirPremios(tablero,configuracion.cantPremios,&auxVec);
-    distribuirOasis(tablero,configuracion.cantOasis,&auxVec);
-    distribuirTormentas(tablero,configuracion.cantTormentas,&auxVec);
-    distribuirVidasExtra(tablero,configuracion.cantVidasExtra,&auxVec);
-    distribuirBandidos(tablero, bandidos, configuracion.cantBandidos,&auxVec);
     free(vecPosiciones);
+    free(cadPosiciones);
     return 0;
 }
 
-void mezclarPosiciones(int * vecPosiciones,int cantCasillas)
+void mezclarPosiciones(int *vecPosiciones, int cantCasillas)
 {
-    int i,j,aux;
+    int i, j, aux;
 
-    for(i=0;i<cantCasillas;i++)
-        vecPosiciones[i]=i;
+    for(i = 0; i < cantCasillas; i++)
+        vecPosiciones[i] = i;
 
-    for(i = cantCasillas-2; i > 1; i--)
+    for(i = cantCasillas - 2; i > 0; i--)
     {
-        j = (rand() % i) + 1;
+        j = rand() % (i + 1);
 
         aux = vecPosiciones[i];
         vecPosiciones[i] = vecPosiciones[j];
         vecPosiciones[j] = aux;
     }
 }
-
-
-void distribuirPremios(tLista* tablero,int cantPremios, int ** vecPosiciones)
+//FALTA DISTRIBUIR BANDIDOS
+void distribuirCasillas(int *vecPos,char *cadPos, tConfig config)
 {
-    tCasilla casilla;
-    tNodoLista * nodoConfig;
-    int i;
-
-    for(i = 0; i < cantPremios; i++)
+    int i, *auxVec, casillasVacias = config.cantCasillas - (
+                                                 config.cantOasis +
+                                                 config.cantPremios +
+                                                 config.cantTormentas +
+                                                 config.cantVidasExtra);
+    auxVec= vecPos;
+    for(i=0;i<config.cantOasis;i++)
     {
-        nodoConfig=*tablero;
-        (*vecPosiciones)++;
-        moverEnLista(&nodoConfig,**vecPosiciones,ADELANTE);
-        recuperarDatoLista(nodoConfig, &casilla, sizeof(tCasilla));
-        casilla.tipo= 'P';
-        actualizarDatoLista(nodoConfig, &casilla, sizeof(tCasilla));
+        *(cadPos + *auxVec)= OASIS;
+        auxVec++;
+    }
+    for(i=0;i<config.cantPremios;i++)
+    {
+        *(cadPos + *auxVec)= PREMIO;
+        auxVec++;
+    }
+    for(i=0;i<config.cantTormentas;i++)
+    {
+        *(cadPos + *auxVec)= TORMENTA;
+        auxVec++;
+    }
+    for(i=0;i<config.cantVidasExtra;i++)
+    {
+        *(cadPos + *auxVec)= VIDAEXTRA;
+        auxVec++;
+    }
+    for(i=0;i<casillasVacias;i++)
+    {
+        *(cadPos + *auxVec)= VACIA;
+        auxVec++;
     }
 }
-
-void distribuirOasis(tLista* tablero,int cantOasis,int ** vecPosiciones)
-{
-    tCasilla casilla;
-    tNodoLista * nodoConfig;
-    int i;
-
-    for(i = 0; i < cantOasis; i++)
-    {
-        nodoConfig=*tablero;
-        (*vecPosiciones)++;
-        moverEnLista(&nodoConfig,**vecPosiciones,ADELANTE);
-        recuperarDatoLista(nodoConfig, &casilla, sizeof(tCasilla));
-        casilla.tipo= 'O';
-        actualizarDatoLista(nodoConfig, &casilla, sizeof(tCasilla));
-    }
-}
-
-void distribuirVidasExtra(tLista* tablero,int cantVidasExtras,int ** vecPosiciones)
-{
-    tCasilla casilla;
-    tNodoLista * nodoConfig;
-    int i;
-    for(i = 0; i < cantVidasExtras; i++)
-    {
-        nodoConfig=*tablero;
-        (*vecPosiciones)++;
-        moverEnLista(&nodoConfig,**vecPosiciones,ADELANTE);
-        recuperarDatoLista(nodoConfig, &casilla, sizeof(tCasilla));
-        casilla.tipo= 'V';
-        actualizarDatoLista(nodoConfig, &casilla, sizeof(tCasilla));
-    }
-}
-
-void distribuirTormentas(tLista* tablero, int cantTormentas, int ** vecPosiciones)
-{
-    tCasilla casilla;
-    tNodoLista * nodoConfig;
-    int i;
-
-    for(i = 0; i < cantTormentas; i++)
-    {
-        nodoConfig=*tablero;
-        (*vecPosiciones)++;
-        moverEnLista(&nodoConfig,**vecPosiciones,ADELANTE);
-        recuperarDatoLista(nodoConfig, &casilla, sizeof(tCasilla));
-        casilla.tipo= 'T';
-        actualizarDatoLista(nodoConfig, &casilla, sizeof(tCasilla));
-    }
-}
-
-void distribuirBandidos(tLista * tablero, tBandido * bandidos, int cantBandidos, int ** vecPosiciones)
-{
-    int i;
-    tNodoLista * nodoMov;
-
-    for(i=0;i<cantBandidos;i++)
-    {
-        nodoMov=*tablero;
-        (*vecPosiciones)++;
-        moverEnLista(&nodoMov,**vecPosiciones,ADELANTE);
-        (bandidos+i)->posicion=nodoMov;
-        (bandidos+i)->direccion=ADELANTE;
-        (bandidos+i)->vivo=VIVO;
-    }
-}
-
 void mostrarTablero(const tLista* tablero, const tBandido*bandidos, unsigned cantBandidos)
 {
     tNodoLista * tableroAux;
