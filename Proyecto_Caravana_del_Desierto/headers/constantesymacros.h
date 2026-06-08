@@ -19,6 +19,7 @@
 #define OPCIONES_MENU "RPQ"
 ///CONSTANTES DE ARCHIVOS
 #define ARCH_ERROR -5
+#define NOMARCH "config.txt"
 ///MACROS
 #define MIN(x,y)(x>y?y:x)
 
