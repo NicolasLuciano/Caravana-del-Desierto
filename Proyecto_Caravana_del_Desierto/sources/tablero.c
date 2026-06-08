@@ -46,10 +46,10 @@ void mezclarPosiciones(int *vecPosiciones, int cantCasillas)
 {
     int i, j, aux;
 
-    for(i = 0; i < cantCasillas; i++)
+    for(i = 0; i < cantCasillas-2; i++)
         vecPosiciones[i] = i;
 
-    for(i = cantCasillas - 2; i > 0; i--)
+    for(i = cantCasillas - 3; i > 0; i--)
     {
         j = rand() % (i + 1);
 
@@ -65,7 +65,7 @@ void distribuirCasillas(int *vecPos,char *cadPos, tConfig config)
                                                  config.cantOasis +
                                                  config.cantPremios +
                                                  config.cantTormentas +
-                                                 config.cantVidasExtra);
+                                                 config.cantVidasExtra+2);
     auxVec= vecPos;
     for(i=0;i<config.cantOasis;i++)
     {
