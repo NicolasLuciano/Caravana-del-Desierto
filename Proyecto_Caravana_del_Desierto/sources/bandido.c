@@ -19,7 +19,7 @@ tBandido * crearBandidos( unsigned cantBandidos)
     return vecBandidos;
 }
 
-void moverBandidos(tLista *tablero, tBandido *vBandidos,tCola *colaMovimientos,unsigned cantBandidos, unsigned cantCasillas)
+/*void moverBandidos(tLista *tablero, tBandido *vBandidos,tCola *colaMovimientos,unsigned cantBandidos, unsigned cantCasillas)
 {
     unsigned dadoBandido;
     tCasilla casilla;
@@ -43,4 +43,4 @@ void moverBandidos(tLista *tablero, tBandido *vBandidos,tCola *colaMovimientos,u
             }
         }
     }
-}
+}*/

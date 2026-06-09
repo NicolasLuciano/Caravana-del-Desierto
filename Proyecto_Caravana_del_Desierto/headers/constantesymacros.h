@@ -7,6 +7,7 @@
 #define DUPLICADO_ERROR -3
 #define COLA_ERROR -4
 #define LIMITE_INVALIDO -6
+#define NO_ENCONTRADO -7
 ///CONSTANTES DE JUEGO
 #define DADO_BANDIDO 4
 #define VIVO 1

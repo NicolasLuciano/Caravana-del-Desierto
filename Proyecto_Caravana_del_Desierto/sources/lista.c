@@ -146,3 +146,17 @@ int compararNodos(const tLista *lista, tNodoLista *nodo, unsigned pos)
         return TODO_OK;
     return LISTA_ERROR;
 }
+
+int buscarNodoLista(const tLista *lista, tNodoLista *nodo)
+{
+    tNodoLista *aux = *lista;
+    int pos=-1;
+    while(aux!=nodo && aux->nodoSig!=*lista)
+    {
+        aux=aux->nodoSig;
+        i++;
+    }
+    if(aux==nodo)
+        pos=i;
+    return pos;
+}
