@@ -19,6 +19,7 @@ int generarTablero(tLista *tablero,const tConfig configuracion, tBandido * bandi
     if(NULL==cadPosiciones)
         return SIN_MEM;
 
+    casilla.bandido=0;
     casilla.tipo = INICIO;
     casilla.numCasilla=1;
     insertarFinLis(tablero, &casilla, sizeof(tCasilla));
@@ -136,6 +137,7 @@ void distribuirBandidos(const tLista *tablero, tBandido *vBandidos, unsigned can
     int i;
     for(i=0;i<cantBandidos;i++)
     {
+
         posicionarEnLista(tablero,&((vBandidos+i)->posicion),*(posBandidos+i));
     }
 }
