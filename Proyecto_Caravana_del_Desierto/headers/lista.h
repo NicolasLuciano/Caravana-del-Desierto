@@ -22,4 +22,5 @@ void moverEnLista(const tLista *lista,tNodoLista **pos, unsigned pasos, int dire
 int recuperarDatoLista(const tLista *lista,unsigned pos,void * dato, unsigned tam);
 void posicionarEnLista(const tLista *lista,tNodoLista **pos, unsigned pasos);
 int modificarEnPosLista(const tLista *lista,unsigned pos, void *dato, unsigned tam);
+int compararNodos(const tLista *lista, tNodoLista *nodo, unsigned pos);
 #endif // LISTA_H_INCLUDED

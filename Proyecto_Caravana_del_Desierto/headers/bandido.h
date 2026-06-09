@@ -15,5 +15,5 @@ typedef struct
 
 tBandido * crearBandidos( unsigned cantBandidos);
 
-void moverBandidos(tLista *tablero, tBandido *vBandidos,tCola *colaMovimientos,unsigned cantBandidos);
+void moverBandidos(tLista *tablero, tBandido *vBandidos,tCola *colaMovimientos,unsigned cantBandidos, unsigned cantCasillas)
 #endif // BANDIDO_H_INCLUDED

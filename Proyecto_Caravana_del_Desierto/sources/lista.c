@@ -1,9 +1,6 @@
 #include "../headers/lista.h"
 #include "../headers/constantesymacros.h"
 
-
-
-
 void crearLista(tLista * lista)
 {
     *lista=NULL;
@@ -136,5 +133,16 @@ int modificarEnPosLista(const tLista *lista,unsigned pos, void *dato, unsigned t
         memcpy(actual->dato,dato,MIN(tam,actual->tam));
         return TODO_OK;
     }
+    return LISTA_ERROR;
+}
+
+int compararNodos(const tLista *lista, tNodoLista *nodo, unsigned pos)
+{
+    tNodoLista *aux = *lista;
+    int i=0;
+    while(i<pos && aux->nodoSig!=*lista)
+        aux=aux->nodoSig;
+    if(i==pos)
+        return TODO_OK;
     return LISTA_ERROR;
 }
