@@ -122,23 +122,19 @@ int recuperarDatoLista(tLista *lista,unsigned pos,void * dato, unsigned tam)
     return LISTA_ERROR;
 }
 
-int eliminarListaPos(tLista *lista,unsigned pos,void * dato, unsigned tam)
+int modificarEnPosLista(const tLista *lista,unsigned pos, void *dato, unsigned tam)
 {
-    tNodoLista *elim,*listaMov = *lista;
-
-    unsigned i=0;
-
-    while(i<pos && auxNodo->nodoSig != *lista)
+    tNodoLista *actual = *lista;
+    unsigned i;
+    while(i<pos && actual->nodoSig!=*lista)
     {
         auxNodo=&(*(auxNodo)->nodoSig);
         i++;
     }
     if(i==pos)
     {
-        memcpy(dato,auxNodo->dato,MIN(tam,auxNodo->tam));
-
+        memcpy(actual->dato,dato,MIN(tam,actual->tam));
         return TODO_OK;
     }
     return LISTA_ERROR;
 }
-
