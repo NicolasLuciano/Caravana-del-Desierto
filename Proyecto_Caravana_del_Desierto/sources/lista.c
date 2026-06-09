@@ -125,10 +125,10 @@ int recuperarDatoLista(const tLista *lista,unsigned pos,void * dato, unsigned ta
 int modificarEnPosLista(const tLista *lista,unsigned pos, void *dato, unsigned tam)
 {
     tNodoLista *actual = *lista;
-    unsigned i;
+    unsigned i=0;
     while(i<pos && actual->nodoSig!=*lista)
     {
-        actual=&(*(actual)->nodoSig);
+        actual=actual->nodoSig;
         i++;
     }
     if(i==pos)

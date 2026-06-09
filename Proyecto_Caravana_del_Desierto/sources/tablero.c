@@ -12,12 +12,20 @@ int generarTablero(tLista *tablero,const tConfig configuracion, tBandido * bandi
     vecPosiciones=malloc(sizeof(int)*configuracion.cantCasillas);
     if(NULL==vecPosiciones)
         return SIN_MEM;
+
     posBandidos=malloc(sizeof(int)*configuracion.cantBandidos);
     if(NULL==posBandidos)
+    {
+        free(vecPosiciones);
         return SIN_MEM;
+    }
     cadPosiciones = malloc(configuracion.cantCasillas);
     if(NULL==cadPosiciones)
+    {
+        free(vecPosiciones);
+        free(posBandidos);
         return SIN_MEM;
+    }
 
     casilla.bandido=0;
     casilla.tipo = INICIO;
@@ -25,8 +33,7 @@ int generarTablero(tLista *tablero,const tConfig configuracion, tBandido * bandi
     insertarFinLis(tablero, &casilla, sizeof(tCasilla));
 
     mezclarPosiciones(vecPosiciones,configuracion.cantCasillas);
-    distribuirCasillas(vecPosiciones,cadPosiciones,configuracion, posBandidos);
-    distribuirBandidos(tablero,bandidos,configuracion.cantBandidos,posBandidos);
+    distribuirCasillas(vecPosiciones,cadPosiciones,configuracion, &posBandidos);
 
     for(i=0;i<configuracion.cantCasillas-2;i++)
     {
@@ -34,13 +41,16 @@ int generarTablero(tLista *tablero,const tConfig configuracion, tBandido * bandi
         casilla.numCasilla++;
         insertarFinLis(tablero, &casilla, sizeof(tCasilla));
     }
+
     casilla.tipo = SALIDA;
     casilla.numCasilla=configuracion.cantCasillas;
     insertarFinLis(tablero, &casilla, sizeof(tCasilla));
 
+    distribuirBandidos(tablero,bandidos,configuracion.cantBandidos,posBandidos);
 
     free(vecPosiciones);
     free(cadPosiciones);
+    free(posBandidos);
     return 0;
 }
 
@@ -61,7 +71,7 @@ void mezclarPosiciones(int *vecPosiciones, int cantCasillas)
     }
 }
 //FALTA DISTRIBUIR BANDIDOS
-void distribuirCasillas(int *vecPos,char *cadPos, tConfig config, int *posBandidos)
+void distribuirCasillas(int *vecPos,char *cadPos, tConfig config, int **posBandidos)
 {
     int i, *auxVec;
 
@@ -91,43 +101,18 @@ void distribuirCasillas(int *vecPos,char *cadPos, tConfig config, int *posBandid
     }
     for(i=0;i<config.cantBandidos;i++)
     {
-        *(posBandidos+i)=*auxVec;
+        *(*(posBandidos)+i)=*auxVec;
         auxVec++;
     }
 }
-//void mostrarTablero(const tLista* tablero, const tBandido*bandidos, unsigned cantBandidos)
-//{
-//    tNodoLista * tableroAux;
-//    tCasilla casilla;
-//    int i;
-//
-//    tableroAux=*tablero;
-//    while(tableroAux->nodoSig != *tablero )
-//    {
-//        i=0;
-//        recuperarDatoLista(tableroAux,&casilla,sizeof(tCasilla));
-//
-//        while(i<cantBandidos && tableroAux!=(bandidos+i)->posicion)
-//            i++;
-//
-//        if(i<cantBandidos)
-//            printf("%02d:B\n",casilla.numCasilla);
-//        else
-//            printf("%02d:%c\n",casilla.numCasilla,casilla.tipo);
-//
-//        tableroAux=tableroAux->nodoSig;
-//    }
-//    recuperarDatoLista(tableroAux,&casilla,sizeof(tCasilla));
-//    printf("%02d:%c\n",casilla.numCasilla,casilla.tipo);
-//
-//}
-void mostrarTablero(const tLista* tablero, const tBandido*bandidos, unsigned cantBandidos, unsigned cantCasillas)
+
+void mostrarTablero(const tLista* tablero, unsigned cantCasillas)
 {
     int i;
     tCasilla casilla;
     for(i=0; i<cantCasillas; i++)
     {
-        recuperarDatoLista(tablero,i,&casilla,sizeof(char));
+        recuperarDatoLista(tablero,i,&casilla,sizeof(tCasilla));
         printf("%d: ", i+1);
         if(VIVO==casilla.bandido)
         {
@@ -147,9 +132,9 @@ void distribuirBandidos(const tLista *tablero, tBandido *vBandidos, unsigned can
     tCasilla casilla;
     for(i=0;i<cantBandidos;i++)
     {
-        recuperarDatoLista(tablero,*(posBandidos+i),&casilla,sizeof(casilla));
-        posicionarEnLista(tablero,&((vBandidos+i)->posicion),*(posBandidos+i));
+        recuperarDatoLista(tablero,*(posBandidos+i)+1,&casilla,sizeof(casilla));
+        posicionarEnLista(tablero,&((vBandidos+i)->posicion),*(posBandidos+i)+1);
         casilla.bandido=VIVO;
-        modificarEnPosLista(tablero,*(posBandidos+i),&casilla,sizeof(casilla));
+        modificarEnPosLista(tablero,*(posBandidos+i)+1,&casilla,sizeof(casilla));
     }
 }
