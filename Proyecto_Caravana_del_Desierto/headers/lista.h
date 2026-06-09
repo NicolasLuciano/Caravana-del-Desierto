@@ -19,7 +19,7 @@ int insertarFinLis(tLista * lista, const void * dato, unsigned tam);
 void* obtenerDatoPos(const tLista* lista, unsigned pos);
 void recorrerListaArchivo(const tLista* lista,FILE*fp,void (*accion)(FILE* fp,const void* dato));
 void moverEnLista(const tLista *lista,tNodoLista **pos, unsigned pasos, int direccion);
-int recuperarDatoLista(tLista *lista,unsigned pos,void * dato, unsigned tam);
+int recuperarDatoLista(const tLista *lista,unsigned pos,void * dato, unsigned tam);
 void posicionarEnLista(const tLista *lista,tNodoLista **pos, unsigned pasos);
 int modificarEnPosLista(const tLista *lista,unsigned pos, void *dato, unsigned tam);
 #endif // LISTA_H_INCLUDED

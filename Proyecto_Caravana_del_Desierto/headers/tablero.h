@@ -15,6 +15,6 @@ int generarTablero(tLista *tablero,const tConfig configuracion, tBandido * bandi
 void mezclarPosiciones(int * vecPosiciones,int cantCasillas);
 void distribuirCasillas(int *vecPos,char *cadPos, tConfig config, int *posBandidos);
 int generarCaravana(const char* nombreArch,const tLista *tablero);
-void mostrarTablero(const tLista* lista, const tBandido*bandidos, unsigned cantBandidos);
+void mostrarTablero(const tLista* tablero, const tBandido*bandidos, unsigned cantBandidos, unsigned cantCasillas);
 void distribuirBandidos(const tLista *tablero, tBandido *vBandidos, unsigned cantBandidos, int *posBandidos);
 #endif // TABLERO_H_INCLUDED

@@ -24,6 +24,7 @@
 #define PREMIO 'P'
 #define INICIO 'I'
 #define SALIDA 'S'
+#define BANDIDO 'B'
 #define VACIA '.'
 ///CONSTANTES DE ARCHIVOS
 #define ARCH_ERROR -5

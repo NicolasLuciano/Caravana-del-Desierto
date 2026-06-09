@@ -24,7 +24,7 @@ int main()
         perror("No hay memoria suficiente para crear bandidos");
     generarTablero(&tablero,configuracion,bandidos); //PARA MI NO HACE FALTA MANDARLO COMO PUNTERO
     printf("Generando tablero...\n");
-    mostrarTablero(&tablero,bandidos,configuracion.cantBandidos);
+    mostrarTablero(&tablero,bandidos,configuracion.cantBandidos, configuracion.cantCasillas);
     printf("Pulsa cualquier tecla para borrar el tablero\n");
     system("pause");
 

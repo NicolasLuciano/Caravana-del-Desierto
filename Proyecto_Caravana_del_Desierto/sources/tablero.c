@@ -26,7 +26,7 @@ int generarTablero(tLista *tablero,const tConfig configuracion, tBandido * bandi
 
     mezclarPosiciones(vecPosiciones,configuracion.cantCasillas);
     distribuirCasillas(vecPosiciones,cadPosiciones,configuracion, posBandidos);
-
+    distribuirBandidos(tablero,bandidos,configuracion.cantBandidos,posBandidos);
 
     for(i=0;i<configuracion.cantCasillas-2;i++)
     {
@@ -121,14 +121,23 @@ void distribuirCasillas(int *vecPos,char *cadPos, tConfig config, int *posBandid
 //    printf("%02d:%c\n",casilla.numCasilla,casilla.tipo);
 //
 //}
-void mostrarTablero(const tLista* tablero, const tBandido*bandidos, unsigned cantBandidos)
+void mostrarTablero(const tLista* tablero, const tBandido*bandidos, unsigned cantBandidos, unsigned cantCasillas)
 {
     int i;
-    char casilla;
+    tCasilla casilla;
     for(i=0; i<cantCasillas; i++)
     {
         recuperarDatoLista(tablero,i,&casilla,sizeof(char));
-
+        printf("%d: ", i+1);
+        if(VIVO==casilla.bandido)
+        {
+            if(VACIA==casilla.tipo)
+                printf("%c\n",BANDIDO);
+            else
+                printf("[%c %c]\n",BANDIDO, casilla.tipo);
+        }
+        else
+        printf("%c\n",casilla.tipo);
     }
 }
 

@@ -105,7 +105,7 @@ void recorrerListaArchivo(const tLista* lista,FILE* fp,void (*accion)(FILE* fp, 
     while(act != *lista);
 }
 
-int recuperarDatoLista(tLista *lista,unsigned pos,void * dato, unsigned tam)
+int recuperarDatoLista(const tLista *lista,unsigned pos,void * dato, unsigned tam)
 {
     tNodoLista *auxNodo = *lista;
     unsigned i=0;
@@ -128,7 +128,7 @@ int modificarEnPosLista(const tLista *lista,unsigned pos, void *dato, unsigned t
     unsigned i;
     while(i<pos && actual->nodoSig!=*lista)
     {
-        auxNodo=&(*(auxNodo)->nodoSig);
+        actual=&(*(actual)->nodoSig);
         i++;
     }
     if(i==pos)
