@@ -47,21 +47,13 @@ int insertarFinLista(tLista * lista, const void * dato, unsigned tam)
     return TODO_OK;
 }
 
-/*void moverEnLista(tNodoLista **pos, unsigned pasos, int direccion)
+void moverEnLista(tLista *pos, int direccion)
 {
-    int i;
-
-    if(direccion == ADELANTE)
-    {
-        for(i = 0; i < pasos; i++)
-            *pos = (*pos)->nodoSig;
-    }
-    else
-    {
-        for(i = 0; i < pasos; i++)
-            *pos = (*pos)->nodoAnt;
-    }
-}*/
+    if( ADELANTE == direccion)
+        *pos = &(*pos)->nodoSig;
+    else ( ATRAS == direccion)
+        *pos = &(*pos)->nodoAnt;
+}
 
 void posicionarEnLista(const tLista *lista,tNodoLista **pos, unsigned pasos)
 {

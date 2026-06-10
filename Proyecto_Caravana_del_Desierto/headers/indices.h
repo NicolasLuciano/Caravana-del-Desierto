@@ -14,4 +14,6 @@ typedef struct
     tClave clave;
 } tIndice;
 
+int compararPorNombreDeUsuario(void* a, void* b);
+void cargarArchivoEnIndice(const char* nombreArchivo, tArbol* arbol);
 #endif // INDICES_H_INCLUDED
