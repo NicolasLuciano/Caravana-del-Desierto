@@ -180,43 +180,43 @@
 	"lista.h"
 	"cola.h"
 
-1780541829 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\arbol.c
+1781115528 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\arbol.c
 	"../headers/arbol.h"
+	"../headers/constantesymacros.h"
 	<string.h>
 	<stdlib.h>
 	<stdio.h>
-	"../headers/constantesymacros.h"
 
-1780541829 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\arbol.h
+1781115528 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\arbol.h
 
-1780872270 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\constantesymacros.h
+1781115528 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\constantesymacros.h
 
 1780541829 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\archivos.c
 	"../headers/archivos.h"
 	"../headers/lista.h"
 	"../headers/constantesymacros.h"
 
-1780541829 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\archivos.h
+1781115528 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\archivos.h
 	<stdlib.h>
 	<stdio.h>
-	"../headers/lista.h"
 
-1780895559 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\lista.h
+1781115528 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\lista.h
 	<string.h>
 	<stdio.h>
 	<stdlib.h>
 
-1780895141 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\bandido.c
+1781115528 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\bandido.c
 	"../headers/bandido.h"
 	"../headers/constantesymacros.h"
 	"../headers/dado.h"
+	"../headers/tablero.h"
 
-1780872004 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\bandido.h
+1781115528 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\bandido.h
 	"../headers/lista.h"
 	"../headers/cola.h"
 	"../headers/constantesymacros.h"
 
-1780541829 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\cola.h
+1781115528 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\cola.h
 
 1780541829 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\dado.h
 
@@ -227,45 +227,53 @@
 	<stdlib.h>
 	<stdio.h>
 
-1780541829 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\dado.c
+1781115528 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\dado.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
 	"../headers/dado.h"
 	"../headers/constantesymacros.h"
 
-1780869529 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\jugador.c
+1781115528 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\jugador.c
 	"../headers/jugador.h"
 	"../headers/constantesymacros.h"
 	"../headers/tablero.h"
 	"../headers/dado.h"
 
-1780869529 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\jugador.h
+1781115528 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\jugador.h
 	"lista.h"
 	"cola.h"
+	"constantesymacros.h"
 
-1780869529 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\tablero.h
+1781115528 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\tablero.h
 	"../headers/bandido.h"
 	<stdio.h>
 	"archivos.h"
 
-1780895579 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\lista.c
+1781116431 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\lista.c
 	"../headers/lista.h"
 	"../headers/constantesymacros.h"
 
-1780541829 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\main.c
-	"../headers/lista.h"
-	"../headers/archivos.h"
-	"../headers/tablero.h"
+1781115528 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\main.c
 	"../headers/constantesymacros.h"
-	"../headers/bandido.h"
+	"../headers/menu.h"
+	"../headers/juego.h"
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
 
-1780541829 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\menu.c
+1781115528 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\menu.c
+	"../headers/menu.h"
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<ctype.h>
 
-1780872081 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\tablero.c
+1781115528 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\tablero.c
 	"../headers/tablero.h"
 	"../headers/constantesymacros.h"
 	<time.h>
+	<string.h>
 
 1780943441 source:c:\users\ramir\onedrive\escritorio\new folder\caravana-del-desierto\proyecto_caravana_del_desierto\sources\arbol.c
 	"../headers/arbol.h"
@@ -387,4 +395,20 @@
 1781043872 c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\headers\juego.h
 
 1781098905 c:\users\ramir\onedrive\escritorio\new folder\caravana-del-desierto\proyecto_caravana_del_desierto\headers\juego.h
+
+1781115528 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\menu.h
+
+1781115528 c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\headers\juego.h
+
+1781115528 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\indices.c
+
+1781115528 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\juego.c
+	"../headers/lista.h"
+	"../headers/archivos.h"
+	"../headers/tablero.h"
+	"../headers/bandido.h"
+	"../headers/jugador.h"
+	"../headers/constantesymacros.h"
+
+1781115528 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\partida.c
 

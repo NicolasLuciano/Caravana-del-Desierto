@@ -11,9 +11,9 @@ tBandido* crearBandidos(unsigned cantBandidos)
 
     for(int i=0; i<cantBandidos; i++)
     {
-        (vecBandidos->vivo=VIVO);
-        (vecBandidos->posicion=NULL);
-        (vecBandidos->direccion=ADELANTE);
+        (vecBandidos+i)->vivo=VIVO;
+        (vecBandidos+i)->posicion=NULL;
+        (vecBandidos+i)->direccion=ADELANTE;
     }
 
     return vecBandidos;
