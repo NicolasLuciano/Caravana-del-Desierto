@@ -18,7 +18,6 @@ int main()
             break;
         case 'P':
             inicializarJuego();
-            system("pause");
             break;
         case 'Q':
             printf("Saliendo...\n");

@@ -7,9 +7,9 @@
 
 typedef struct
 {
-    char nickname[NICKNAME_TAM];
-    char name[NAME_TAM];
-    char surname[SURNAME_TAM];
+    char nombreDeUsuario[NOMBRE_DE_USUARIO_TAM];
+    char nombre[NOMBRE_TAM];
+    char apellido[APELLIDO_TAM];
 } tUsuario;
 
 typedef struct

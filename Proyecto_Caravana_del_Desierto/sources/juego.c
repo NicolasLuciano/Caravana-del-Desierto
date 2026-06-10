@@ -32,6 +32,10 @@ int inicializarJuego()
     inicializarJugador(&jugador, obtenerPrimero(&tablero), configuracion.vidasIniciales);
 
     mostrarTablero(&tablero,configuracion.cantCasillas);
+    system("pause");
+    system("cls");
 
+
+    vaciarLista(&tablero);
     return TODO_OK;
 }

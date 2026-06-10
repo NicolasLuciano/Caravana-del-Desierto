@@ -32,7 +32,7 @@ int generarTablero(tLista *tablero,const tConfig configuracion, tBandido * bandi
     casilla.jugador=HAY_JUGADOR;
     casilla.tipo = INICIO;
     casilla.numCasilla=1;
-    insertarFinLis(tablero, &casilla, sizeof(tCasilla));
+    insertarFinLista(tablero, &casilla, sizeof(tCasilla));
 
     mezclarPosiciones(vecPosiciones,configuracion.cantCasillas);
     distribuirCasillas(vecPosiciones,cadPosiciones,configuracion, &posBandidos);
@@ -43,12 +43,12 @@ int generarTablero(tLista *tablero,const tConfig configuracion, tBandido * bandi
     {
         casilla.tipo= (char)(*(cadPosiciones+i));
         casilla.numCasilla++;
-        insertarFinLis(tablero, &casilla, sizeof(tCasilla));
+        insertarFinLista(tablero, &casilla, sizeof(tCasilla));
     }
 
     casilla.tipo = SALIDA;
     casilla.numCasilla=configuracion.cantCasillas;
-    insertarFinLis(tablero, &casilla, sizeof(tCasilla));
+    insertarFinLista(tablero, &casilla, sizeof(tCasilla));
 
     distribuirBandidos(tablero,bandidos,configuracion.cantBandidos,posBandidos);
 

@@ -4,7 +4,7 @@
 typedef struct
 {
     int idPartida;
-    char nickname[NICKNAME_TAM];
+    char nombreDeUsuario[NOMBRE_DE_USUARIO_TAM];
     unsigned puntos;
     unsigned movimientos;
     char resultado;

@@ -37,9 +37,12 @@
 		<Unit filename="headers/cola.h" />
 		<Unit filename="headers/constantesymacros.h" />
 		<Unit filename="headers/dado.h" />
+		<Unit filename="headers/indices.h" />
+		<Unit filename="headers/juego.h" />
 		<Unit filename="headers/jugador.h" />
 		<Unit filename="headers/lista.h" />
 		<Unit filename="headers/menu.h" />
+		<Unit filename="headers/partida.h" />
 		<Unit filename="headers/tablero.h" />
 		<Unit filename="sources/arbol.c">
 			<Option compilerVar="CC" />
@@ -56,6 +59,12 @@
 		<Unit filename="sources/dado.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="sources/indices.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sources/juego.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="sources/jugador.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -66,6 +75,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="sources/menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sources/partida.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="sources/tablero.c">

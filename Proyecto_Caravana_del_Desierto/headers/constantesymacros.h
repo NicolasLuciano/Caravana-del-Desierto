@@ -32,7 +32,9 @@
 ///CONSTANTES DE ARCHIVOS
 #define ARCH_ERROR -5
 #define NOMARCH "config.txt"
-#define NICKNAME_TAM 30
+#define NOMBRE_DE_USUARIO_TAM 30
+#define NOMBRE_TAM 30
+#define APELLIDO_TAM 30
 
 ///MACROS
 #define MIN(x,y)(x>y?y:x)

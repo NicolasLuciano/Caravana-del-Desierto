@@ -2,7 +2,7 @@
 #include "../headers/constantesymacros.h"
 #include "../headers/dado.h"
 #include "../headers/tablero.h"
-tBandido * crearBandidos( unsigned cantBandidos)
+tBandido* crearBandidos(unsigned cantBandidos)
 {
     tBandido * vecBandidos;
     vecBandidos=malloc(sizeof(tBandido)*cantBandidos);

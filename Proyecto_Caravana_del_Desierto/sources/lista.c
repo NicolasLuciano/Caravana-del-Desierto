@@ -6,7 +6,7 @@ void crearLista(tLista * lista)
     *lista=NULL;
 }
 
-int insertarFinLis(tLista * lista, const void * dato, unsigned tam)
+int insertarFinLista(tLista * lista, const void * dato, unsigned tam)
 {
     tNodoLista * nuevoNodo, * nodoActual;
 
@@ -108,7 +108,7 @@ int recuperarDatoLista(const tLista *lista,unsigned pos,void * dato, unsigned ta
     unsigned i=0;
     while(i<pos && auxNodo->nodoSig != *lista)
     {
-        auxNodo=&(*(auxNodo)->nodoSig);
+        auxNodo=auxNodo->nodoSig;
         i++;
     }
     if(i==pos)
@@ -164,4 +164,14 @@ int compararNodos(const tLista *lista, tNodoLista *nodo, unsigned pos)
 tNodoLista* obtenerPrimero(const tLista* lista)
 {
     return *lista;
+}
+
+void vaciarLista(tLista* lista){
+    tNodoLista * nodoElim;
+    while(NULL != lista){
+        nodoElim = *lista;
+        lista = &(*lista)->nodoSig;
+        free(nodoElim->dato);
+        free(nodoElim);
+    }
 }
