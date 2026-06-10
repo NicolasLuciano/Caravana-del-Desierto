@@ -1,7 +1,7 @@
 #ifndef INDICES_H_INCLUDED
 #define INDICES_H_INCLUDED
 
-#include "../headers/constantesymacros.h"
+#include "constantesymacros.h"
 
 typedef struct
 {
