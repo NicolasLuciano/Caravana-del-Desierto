@@ -6,12 +6,12 @@ typedef struct sNodoC
     void *dato;
     unsigned tamDato;
     struct sNodoC *sig;
-}tNodo;
+} tNodo;
 
 typedef struct
 {
     tNodo *pri, *ult;
-}tCola;
+} tCola;
 
 void crearCola(tCola* pc);
 int ponerEnCola(tCola* pc, const void* dato, unsigned tam);

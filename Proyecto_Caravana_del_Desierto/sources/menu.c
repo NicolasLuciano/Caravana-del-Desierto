@@ -16,6 +16,7 @@ char menu(const char* msj, const char* opciones)
         clave = toupper(clave);
         if(NULL == strchr(opciones, clave))
             printf("Opcion incorrecta, vuelva a intentar\n");
-    } while(NULL == strchr(opciones, clave));
+    }
+    while(NULL == strchr(opciones, clave));
     return clave;
 }

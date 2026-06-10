@@ -1,7 +1,8 @@
 #ifndef ARBOL_H_INCLUDED
 #define ARBOL_H_INCLUDED
 
-typedef struct sNodoA{
+typedef struct sNodoA
+{
     void *dato;
     unsigned tam;
     struct sNodoA *nodoIzq;

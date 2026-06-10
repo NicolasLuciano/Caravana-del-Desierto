@@ -9,20 +9,22 @@
 int main()
 {
     char opcion;
-    do {
+    do
+    {
         switch(opcion = menu(MENSAJE_MENU, OPCIONES_MENU))
         {
-            case 'R':
-                printf("Cargando Ranking...\n");
-                break;
-            case 'P':
-                inicializarJuego();
-                system("pause");
-                break;
-            case 'Q':
-                printf("Saliendo...\n");
-                break;
+        case 'R':
+            printf("Cargando Ranking...\n");
+            break;
+        case 'P':
+            inicializarJuego();
+            system("pause");
+            break;
+        case 'Q':
+            printf("Saliendo...\n");
+            break;
         }
-    } while(opcion != 'Q');
+    }
+    while('Q' != opcion );
     return TODO_OK;
 }

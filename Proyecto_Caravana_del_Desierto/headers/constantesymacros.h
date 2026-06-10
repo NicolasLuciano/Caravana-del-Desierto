@@ -32,6 +32,8 @@
 ///CONSTANTES DE ARCHIVOS
 #define ARCH_ERROR -5
 #define NOMARCH "config.txt"
+#define NICKNAME_TAM 30
+
 ///MACROS
 #define MIN(x,y)(x>y?y:x)
 

@@ -5,12 +5,13 @@
 #include <stdio.h>
 #include "archivos.h"
 
-typedef struct{
+typedef struct
+{
     char tipo;
     int bandido;
     int jugador;
     unsigned numCasilla;
-}tCasilla;
+} tCasilla;
 
 int generarTablero(tLista *tablero,const tConfig configuracion, tBandido * bandidos);
 void mezclarPosiciones(int * vecPosiciones,int cantCasillas);

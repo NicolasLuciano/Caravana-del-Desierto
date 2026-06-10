@@ -1,8 +1,8 @@
 #include "../headers/arbol.h"
+#include "../headers/constantesymacros.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "../headers/constantesymacros.h"
 
 void crearArbol(tArbol *arbol)
 {

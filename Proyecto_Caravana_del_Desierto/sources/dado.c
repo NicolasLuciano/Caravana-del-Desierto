@@ -6,7 +6,8 @@
 
 
 
-int tirar_dado(int limite) {
+int tirar_dado(int limite)
+{
     if (limite < 1) return LIMITE_INVALIDO;
     return rand() % limite + 1;
 }

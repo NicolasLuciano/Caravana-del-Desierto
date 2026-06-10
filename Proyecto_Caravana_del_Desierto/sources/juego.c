@@ -16,13 +16,13 @@ int inicializarJuego()
     cargarConfig(NOMARCH, &configuracion);
 
     bandidos = crearBandidos(configuracion.cantBandidos);
-    if(bandidos == NULL)
+    if(NULL == bandidos)
     {
         printf("No hay memoria suficiente para iniciar la partida\n");
         return SIN_MEM;
     }
 
-    if(generarTablero(&tablero, configuracion, bandidos) == SIN_MEM)
+    if(SIN_MEM == generarTablero(&tablero, configuracion, bandidos))
     {
         printf("No hay memoria suficiente para iniciar la partida\n");
         free(bandidos);

@@ -18,11 +18,11 @@ void inicializarJugador(tJugador* jugador, tNodoLista* posInicial, int vidasInic
     unsigned pasosAdelante, pasosAtras,i;
     int casillaJugador;
 
-    recuperarDatoLista(posJugador,0,&casillaAct,sizeof(tCasilla));
+recuperarDatoLista(posJugador,0,&casillaAct,sizeof(tCasilla));
 
-    if(direccion==ATRAS)
+    if(ATRAS == direccion)
     {
-        if(casillaAct.numCasilla -dado<1) //HAY QUE  VALIDAR ESTO ANTES DE ENTRAR A LA FUNCION
+        if(casillaAct.numCasilla-dado<1) //HAY QUE  VALIDAR ESTO ANTES DE ENTRAR A LA FUNCION
             moverEnLista(posJugador,dado,ADELANTE);
         else
             moverEnLista(posJugador,dado,ATRAS);

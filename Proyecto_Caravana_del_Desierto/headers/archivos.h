@@ -13,7 +13,7 @@ typedef struct
     unsigned cantTormentas;
     unsigned cantBandidos;
     unsigned cantVidasExtra;
-}tConfig;
+} tConfig;
 
 int cargarConfig(const char* nombreArch, tConfig* configuracion);
 void generaraArchivoTablero();

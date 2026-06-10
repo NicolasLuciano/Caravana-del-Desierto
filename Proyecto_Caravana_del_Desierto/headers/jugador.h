@@ -12,6 +12,7 @@ typedef struct
     char pierdeTurno;
 } tJugador;
 
+
 void moverJugador(tLista *tablero, tNodoLista ** posJugador,tCola *colaMovimientos, int direccion, unsigned dado,unsigned cantCasillas);
 void inicializarJugador(tJugador* jugador, tNodoLista* posInicial, int vidasInicio);
 
