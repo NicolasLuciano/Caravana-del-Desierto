@@ -37,7 +37,6 @@
 		<Unit filename="headers/cola.h" />
 		<Unit filename="headers/constantesymacros.h" />
 		<Unit filename="headers/dado.h" />
-		<Unit filename="headers/indices.h" />
 		<Unit filename="headers/juego.h" />
 		<Unit filename="headers/jugador.h" />
 		<Unit filename="headers/lista.h" />
@@ -57,9 +56,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="sources/dado.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="sources/indices.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="sources/juego.c">

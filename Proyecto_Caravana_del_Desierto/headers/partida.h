@@ -10,4 +10,6 @@ typedef struct
     char resultado;
 } tPartida;
 
+int inicializarPartida()
+
 #endif // PARTIDA_H_INCLUDED

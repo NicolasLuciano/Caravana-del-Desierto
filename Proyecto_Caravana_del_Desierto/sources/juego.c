@@ -29,9 +29,11 @@ int inicializarJuego()
         return SIN_MEM;
     }
 
-    inicializarJugador(&jugador, obtenerPrimero(&tablero), configuracion.vidasIniciales);
+    inicializarJugador(jugador, configuracion.vidasIniciales);
+    mostrarTablero((tLista*)iniTablero,configuracion.cantCasillas);
 
-    mostrarTablero(&tablero,configuracion.cantCasillas);
+    empezarPartida(&tablero,jugador,bandidos,iniTablero,finTablero,configuracion.cantCasillas);
+
     system("pause");
     system("cls");
 

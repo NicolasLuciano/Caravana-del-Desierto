@@ -3,13 +3,10 @@
 #include "../headers/tablero.h"
 #include "../headers/dado.h"
 
-void inicializarJugador(tJugador* jugador, tNodoLista* posInicial, int vidasInicio)
+void inicializarJugador(tJugador, int vidasInicio)
 {
-    jugador->posicion = posInicial;
     jugador->vidas = vidasInicio;
     jugador->puntos = 0;
-    jugador->protegido = 0;
-    jugador->pierdeTurno = 0;
 }
 
 /*void moverJugador(tLista *tablero, tNodoLista ** posJugador,tCola *colaMovimientos, int direccion, unsigned dado,unsigned cantCasillas)

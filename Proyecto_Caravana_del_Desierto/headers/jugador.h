@@ -15,11 +15,8 @@ typedef struct
 typedef struct
 {
     tUsuario usuario;
-    tNodoLista* posicion;
     unsigned vidas;
     unsigned puntos;
-    char protegido;
-    char pierdeTurno;
 } tJugador;
 
 
