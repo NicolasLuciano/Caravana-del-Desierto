@@ -166,7 +166,8 @@ tNodoLista* obtenerPrimero(const tLista* lista)
     return *lista;
 }
 
-void vaciarLista(tLista* lista){
+void vaciarLista(tLista* lista)
+{
     tNodoLista * nodoElim;
     while(NULL != lista){
         nodoElim = *lista;
