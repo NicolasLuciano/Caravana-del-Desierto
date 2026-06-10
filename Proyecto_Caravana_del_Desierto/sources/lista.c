@@ -47,7 +47,7 @@ int insertarFinLis(tLista * lista, const void * dato, unsigned tam)
     return TODO_OK;
 }
 
-void moverEnLista(const tLista *lista,tNodoLista **pos, unsigned pasos, int direccion)
+/*void moverEnLista(tNodoLista **pos, unsigned pasos, int direccion)
 {
     int i;
 
@@ -61,7 +61,7 @@ void moverEnLista(const tLista *lista,tNodoLista **pos, unsigned pasos, int dire
         for(i = 0; i < pasos; i++)
             *pos = (*pos)->nodoAnt;
     }
-}
+}*/
 
 void posicionarEnLista(const tLista *lista,tNodoLista **pos, unsigned pasos)
 {
@@ -147,10 +147,10 @@ int compararNodos(const tLista *lista, tNodoLista *nodo, unsigned pos)
     return LISTA_ERROR;
 }
 
-int buscarNodoLista(const tLista *lista, tNodoLista *nodo)
+/*int buscarNodoLista(const tLista *lista, tNodoLista *nodo)
 {
     tNodoLista *aux = *lista;
-    int pos=-1;
+    int pos=NO_ENCONTRADO;
     while(aux!=nodo && aux->nodoSig!=*lista)
     {
         aux=aux->nodoSig;
@@ -159,4 +159,9 @@ int buscarNodoLista(const tLista *lista, tNodoLista *nodo)
     if(aux==nodo)
         pos=i;
     return pos;
+}*/
+
+tNodoLista* obtenerPrimero(const tLista* lista)
+{
+    return *lista;
 }

@@ -1,6 +1,7 @@
 #include "../headers/tablero.h"
 #include "../headers/constantesymacros.h"
 #include <time.h>
+#include <string.h>
 
 int generarTablero(tLista *tablero,const tConfig configuracion, tBandido * bandidos)
 {
@@ -27,7 +28,8 @@ int generarTablero(tLista *tablero,const tConfig configuracion, tBandido * bandi
         return SIN_MEM;
     }
 
-    casilla.bandido=0;
+    casilla.bandido=MUERTO;
+    casilla.jugador=HAY_JUGADOR;
     casilla.tipo = INICIO;
     casilla.numCasilla=1;
     insertarFinLis(tablero, &casilla, sizeof(tCasilla));
@@ -35,7 +37,9 @@ int generarTablero(tLista *tablero,const tConfig configuracion, tBandido * bandi
     mezclarPosiciones(vecPosiciones,configuracion.cantCasillas);
     distribuirCasillas(vecPosiciones,cadPosiciones,configuracion, &posBandidos);
 
-    for(i=0;i<configuracion.cantCasillas-2;i++)
+    casilla.jugador=SIN_JUGADOR;
+
+    for(i=0; i<configuracion.cantCasillas-2; i++)
     {
         casilla.tipo= (char)(*(cadPosiciones+i));
         casilla.numCasilla++;
@@ -75,31 +79,31 @@ void distribuirCasillas(int *vecPos,char *cadPos, tConfig config, int **posBandi
 {
     int i, *auxVec;
 
-    for(i=0;i<config.cantCasillas;i++)
+    for(i=0; i<config.cantCasillas; i++)
         *(cadPos+i)=VACIA;
 
     auxVec= vecPos;
-    for(i=0;i<config.cantOasis;i++)
+    for(i=0; i<config.cantOasis; i++)
     {
         *(cadPos + *auxVec)= OASIS;
         auxVec++;
     }
-    for(i=0;i<config.cantPremios;i++)
+    for(i=0; i<config.cantPremios; i++)
     {
         *(cadPos + *auxVec)= PREMIO;
         auxVec++;
     }
-    for(i=0;i<config.cantTormentas;i++)
+    for(i=0; i<config.cantTormentas; i++)
     {
         *(cadPos + *auxVec)= TORMENTA;
         auxVec++;
     }
-    for(i=0;i<config.cantVidasExtra;i++)
+    for(i=0; i<config.cantVidasExtra; i++)
     {
         *(cadPos + *auxVec)= VIDAEXTRA;
         auxVec++;
     }
-    for(i=0;i<config.cantBandidos;i++)
+    for(i=0; i<config.cantBandidos; i++)
     {
         *(*(posBandidos)+i)=*auxVec;
         auxVec++;
@@ -110,19 +114,32 @@ void mostrarTablero(const tLista* tablero, unsigned cantCasillas)
 {
     int i;
     tCasilla casilla;
+    char linea[5];
     for(i=0; i<cantCasillas; i++)
     {
         recuperarDatoLista(tablero,i,&casilla,sizeof(tCasilla));
-        printf("%d: ", i+1);
-        if(VIVO==casilla.bandido)
+        linea[0] = '\0';
+
+        if(casilla.tipo != VACIA)
+            sprintf(linea, "%c ", casilla.tipo);
+
+        if(casilla.jugador == HAY_JUGADOR)
+            sprintf(linea + strlen(linea), "%c ", JUGADOR);
+
+        if(casilla.bandido == VIVO)
+            sprintf(linea + strlen(linea), "%c ", BANDIDO);
+
+        if(strlen(linea) > 0)
         {
-            if(VACIA==casilla.tipo)
-                printf("%c\n",BANDIDO);
+            linea[strlen(linea)-1] = '\0';
+
+            if(strlen(linea) > 1)
+                printf("%02d: [%s]\n", i+1, linea);
             else
-                printf("[%c %c]\n",BANDIDO, casilla.tipo);
+                printf("%02d: %s\n", i+1, linea);
         }
         else
-        printf("%c\n",casilla.tipo);
+            printf("%02d: %c\n", i+1, casilla.tipo);
     }
 }
 
@@ -130,7 +147,7 @@ void distribuirBandidos(const tLista *tablero, tBandido *vBandidos, unsigned can
 {
     int i;
     tCasilla casilla;
-    for(i=0;i<cantBandidos;i++)
+    for(i=0; i<cantBandidos; i++)
     {
         recuperarDatoLista(tablero,*(posBandidos+i)+1,&casilla,sizeof(casilla));
         posicionarEnLista(tablero,&((vBandidos+i)->posicion),*(posBandidos+i)+1);

@@ -10,9 +10,10 @@ typedef struct
     unsigned puntos;
     char protegido;
     char pierdeTurno;
-} Jugador;
+} tJugador;
 
 void moverJugador(tLista *tablero, tNodoLista ** posJugador,tCola *colaMovimientos, int direccion, unsigned dado,unsigned cantCasillas);
+void inicializarJugador(tJugador* jugador, tNodoLista* posInicial, int vidasInicio);
 
 
 #endif // JUGADOR_H_INCLUDED

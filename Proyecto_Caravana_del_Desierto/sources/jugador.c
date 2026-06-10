@@ -3,17 +3,26 @@
 #include "../headers/tablero.h"
 #include "../headers/dado.h"
 
-void moverJugador(tLista *tablero, tNodoLista ** posJugador,tCola *colaMovimientos, int direccion, unsigned dado,unsigned cantCasillas)
+void inicializarJugador(tJugador* jugador, tNodoLista* posInicial, int vidasInicio)
+{
+    jugador->posicion = posInicial;
+    jugador->vidas = vidasInicio;
+    jugador->puntos = 0;
+    jugador->protegido = 0;
+    jugador->pierdeTurno = 0;
+}
+
+/*void moverJugador(tLista *tablero, tNodoLista ** posJugador,tCola *colaMovimientos, int direccion, unsigned dado,unsigned cantCasillas)
 {
     tCasilla casillaAct;
     unsigned pasosAdelante, pasosAtras,i;
+    int casillaJugador;
 
-    while(compararNodos())
+    recuperarDatoLista(posJugador,0,&casillaAct,sizeof(tCasilla));
 
-    recuperarDatoLista(*posJugador,&casillaAct,sizeof(tCasilla));
     if(direccion==ATRAS)
     {
-        if(casillaAct.numCasilla -dado<1) //CAPAZ HAY QUE  VALIDAR ESTO ANTES DE ENTRAR A LA FUNCION
+        if(casillaAct.numCasilla -dado<1) //HAY QUE  VALIDAR ESTO ANTES DE ENTRAR A LA FUNCION
             moverEnLista(posJugador,dado,ADELANTE);
         else
             moverEnLista(posJugador,dado,ATRAS);
@@ -24,10 +33,9 @@ void moverJugador(tLista *tablero, tNodoLista ** posJugador,tCola *colaMovimient
         {
             pasosAdelante=cantCasillas-casillaAct.numCasilla;
             pasosAtras=dado-pasosAdelante;
-            moverEnLista(posJugador,pasosAdelante,ADELANTE);
-            moverEnLista(posJugador,pasosAtras,ATRAS);
+            moverEnLista(posJugador,pasosAdelante-pasosAtras,ADELANTE);
         }
         else
             moverEnLista(posJugador,dado,ADELANTE);
     }
-}
+}*/

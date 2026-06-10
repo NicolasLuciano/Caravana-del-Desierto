@@ -12,7 +12,8 @@
 #define DADO_BANDIDO 4
 #define VIVO 1
 #define MUERTO 0
-#define SALIDA 'S'
+#define HAY_JUGADOR 1
+#define SIN_JUGADOR 0
 #define ADELANTE 1
 #define ATRAS -1
 ///CONSTANTES DE MENU
@@ -26,6 +27,7 @@
 #define INICIO 'I'
 #define SALIDA 'S'
 #define BANDIDO 'B'
+#define JUGADOR 'J'
 #define VACIA '.'
 ///CONSTANTES DE ARCHIVOS
 #define ARCH_ERROR -5

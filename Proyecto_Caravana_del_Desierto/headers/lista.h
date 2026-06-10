@@ -23,4 +23,5 @@ int recuperarDatoLista(const tLista *lista,unsigned pos,void * dato, unsigned ta
 void posicionarEnLista(const tLista *lista,tNodoLista **pos, unsigned pasos);
 int modificarEnPosLista(const tLista *lista,unsigned pos, void *dato, unsigned tam);
 int compararNodos(const tLista *lista, tNodoLista *nodo, unsigned pos);
+tNodoLista* obtenerPrimero(const tLista* lista);
 #endif // LISTA_H_INCLUDED

@@ -8,6 +8,7 @@
 typedef struct{
     char tipo;
     int bandido;
+    int jugador;
     unsigned numCasilla;
 }tCasilla;
 
