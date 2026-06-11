@@ -13,15 +13,9 @@ tBandido* crearBandidos(unsigned cantBandidos)
     direccion = ADELANTE;
     for(int i=0; i<cantBandidos; i++)
     {
-<<<<<<< HEAD
-        (vecBandidos+i)->vivo=VIVO;
-        (vecBandidos+i)->posicion=NULL;
-        (vecBandidos+i)->direccion=ADELANTE;
-=======
         (vecBandidos->vivo=VIVO);
         (vecBandidos->direccion=direccion);
         direccion = direccion * ATRAS;
->>>>>>> 99a0559 (trabajo local)
     }
 
     return vecBandidos;
