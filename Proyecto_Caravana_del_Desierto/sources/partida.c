@@ -12,12 +12,17 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
     tLista posJugador;
     int dado,direccion;
     tCasilla casillaAct;
+    tCola colaTurno, colaRegistro;
 
     copiarPosicionLista(&posJugador,*tablero);
+    crearCola(&colaTurno);
+    crearCola(&colaRegistro);
 
     recuperarDatoLista(&posJugador,0,&casillaAct,sizeof(tCasilla));
     while(jugador->vidas>0)
     {
+        mostrarTablero(tablero,configuracion.cantCasillas);
+
         printf("Lanzar Dado\n");
         dado=tirar_dado(DADO_JUGADOR);
         printf("Elija la direccion a moverse\n");
@@ -30,7 +35,8 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
             printf("No es posible moverse hacia atras, sera movido hacia adelante\n");
             direccion=ADELANTE;
         }
-        //moverJugador()
+
+        moverJugador(&posJugador,casillaAct,&colaTurno,&colaRegistro,direccion,dado,cantCasillas);
 
 
         recuperarDatoLista(&posJugador,0,&casillaAct,sizeof(tCasilla));

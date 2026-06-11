@@ -4,7 +4,7 @@
 #include "lista.h"
 #include "cola.h"
 #include "constantesymacros.h"
-#include "../headers/tablero.h"
+#include "tablero.h"
 
 typedef struct
 {
@@ -22,7 +22,7 @@ typedef struct
 
 
 
-void moverJugador(tLista *posJugador, tCasilla casillaAct, tCola *colaMovimientos, int direccion, unsigned dado,unsigned cantCasillas);
+void moverJugador(tLista *posJugador, tCasilla casillaAct, tCola *colaTurno, tCola *colaRegistro, int direccion, unsigned dado,unsigned cantCasillas);
 void inicializarJugador(tJugador * jugador, int vidasInicio);
 
 
