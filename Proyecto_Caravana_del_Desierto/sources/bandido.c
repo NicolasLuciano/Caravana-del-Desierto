@@ -2,6 +2,7 @@
 #include "../headers/constantesymacros.h"
 #include "../headers/dado.h"
 #include "../headers/tablero.h"
+#include "../headers/partida.h"
 tBandido* crearBandidos(unsigned cantBandidos)
 {
     tBandido * vecBandidos;
@@ -10,13 +11,15 @@ tBandido* crearBandidos(unsigned cantBandidos)
     if(vecBandidos==NULL)
         return NULL;
 
-    direccion = ADELANTE;
     for(int i=0; i<cantBandidos; i++)
     {
+        if(i%2==0)
+            direccion=ADELANTE;
+        else
+            direccion=ATRAS;
         ((vecBandidos+i)->vivo=VIVO);
         ((vecBandidos+i)->posicion=NULL);
         ((vecBandidos+i)->direccion=direccion);
-        direccion = direccion * ATRAS;
     }
 
     return vecBandidos;
@@ -44,6 +47,10 @@ void moverBandidos(tLista *tablero, tBandido *vBandidos,tCola *colaMovimientos,u
             recuperarDatoLista(&(vBandidos+i)->posicion,0,&casilla,sizeof(casilla));
             casilla.bandido = HAY_BANDIDO;
             modificarEnPosLista(&(vBandidos+i)->posicion,0,&casilla,sizeof(casilla));
+            if(ADELANTE==(vBandidos+i)->direccion)
+                (vBandidos+i)->direccion=ATRAS;
+            else
+                (vBandidos+i)->direccion=ADELANTE;
         }
         i++;
     }
