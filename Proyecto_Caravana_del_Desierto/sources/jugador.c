@@ -1,38 +1,24 @@
 #include "../headers/jugador.h"
 #include "../headers/constantesymacros.h"
-#include "../headers/tablero.h"
 #include "../headers/dado.h"
 
-void inicializarJugador(tJugador, int vidasInicio)
+void inicializarJugador(tJugador * jugador, int vidasInicio)
 {
     jugador->vidas = vidasInicio;
     jugador->puntos = 0;
 }
 
-/*void moverJugador(tLista *tablero, tNodoLista ** posJugador,tCola *colaMovimientos, int direccion, unsigned dado,unsigned cantCasillas)
+void moverJugador(tLista *posJugador, tCasilla casillaAct, tCola *colaMovimientos, int direccion, unsigned dado,unsigned cantCasillas)
 {
-    tCasilla casillaAct;
-    unsigned pasosAdelante, pasosAtras,i;
-    int casillaJugador;
+    unsigned pasosAdelante, pasosAtras;
 
-recuperarDatoLista(posJugador,0,&casillaAct,sizeof(tCasilla));
 
-    if(ATRAS == direccion)
+    if(casillaAct.numCasilla+dado >cantCasillas)
     {
-        if(casillaAct.numCasilla-dado<1) //HAY QUE  VALIDAR ESTO ANTES DE ENTRAR A LA FUNCION
-            moverEnLista(posJugador,dado,ADELANTE);
-        else
-            moverEnLista(posJugador,dado,ATRAS);
+        pasosAdelante=cantCasillas-casillaAct.numCasilla;
+        pasosAtras=dado-pasosAdelante;
+        dado=pasosAdelante-pasosAtras;
     }
-    else
-    {
-        if(casillaAct.numCasilla+dado>cantCasillas)
-        {
-            pasosAdelante=cantCasillas-casillaAct.numCasilla;
-            pasosAtras=dado-pasosAdelante;
-            moverEnLista(posJugador,pasosAdelante-pasosAtras,ADELANTE);
-        }
-        else
-            moverEnLista(posJugador,dado,ADELANTE);
-    }
-}*/
+
+    moverEnLista(posJugador,dado);
+}

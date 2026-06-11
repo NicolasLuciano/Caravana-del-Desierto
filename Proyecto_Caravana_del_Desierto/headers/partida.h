@@ -10,6 +10,6 @@ typedef struct
     char resultado;
 } tPartida;
 
-int inicializarPartida()
+void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, unsigned cantCasillas);
 
 #endif // PARTIDA_H_INCLUDED

@@ -4,6 +4,7 @@
 #include "lista.h"
 #include "cola.h"
 #include "constantesymacros.h"
+#include "../headers/tablero.h"
 
 typedef struct
 {
@@ -21,8 +22,8 @@ typedef struct
 
 
 
-void moverJugador(tLista *tablero, tNodoLista ** posJugador,tCola *colaMovimientos, int direccion, unsigned dado,unsigned cantCasillas);
-void inicializarJugador(tJugador* jugador, tNodoLista* posInicial, int vidasInicio);
+void moverJugador(tLista *posJugador, tCasilla casillaAct, tCola *colaMovimientos, int direccion, unsigned dado,unsigned cantCasillas);
+void inicializarJugador(tJugador * jugador, int vidasInicio);
 
 
 #endif // JUGADOR_H_INCLUDED

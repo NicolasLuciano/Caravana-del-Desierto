@@ -10,6 +10,7 @@
 #define NO_ENCONTRADO -7
 ///CONSTANTES DE JUEGO
 #define DADO_BANDIDO 4
+#define DADO_JUGADOR 6
 #define VIVO 1
 #define MUERTO 0
 #define HAY_JUGADOR 1

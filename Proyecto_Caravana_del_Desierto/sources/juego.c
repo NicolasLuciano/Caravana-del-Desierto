@@ -4,6 +4,7 @@
 #include "../headers/bandido.h"
 #include "../headers/jugador.h"
 #include "../headers/constantesymacros.h"
+#include "../headers/partida.h"
 
 int inicializarJuego()
 {
@@ -29,11 +30,10 @@ int inicializarJuego()
         return SIN_MEM;
     }
 
-    inicializarJugador(jugador, configuracion.vidasIniciales);
-    mostrarTablero((tLista*)iniTablero,configuracion.cantCasillas);
+    inicializarJugador(&jugador, configuracion.vidasIniciales);
+    mostrarTablero(tablero,configuracion.cantCasillas);
 
-    empezarPartida(&tablero,jugador,bandidos,iniTablero,finTablero,configuracion.cantCasillas);
-
+    empezarPartida(&tablero,&jugador,bandidos, configuracion.cantCasillas);
     system("pause");
     system("cls");
 

@@ -110,14 +110,14 @@ void distribuirCasillas(int *vecPos,char *cadPos, tConfig config, int **posBandi
     }
 }
 
-void mostrarTablero(const tLista* tablero, unsigned cantCasillas)
+void mostrarTablero(const tLista tablero, unsigned cantCasillas)
 {
     int i;
     tCasilla casilla;
     char linea[5];
     for(i=0; i<cantCasillas; i++)
     {
-        recuperarDatoLista(tablero,i,&casilla,sizeof(tCasilla));
+        recuperarDatoLista(&tablero,i,&casilla,sizeof(tCasilla));
         linea[0] = '\0';
 
         if(casilla.tipo != VACIA)
