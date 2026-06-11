@@ -10,6 +10,12 @@ typedef struct
     char resultado;
 } tPartida;
 
+typedef struct
+{
+    char direccion;
+    unsigned casillas;
+} tMovimiento;
+
 void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, unsigned cantCasillas);
 
 #endif // PARTIDA_H_INCLUDED

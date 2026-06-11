@@ -1,6 +1,6 @@
 #include "../headers/jugador.h"
-#include "../headers/constantesymacros.h"
 #include "../headers/dado.h"
+#include "../headers/partida.h"
 
 void inicializarJugador(tJugador * jugador, int vidasInicio)
 {
@@ -8,17 +8,29 @@ void inicializarJugador(tJugador * jugador, int vidasInicio)
     jugador->puntos = 0;
 }
 
-void moverJugador(tLista *posJugador, tCasilla casillaAct, tCola *colaMovimientos, int direccion, unsigned dado,unsigned cantCasillas)
+void moverJugador(tLista *posJugador, tCasilla casillaAct, tCola *colaTurno, tCola *colaRegistro, int direccion, unsigned dado,unsigned cantCasillas)
 {
     unsigned pasosAdelante, pasosAtras;
-
+    tMovimiento movJugador;
 
     if(casillaAct.numCasilla+dado >cantCasillas)
     {
         pasosAdelante=cantCasillas-casillaAct.numCasilla;
         pasosAtras=dado-pasosAdelante;
+
+        movJugador.casillas=pasosAdelante;
+        movJugador.direccion=ADELANTE;
+        ponerEnCola(colaRegistro,&movJugador,sizeof(tMovimiento));
+
+        movJugador.casillas=pasosAdelante;
+        movJugador.direccion=ADELANTE;
+        ponerEnCola(colaRegistro,&movJugador,sizeof(tMovimiento));
+
         dado=pasosAdelante-pasosAtras;
     }
+    movJugador.direccion=direccion;
+    movJugador.casillas=dado;
 
-    moverEnLista(posJugador,dado);
+    ponerEnCola(colaTurno,movJugador,sizeof(tMovimiento));
+    //moverEnLista(posJugador,direccion);
 }

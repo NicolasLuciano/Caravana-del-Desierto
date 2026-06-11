@@ -47,7 +47,7 @@ int insertarFinLista(tLista * lista, const void * dato, unsigned tam)
     return TODO_OK;
 }
 
-void moverEnLista(tLista *pos, int direccion)
+void moverEnLista(tLista *pos, char direccion)
 {
     if( ADELANTE == direccion)
         *pos = (*pos)->nodoSig;
@@ -165,15 +165,17 @@ tNodoLista* obtenerPrimero(const tLista* lista)
 void vaciarLista(tLista* lista)
 {
     tNodoLista * nodoElim;
-    while(NULL != lista){
+    while(NULL != lista)
+    {
         nodoElim = *lista;
         lista = &(*lista)->nodoSig;
         free(nodoElim->dato);
-        free(nodoElim);
     }
+    free(nodoElim);
 }
 
 void copiarPosicionLista(tLista *destino, tLista origen)
 {
     *destino = origen;
 }
+

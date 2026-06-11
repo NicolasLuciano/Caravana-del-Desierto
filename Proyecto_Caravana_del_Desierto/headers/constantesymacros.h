@@ -13,12 +13,10 @@
 #define DADO_JUGADOR 6
 #define VIVO 1
 #define MUERTO 0
-#define HAY_BANDIDO 1
-#define SIN_BANDIDO 0
 #define HAY_JUGADOR 1
 #define SIN_JUGADOR 0
-#define ADELANTE 1
-#define ATRAS -1
+#define ADELANTE 'F'
+#define ATRAS 'B'
 ///CONSTANTES DE MENU
 #define MENSAJE_MENU "R - Ver el ranking de jugadores\nP - Jugar una nueva partida\nQ - Salir del juego\n-> "
 #define OPCIONES_MENU "RPQ"

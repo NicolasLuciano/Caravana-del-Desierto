@@ -31,7 +31,6 @@ int inicializarJuego()
     }
 
     inicializarJugador(&jugador, configuracion.vidasIniciales);
-    mostrarTablero(tablero,configuracion.cantCasillas);
 
     empezarPartida(&tablero,&jugador,bandidos, configuracion.cantCasillas);
     system("pause");
