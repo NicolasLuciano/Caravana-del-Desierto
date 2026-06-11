@@ -7,7 +7,7 @@
 
 typedef struct
 {
-    tCasilla posCasilla;
+    tLista posicion;
     unsigned vivo;
     int direccion;
 } tBandido;

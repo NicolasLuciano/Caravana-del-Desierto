@@ -13,8 +13,9 @@ tBandido* crearBandidos(unsigned cantBandidos)
     direccion = ADELANTE;
     for(int i=0; i<cantBandidos; i++)
     {
-        (vecBandidos->vivo=VIVO);
-        (vecBandidos->direccion=direccion);
+        ((vecBandidos+i)->vivo=VIVO);
+        ((vecBandidos+i)->posicion=NULL);
+        ((vecBandidos+i)->direccion=direccion);
         direccion = direccion * ATRAS;
     }
 
@@ -23,17 +24,26 @@ tBandido* crearBandidos(unsigned cantBandidos)
 void moverBandidos(tLista *tablero, tBandido *vBandidos,tCola *colaMovimientos,unsigned cantBandidos, unsigned cantCasillas)
 {
     tCasilla casilla;
-    unsigned i;
+    unsigned i, mov, dado;
     i=0;
     while(i<cantBandidos)
     {
         if(VIVO==(vBandidos+i)->vivo)
         {
-            recuperarDatoLista(tablero,0,&casilla,sizeof(casilla));
-            while(((vBandidos+i)->posCasilla.numCasilla)<casilla.numCasilla)
-            {
+            dado=tirar_dado(DADO_BANDIDO);
 
+            recuperarDatoLista(&(vBandidos+i)->posicion,0,&casilla,sizeof(casilla));
+            casilla.bandido = SIN_BANDIDO;
+            modificarEnPosLista(&(vBandidos+i)->posicion,0,&casilla,sizeof(casilla));
+
+            for(mov=0;mov<dado;mov++)
+            {
+                moverEnLista(&(vBandidos+i)->posicion,(vBandidos+i)->direccion);
             }
+
+            recuperarDatoLista(&(vBandidos+i)->posicion,0,&casilla,sizeof(casilla));
+            casilla.bandido = HAY_BANDIDO;
+            modificarEnPosLista(&(vBandidos+i)->posicion,0,&casilla,sizeof(casilla));
         }
         i++;
     }
