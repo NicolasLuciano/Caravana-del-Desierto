@@ -7,8 +7,8 @@
 
 typedef struct
 {
-    tNodoLista *posicion;
-    char vivo;
+    tCasilla posCasilla;
+    unsigned vivo;
     int direccion;
 } tBandido;
 

@@ -5,42 +5,66 @@
 tBandido* crearBandidos(unsigned cantBandidos)
 {
     tBandido * vecBandidos;
+    unsigned direccion;
     vecBandidos=malloc(sizeof(tBandido)*cantBandidos);
     if(vecBandidos==NULL)
         return NULL;
 
+    direccion = ADELANTE;
     for(int i=0; i<cantBandidos; i++)
     {
+<<<<<<< HEAD
         (vecBandidos+i)->vivo=VIVO;
         (vecBandidos+i)->posicion=NULL;
         (vecBandidos+i)->direccion=ADELANTE;
+=======
+        (vecBandidos->vivo=VIVO);
+        (vecBandidos->direccion=direccion);
+        direccion = direccion * ATRAS;
+>>>>>>> 99a0559 (trabajo local)
     }
 
     return vecBandidos;
 }
-
-/*void moverBandidos(tLista *tablero, tBandido *vBandidos,tCola *colaMovimientos,unsigned cantBandidos, unsigned cantCasillas)
+void moverBandidos(tLista *tablero, tBandido *vBandidos,tCola *colaMovimientos,unsigned cantBandidos, unsigned cantCasillas)
 {
-    unsigned dadoBandido;
     tCasilla casilla;
-    int posActual,j, flagBandidos=VIVO;
-
-    posActual=0;
-    while(posActual<cantCasillas && VIVO==flagBandidos)
+    unsigned i;
+    i=0;
+    while(i<cantBandidos)
     {
-        flagBandidos=MUERTO;
-        for(j=0;j<cantBandidos;j++)
+        if(VIVO==(vBandidos+i)->vivo)
         {
-            if(VIVO==(vBandidos+j)->vivo)
+            recuperarDatoLista(tablero,0,&casilla,sizeof(casilla));
+            while(((vBandidos+i)->posCasilla.numCasilla)<casilla.numCasilla)
             {
-                flagBandidos=VIVO;
-                if(TODO_OK==compararNodos(tablero,(vBandidos+j)->pos,posActual))
-                {
-                    dadoBandido=tirar_dado(DADO_BANDIDO);
 
-                    recuperarDatoLista()
-                }
             }
         }
+        i++;
     }
-}*/
+}
+//void moverBandidos(tLista *tablero, tBandido *vBandidos,tCola *colaMovimientos,unsigned cantBandidos, unsigned cantCasillas)
+//{
+//    unsigned dadoBandido, nuevaPos;
+//    int posActual,j, flagBandidos=VIVO;
+//
+//    posActual=0;
+//    while(posActual<cantCasillas && VIVO==flagBandidos)
+//    {
+//        flagBandidos=MUERTO;
+//        for(j=0; j<cantBandidos; j++)
+//        {
+//            if(VIVO==(vBandidos+j)->vivo)
+//            {
+//                flagBandidos=VIVO;
+//                (vBandidos+j)->posCasilla.bandido=MUERTO;
+//                modificarEnPosLista(tablero,(vBandidos+j)->posCasilla.numCasilla,(vBandidos+j)->posCasilla,sizeof((vBandidos+j)->posCasilla));
+//                (vBandidos+j)->posCasilla.bandido=VIVO;
+//
+//                dadoBandido=tirar_dado(DADO_BANDIDO);
+//                nuevaPos = (vBandidos+j)->direccion * dadoBandido
+//            }
+//        }
+//    }
+//}

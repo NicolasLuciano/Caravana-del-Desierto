@@ -146,12 +146,10 @@ void mostrarTablero(const tLista* tablero, unsigned cantCasillas)
 void distribuirBandidos(const tLista *tablero, tBandido *vBandidos, unsigned cantBandidos, int *posBandidos)
 {
     int i;
-    tCasilla casilla;
     for(i=0; i<cantBandidos; i++)
     {
-        recuperarDatoLista(tablero,*(posBandidos+i)+1,&casilla,sizeof(casilla));
-        posicionarEnLista(tablero,&((vBandidos+i)->posicion),*(posBandidos+i)+1);
-        casilla.bandido=VIVO;
-        modificarEnPosLista(tablero,*(posBandidos+i)+1,&casilla,sizeof(casilla));
+        recuperarDatoLista(tablero,*(posBandidos+i)+1,&((vBandidos+i)->posCasilla),sizeof(casilla));
+        (vBandidos+i)->posCasilla.bandido=VIVO;
+        modificarEnPosLista(tablero,*(posBandidos+i)+1,&((vBandidos+i)->posCasilla),sizeof(casilla));
     }
 }
