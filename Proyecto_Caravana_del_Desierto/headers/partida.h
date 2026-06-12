@@ -4,6 +4,7 @@
 #include "lista.h"
 #include "bandido.h"
 #include "jugador.h"
+#include "cola.h"
 
 typedef struct
 {
@@ -20,6 +21,7 @@ typedef struct
     unsigned casillas;
 } tMovimiento;
 
-void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, unsigned cantCasillas);
+void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, unsigned cantCasillas, unsigned cantBandidos);
+void resolverMovimientos(tLista * posJugador, tBandido * bandidos, tCola * colaTurno,tCasilla * casillaAct, tJugador * jugador, unsigned cantBandidos);
 
 #endif // PARTIDA_H_INCLUDED

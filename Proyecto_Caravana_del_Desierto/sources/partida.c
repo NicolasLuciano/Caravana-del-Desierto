@@ -3,9 +3,8 @@
 #include "../headers/constantesymacros.h"
 #include "../headers/dado.h"
 #include "../headers/partida.h"
-#include "../headers/cola.h"
 
-void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, unsigned cantCasillas)
+void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, unsigned cantCasillas, unsigned cantBandidos)
 {
     tLista posJugador;
     int dado,direccion;
@@ -19,7 +18,7 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
     recuperarDatoLista(&posJugador,0,&casillaAct,sizeof(tCasilla));
     while(jugador->vidas>0)
     {
-        mostrarTablero(tablero,cantCasillas);
+        mostrarTablero(*tablero,cantCasillas);
 
         printf("Lanzar Dado\n");
         dado=tirar_dado(DADO_JUGADOR);
@@ -36,12 +35,12 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
         }
 
         encolarJugador(&posJugador,casillaAct,&colaTurno,&colaRegistro,direccion,dado,cantCasillas);
-        resolverMovimientos();
+        resolverMovimientos(&posJugador,bandidos,&colaTurno,&casillaAct,jugador,cantBandidos);
 
     }
 }
 
-void resolverMovimientos(tLista * posJugador, tBandido * bandidos, tCola * colaTurno,tCasilla * casillaAct, tJugador * jugador)
+void resolverMovimientos(tLista * posJugador, tBandido * bandidos, tCola * colaTurno,tCasilla * casillaAct, tJugador * jugador, unsigned cantBandidos)
 {
     tMovimiento mov;
     tCasilla casillaBandido;
@@ -49,12 +48,11 @@ void resolverMovimientos(tLista * posJugador, tBandido * bandidos, tCola * colaT
 
     colision=SIN_COLISION;
 
-    desencolar(&colaTurno, &mov, sizeof(tMovimiento));
+    sacarDeCola(colaTurno, &mov, sizeof(tMovimiento));
     for(i=0; i<mov.casillas; i++)
-        moverEnLista(posJugador,mov.direccion);
+        moverEnLista(posJugador,mov.direccion); //en vez de hacer este for, conviene copiar la posJugador a el inicio del tablero
 
     recuperarDatoLista(posJugador,0,casillaAct,sizeof(tCasilla));
-
 
     if(casillaAct->bandido==HAY_BANDIDO)
     {
@@ -65,7 +63,6 @@ void resolverMovimientos(tLista * posJugador, tBandido * bandidos, tCola * colaT
             i++;
 
         (bandidos+i)->vivo=MUERTO;
-        //LOGICA PARA MOVER EL BANDIDO MUERTO ATRAS
         for(i=1; i<casillaAct->numCasilla; i++)
             moverEnLista(posJugador,ATRAS);
 
@@ -78,19 +75,19 @@ void resolverMovimientos(tLista * posJugador, tBandido * bandidos, tCola * colaT
     contBandido=0;
     while(!colaVacia(colaTurno))
     {
-        desencolar(&colaTurno, &mov, sizeof(tMovimiento));
+        sacarDeCola(colaTurno, &mov, sizeof(tMovimiento));
         if((bandidos+contBandido)->vivo==VIVO)
         {
             recuperarDatoLista(&(bandidos+contBandido)->posicion,0,&casillaBandido,sizeof(tCasilla));
             casillaBandido.bandido=SIN_BANDIDO;
-            modificarEnPosLista(posJugador,0,&casillaBandido,sizeof(tCasilla));
+            modificarEnPosLista(&(bandidos+contBandido)->posicion,0,&casillaBandido,sizeof(tCasilla));
 
             for(i=0; i<mov.casillas; i++)
                 moverEnLista(&(bandidos+contBandido)->posicion,mov.direccion);
 
-            if(compararLista(posJugador,&(bandidos+contBandido)->posicion)==1 ) //MAGIC NUMBER?
+            if(compararLista(posJugador,&(bandidos+contBandido)->posicion)==LISTAS_IGUALES )
             {
-                (bandidos+i)->vivo=MUERTO;
+                (bandidos+contBandido)->vivo=MUERTO;
                 if(colision==SIN_COLISION)
                 {
                     for(i=1; i<casillaAct->numCasilla; i++)

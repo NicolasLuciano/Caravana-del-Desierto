@@ -8,6 +8,7 @@
 #define COLA_ERROR -4
 #define LIMITE_INVALIDO -6
 #define NO_ENCONTRADO -7
+#define LISTAS_IGUALES 8
 ///CONSTANTES DE JUEGO
 #define DADO_BANDIDO 4
 #define DADO_JUGADOR 6
@@ -19,6 +20,8 @@
 #define SIN_JUGADOR 0
 #define ADELANTE 'F'
 #define ATRAS 'B'
+#define SIN_COLISION -5
+#define HAY_COLISION 5
 ///CONSTANTES DE MENU
 #define MENSAJE_MENU "R - Ver el ranking de jugadores\nP - Jugar una nueva partida\nQ - Salir del juego\n-> "
 #define OPCIONES_MENU "RPQ"
@@ -38,6 +41,7 @@
 #define NOMBRE_DE_USUARIO_TAM 30
 #define NOMBRE_TAM 30
 #define APELLIDO_TAM 30
+#define NOMARCH2 "caravana.txt"
 
 ///MACROS
 #define MIN(x,y)(x>y?y:x)

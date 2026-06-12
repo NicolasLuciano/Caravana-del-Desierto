@@ -32,7 +32,7 @@ int inicializarJuego()
 
     inicializarJugador(&jugador, configuracion.vidasIniciales);
 
-    empezarPartida(&tablero,&jugador,bandidos, configuracion.cantCasillas);
+    empezarPartida(&tablero,&jugador,bandidos, configuracion.cantCasillas,configuracion.cantBandidos);
     system("pause");
     system("cls");
 

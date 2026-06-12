@@ -114,7 +114,7 @@ void mostrarTablero(const tLista tablero, unsigned cantCasillas)
 {
     int i;
     tCasilla casilla;
-    char linea[5];
+    char linea[10];
     for(i=0; i<cantCasillas; i++)
     {
         recuperarDatoLista(&tablero,i,&casilla,sizeof(tCasilla));
@@ -134,12 +134,12 @@ void mostrarTablero(const tLista tablero, unsigned cantCasillas)
             linea[strlen(linea)-1] = '\0';
 
             if(strlen(linea) > 1)
-                printf("%02d: [%s]\n", i+1, linea);
+                printf("%02d: [%s]\n", casilla.numCasilla, linea);
             else
-                printf("%02d: %s\n", i+1, linea);
+                printf("%02d: %s\n", casilla.numCasilla, linea);
         }
         else
-            printf("%02d: %c\n", i+1, casilla.tipo);
+            printf("%02d: %c\n", casilla.numCasilla, casilla.tipo);
     }
 }
 
@@ -152,4 +152,42 @@ void distribuirBandidos(const tLista *tablero, tBandido *vBandidos, unsigned can
 //        (vBandidos+i)->posCasilla.bandido=VIVO;
 //        modificarEnPosLista(tablero,*(posBandidos+i)+1,&((vBandidos+i)->posCasilla),sizeof(casilla));
 //    }
+}
+
+void escribirCasilla(FILE* fp, const void* dato)
+{
+    tCasilla casilla = *(tCasilla*)dato;
+    char linea[10];
+
+    linea[0] = '\0';
+
+    if(casilla.tipo != VACIA)
+        sprintf(linea, "%c ", casilla.tipo);
+
+    if(casilla.jugador == HAY_JUGADOR)
+        sprintf(linea + strlen(linea), "%c ", JUGADOR);
+
+    if(casilla.bandido == VIVO)
+        sprintf(linea + strlen(linea), "%c ", BANDIDO);
+
+    if(strlen(linea) > 0)
+    {
+        linea[strlen(linea)-1] = '\0';
+
+        if(strlen(linea) > 1)
+            fprintf(fp,"%02d: [%s]\n", casilla.numCasilla, linea);
+        else
+            fprintf(fp,"%02d: %s\n", casilla.numCasilla, linea);
+    }
+    else
+        fprintf(fp,"%02d: %c\n", casilla.numCasilla, casilla.tipo);
+}
+
+void guardarTablero(const tLista* tablero, const char* nombreArchivo)
+{
+    FILE* fp = fopen(nombreArchivo, "wt");
+    if(fp == NULL)
+        return;
+    recorrerListaArchivo(tablero, fp, escribirCasilla);
+    fclose(fp);
 }

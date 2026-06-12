@@ -55,28 +55,6 @@ void moverEnLista(tLista *pos, char direccion)
         *pos = (*pos)->nodoAnt;
 }
 
-void posicionarEnLista(const tLista *lista,tNodoLista **pos, unsigned pasos)
-{
-    int i;
-    *pos=*lista;
-    for(i = 0; i < pasos; i++)
-        *pos = (*pos)->nodoSig;
-}
-void* obtenerDatoPos(const tLista* lista, unsigned pos)
-{
-    tNodoLista* act;
-
-    if(*lista == NULL)
-        return NULL;
-
-    act = *lista;
-
-    while(pos--)
-        act = act->nodoSig;
-
-    return act->dato;
-}
-
 void recorrerListaArchivo(const tLista* lista,FILE* fp,void (*accion)(FILE* fp, const void* dato))
 {
     tNodoLista* act;
@@ -131,25 +109,6 @@ int modificarEnPosLista(const tLista *lista,unsigned pos, void *dato, unsigned t
 int compararLista(const tLista *lista1, const tLista *lista2)
 {
     return *lista1==*lista2;
-}
-
-/*int buscarNodoLista(const tLista *lista, tNodoLista *nodo)
-{
-    tNodoLista *aux = *lista;
-    int pos=NO_ENCONTRADO;
-    while(aux!=nodo && aux->nodoSig!=*lista)
-    {
-        aux=aux->nodoSig;
-        i++;
-    }
-    if(aux==nodo)
-        pos=i;
-    return pos;
-}*/
-
-tNodoLista* obtenerPrimero(const tLista* lista)
-{
-    return *lista;
 }
 
 void vaciarLista(tLista* lista)
