@@ -145,13 +145,18 @@ void mostrarTablero(const tLista tablero, unsigned cantCasillas)
 
 void distribuirBandidos(const tLista *tablero, tBandido *vBandidos, unsigned cantBandidos, int *posBandidos)
 {
-//    int i;
-//    for(i=0; i<cantBandidos; i++)
-//    {
-//        recuperarDatoLista(tablero,*(posBandidos+i)+1,&((vBandidos+i)->posCasilla),sizeof(casilla));
-//        (vBandidos+i)->posCasilla.bandido=VIVO;
-//        modificarEnPosLista(tablero,*(posBandidos+i)+1,&((vBandidos+i)->posCasilla),sizeof(casilla));
-//    }
+
+    unsigned i, mov;
+    tCasilla casilla;
+    for(i=0; i<cantBandidos; i++)
+    {
+        copiarPosicionLista(&((vBandidos+i)->posicion),*tablero);
+        for(mov=0;mov<*(posBandidos+i);mov++)
+            moverEnLista(&((vBandidos+i)->posicion),ADELANTE);
+        recuperarDatoLista(&((vBandidos+i)->posicion),0,&casilla,sizeof(casilla));
+        casilla.bandido=HAY_BANDIDO;
+        modificarEnPosLista(&((vBandidos+i)->posicion),0,&casilla,sizeof(casilla));
+    }
 }
 
 void escribirCasilla(FILE* fp, const void* dato)

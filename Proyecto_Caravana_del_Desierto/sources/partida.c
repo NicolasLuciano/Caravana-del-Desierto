@@ -44,7 +44,7 @@ void resolverMovimientos(tLista * posJugador, tBandido * bandidos, tCola * colaT
 {
     tMovimiento mov;
     tCasilla casillaBandido;
-    int i,contBandido, colision;
+    unsigned i,contBandido, colision, bandidoColision;
 
     colision=SIN_COLISION;
 
@@ -54,15 +54,15 @@ void resolverMovimientos(tLista * posJugador, tBandido * bandidos, tCola * colaT
 
     recuperarDatoLista(posJugador,0,casillaAct,sizeof(tCasilla));
 
+    bandidoColision=0;
     if(casillaAct->bandido==HAY_BANDIDO)
     {
-        i=0;
         casillaAct->bandido=SIN_BANDIDO;
         modificarEnPosLista(posJugador,0,casillaAct,sizeof(tCasilla));
-        while(i<cantBandidos && compararLista(posJugador,&(bandidos+i)->posicion)==0)
-            i++;
+        while(bandidoColision<cantBandidos && compararLista(posJugador,&(bandidos+bandidoColision)->posicion)==0)
+            bandidoColision++;
 
-        (bandidos+i)->vivo=MUERTO;
+        (bandidos+bandidoColision)->vivo=MUERTO;
         for(i=1; i<casillaAct->numCasilla; i++)
             moverEnLista(posJugador,ATRAS);
 
@@ -75,9 +75,10 @@ void resolverMovimientos(tLista * posJugador, tBandido * bandidos, tCola * colaT
     contBandido=0;
     while(!colaVacia(colaTurno))
     {
-        sacarDeCola(colaTurno, &mov, sizeof(tMovimiento));
         if((bandidos+contBandido)->vivo==VIVO)
         {
+            sacarDeCola(colaTurno, &mov, sizeof(tMovimiento));
+
             recuperarDatoLista(&(bandidos+contBandido)->posicion,0,&casillaBandido,sizeof(tCasilla));
             casillaBandido.bandido=SIN_BANDIDO;
             modificarEnPosLista(&(bandidos+contBandido)->posicion,0,&casillaBandido,sizeof(tCasilla));
@@ -106,6 +107,12 @@ void resolverMovimientos(tLista * posJugador, tBandido * bandidos, tCola * colaT
                 casillaBandido.bandido=HAY_BANDIDO;
                 modificarEnPosLista(&(bandidos+contBandido)->posicion,0,&casillaBandido,sizeof(tCasilla));
             }
+
+        }
+        else
+        {
+            if(HAY_COLISION==colision && contBandido==bandidoColision)
+                sacarDeCola(colaTurno, &mov, sizeof(tMovimiento));
         }
         contBandido++;
     }

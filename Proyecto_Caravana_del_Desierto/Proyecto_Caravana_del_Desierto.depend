@@ -1,10 +1,10 @@
 # depslib dependency file v1.0
-1780441521 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\arbol.c
+1781109324 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\arbol.c
 	"../headers/arbol.h"
+	"../headers/constantesymacros.h"
 	<string.h>
 	<stdlib.h>
 	<stdio.h>
-	"../headers/constantesymacros.h"
 
 1780514901 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\archivos.c
 	"../headers/archivos.h"
@@ -26,28 +26,26 @@
 	"../headers/lista.h"
 	"../headers/constantesymacros.h"
 
-1781036717 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\main.c
-	"../headers/lista.h"
-	"../headers/archivos.h"
-	"../headers/tablero.h"
+1781113420 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\main.c
 	"../headers/constantesymacros.h"
-	"../headers/bandido.h"
 	"../headers/menu.h"
+	"../headers/juego.h"
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
 
-1780954308 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\menu.c
+1781109324 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\menu.c
 	"../headers/menu.h"
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
 	<ctype.h>
 
-1781036717 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\tablero.c
+1781215072 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\tablero.c
 	"../headers/tablero.h"
 	"../headers/constantesymacros.h"
 	<time.h>
+	<string.h>
 
 1780441478 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\cola.c
 	"../headers/cola.h"
@@ -56,7 +54,7 @@
 	<stdlib.h>
 	<stdio.h>
 
-1780514901 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\cola.h
+1781109324 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\cola.h
 
 1781038685 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\bandido.c
 	"../headers/bandido.h"
@@ -129,21 +127,20 @@
 	<stdlib.h>
 	<stdio.h>
 
-1780514901 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\arbol.h
+1781109324 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\arbol.h
 
-1780941501 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\archivos.h
+1781109324 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\archivos.h
 	<stdlib.h>
 	<stdio.h>
-	"../headers/lista.h"
 
-1781036717 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\lista.h
+1781213503 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\lista.h
 	<string.h>
 	<stdio.h>
 	<stdlib.h>
 
-1781036717 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\constantesymacros.h
+1781220668 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\constantesymacros.h
 
-1780437553 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\dado.c
+1781109324 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\dado.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -152,7 +149,7 @@
 
 1780437553 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\dado.h
 
-1781036717 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\tablero.h
+1781213503 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\tablero.h
 	"../headers/bandido.h"
 	<stdio.h>
 	"archivos.h"
@@ -373,7 +370,7 @@
 
 1780946268 c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\headers\menu.h
 
-1780945107 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\bandido.h
+1781228867 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\bandido.h
 	"../headers/lista.h"
 	"../headers/cola.h"
 	"../headers/constantesymacros.h"
@@ -411,4 +408,6 @@
 	"../headers/constantesymacros.h"
 
 1781115528 source:c:\users\frfie\caravana-del-desierto\proyecto_caravana_del_desierto\sources\partida.c
+
+1781058084 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\juego.h
 
