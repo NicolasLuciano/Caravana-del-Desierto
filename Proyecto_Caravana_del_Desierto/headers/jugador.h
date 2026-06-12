@@ -22,7 +22,7 @@ typedef struct
 
 
 
-void moverJugador(tLista *posJugador, tCasilla casillaAct, tCola *colaTurno, tCola *colaRegistro, int direccion, unsigned dado,unsigned cantCasillas);
+void encolarJugador(tLista *posJugador, tCasilla casillaAct, tCola *colaTurno, tCola *colaRegistro, int direccion, unsigned dado,unsigned cantCasillas);
 void inicializarJugador(tJugador * jugador, int vidasInicio);
 
 

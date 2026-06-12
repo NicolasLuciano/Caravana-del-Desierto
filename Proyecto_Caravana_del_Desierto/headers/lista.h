@@ -23,7 +23,7 @@ void* obtenerDatoPos(const tLista* lista, unsigned pos);
 
 void recorrerListaArchivo(const tLista* lista,FILE*fp,void (*accion)(FILE* fp,const void* dato));
 
-void moverEnLista(tLista *pos, int direccion);
+void moverEnLista(tLista *pos, char direccion);
 
 int recuperarDatoLista(const tLista *lista,unsigned pos,void * dato, unsigned tam);
 
@@ -31,7 +31,7 @@ void posicionarEnLista(const tLista *lista,tNodoLista **pos, unsigned pasos);
 
 int modificarEnPosLista(const tLista *lista,unsigned pos, void *dato, unsigned tam);
 
-int compararNodos(const tLista *lista, tNodoLista *nodo, unsigned pos);
+int compararLista(const tLista *lista1, const tLista *lista2)
 
 tNodoLista* obtenerPrimero(const tLista* lista);
 

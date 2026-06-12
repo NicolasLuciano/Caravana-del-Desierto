@@ -8,7 +8,7 @@ void inicializarJugador(tJugador * jugador, int vidasInicio)
     jugador->puntos = 0;
 }
 
-void moverJugador(tLista *posJugador, tCasilla casillaAct, tCola *colaTurno, tCola *colaRegistro, int direccion, unsigned dado,unsigned cantCasillas)
+void encolarJugador(tLista *posJugador, tCasilla casillaAct, tCola *colaTurno, tCola *colaRegistro, int direccion, unsigned dado,unsigned cantCasillas)
 {
     unsigned pasosAdelante, pasosAtras;
     tMovimiento movJugador;
@@ -31,6 +31,6 @@ void moverJugador(tLista *posJugador, tCasilla casillaAct, tCola *colaTurno, tCo
     movJugador.direccion=direccion;
     movJugador.casillas=dado;
 
-    ponerEnCola(colaTurno,movJugador,sizeof(tMovimiento));
+    ponerEnCola(colaTurno,&movJugador,sizeof(tMovimiento));
     //moverEnLista(posJugador,direccion);
 }

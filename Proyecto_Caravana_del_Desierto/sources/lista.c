@@ -128,19 +128,9 @@ int modificarEnPosLista(const tLista *lista,unsigned pos, void *dato, unsigned t
     return LISTA_ERROR;
 }
 
-int compararNodos(const tLista *lista, tNodoLista *nodo, unsigned pos)
+int compararLista(const tLista *lista1, const tLista *lista2)
 {
-    tNodoLista *aux = *lista;
-    int i=0;
-    while(i<pos && aux->nodoSig!=*lista)
-    {
-        aux=aux->nodoSig;
-        i++;
-    }
-
-    if(i==pos)
-        return TODO_OK;
-    return LISTA_ERROR;
+    return *lista1==*lista2;
 }
 
 /*int buscarNodoLista(const tLista *lista, tNodoLista *nodo)

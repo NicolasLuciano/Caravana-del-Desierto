@@ -1,6 +1,10 @@
 #ifndef PARTIDA_H_INCLUDED
 #define PARTIDA_H_INCLUDED
 
+#include "lista.h"
+#include "bandido.h"
+#include "jugador.h"
+
 typedef struct
 {
     int idPartida;
