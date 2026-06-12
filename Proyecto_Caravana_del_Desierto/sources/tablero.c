@@ -151,7 +151,7 @@ void distribuirBandidos(const tLista *tablero, tBandido *vBandidos, unsigned can
     for(i=0; i<cantBandidos; i++)
     {
         copiarPosicionLista(&((vBandidos+i)->posicion),*tablero);
-        for(mov=0;mov<*(posBandidos+i);mov++)
+        for(mov=0;mov< *(posBandidos+i)+1;mov++)
             moverEnLista(&((vBandidos+i)->posicion),ADELANTE);
         recuperarDatoLista(&((vBandidos+i)->posicion),0,&casilla,sizeof(casilla));
         casilla.bandido=HAY_BANDIDO;

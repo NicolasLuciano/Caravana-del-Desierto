@@ -7,9 +7,10 @@
 void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, unsigned cantCasillas, unsigned cantBandidos)
 {
     tLista posJugador;
-    int dado,direccion;
+    int dado;
     tCasilla casillaAct;
     tCola colaTurno, colaRegistro;
+    char direccion;
 
     copiarPosicionLista(&posJugador,*tablero);
     crearCola(&colaTurno);
@@ -23,9 +24,9 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
         printf("Lanzar Dado\n");
         dado=tirar_dado(DADO_JUGADOR);
         printf("Elija la direccion a moverse\n");
-        printf("ADELANTE: %d\tATRAS: %d\n",ADELANTE,ATRAS);
+        printf("ADELANTE: %c\tATRAS: %c\n",ADELANTE,ATRAS);
         printf("\n");
-        scanf("%d", &direccion);
+        scanf("%c", &direccion);
 
 
         if(direccion==ATRAS && casillaAct.numCasilla-dado<1)
