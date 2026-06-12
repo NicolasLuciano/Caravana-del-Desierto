@@ -31,7 +31,7 @@ void posicionarEnLista(const tLista *lista,tNodoLista **pos, unsigned pasos);
 
 int modificarEnPosLista(const tLista *lista,unsigned pos, void *dato, unsigned tam);
 
-int compararLista(const tLista *lista1, const tLista *lista2)
+int compararLista(const tLista *lista1, const tLista *lista2);
 
 tNodoLista* obtenerPrimero(const tLista* lista);
 

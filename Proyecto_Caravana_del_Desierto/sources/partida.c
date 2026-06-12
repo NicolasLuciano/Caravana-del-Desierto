@@ -3,6 +3,7 @@
 #include "../headers/constantesymacros.h"
 #include "../headers/dado.h"
 #include "../headers/partida.h"
+#include "../headers/cola.h"
 
 void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, unsigned cantCasillas)
 {
@@ -18,7 +19,7 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
     recuperarDatoLista(&posJugador,0,&casillaAct,sizeof(tCasilla));
     while(jugador->vidas>0)
     {
-        mostrarTablero(tablero,configuracion.cantCasillas);
+        mostrarTablero(tablero,cantCasillas);
 
         printf("Lanzar Dado\n");
         dado=tirar_dado(DADO_JUGADOR);
@@ -60,7 +61,7 @@ void resolverMovimientos(tLista * posJugador, tBandido * bandidos, tCola * colaT
         i=0;
         casillaAct->bandido=SIN_BANDIDO;
         modificarEnPosLista(posJugador,0,casillaAct,sizeof(tCasilla));
-        while(i<cantBandidos && compararLista(posJugador,(bandidos+i)->posicion)==0)
+        while(i<cantBandidos && compararLista(posJugador,&(bandidos+i)->posicion)==0)
             i++;
 
         (bandidos+i)->vivo=MUERTO;
@@ -80,14 +81,14 @@ void resolverMovimientos(tLista * posJugador, tBandido * bandidos, tCola * colaT
         desencolar(&colaTurno, &mov, sizeof(tMovimiento));
         if((bandidos+contBandido)->vivo==VIVO)
         {
-            recuperarDatoLista((bandidos+contBandido)->posicion,0,&casillaBandido,sizeof(tCasilla));
-            casillaBandido->bandido=SIN_BANDIDO;
-            modificarEnPosLista(posJugador,0,casillaBandido,sizeof(tCasilla));
+            recuperarDatoLista(&(bandidos+contBandido)->posicion,0,&casillaBandido,sizeof(tCasilla));
+            casillaBandido.bandido=SIN_BANDIDO;
+            modificarEnPosLista(posJugador,0,&casillaBandido,sizeof(tCasilla));
 
             for(i=0; i<mov.casillas; i++)
-                moverEnLista((bandidos+contBandido)->posicion,mov.direccion);
+                moverEnLista(&(bandidos+contBandido)->posicion,mov.direccion);
 
-            if(compararLista(posJugador,(bandidos+contBandido)->posicion)==1 ) //MAGIC NUMBER?
+            if(compararLista(posJugador,&(bandidos+contBandido)->posicion)==1 ) //MAGIC NUMBER?
             {
                 (bandidos+i)->vivo=MUERTO;
                 if(colision==SIN_COLISION)
@@ -104,9 +105,9 @@ void resolverMovimientos(tLista * posJugador, tBandido * bandidos, tCola * colaT
             }
             else
             {
-                recuperarDatoLista((bandidos+contBandido)->posicion,0,&casillaBandido,sizeof(tCasilla));
-                casillaBandido->bandido=HAY_BANDIDO;
-                modificarEnPosLista((bandidos+contBandido)->posicion,0,&casillaBandido,sizeof(tCasilla));
+                recuperarDatoLista(&(bandidos+contBandido)->posicion,0,&casillaBandido,sizeof(tCasilla));
+                casillaBandido.bandido=HAY_BANDIDO;
+                modificarEnPosLista(&(bandidos+contBandido)->posicion,0,&casillaBandido,sizeof(tCasilla));
             }
         }
         contBandido++;
