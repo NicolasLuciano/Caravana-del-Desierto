@@ -13,6 +13,8 @@
 #define DADO_JUGADOR 6
 #define VIVO 1
 #define MUERTO 0
+#define HAY_BANDIDO 1
+#define SIN_BANDIDO 0
 #define HAY_JUGADOR 1
 #define SIN_JUGADOR 0
 #define ADELANTE 'F'
