@@ -27,7 +27,8 @@ tBandido* crearBandidos(unsigned cantBandidos)
 void moverBandidos(tLista *tablero, tBandido *vBandidos,tCola *colaMovimientos,unsigned cantBandidos, unsigned cantCasillas)
 {
     tCasilla casilla;
-    unsigned i, mov, dado;
+    tMovimiento movimiento;
+    unsigned i, j, dado;
     i=0;
     while(i<cantBandidos)
     {
@@ -39,7 +40,7 @@ void moverBandidos(tLista *tablero, tBandido *vBandidos,tCola *colaMovimientos,u
             casilla.bandido = SIN_BANDIDO;
             modificarEnPosLista(&(vBandidos+i)->posicion,0,&casilla,sizeof(casilla));
 
-            for(mov=0;mov<dado;mov++)
+            for(j=0;j<dado;j++)
             {
                 moverEnLista(&(vBandidos+i)->posicion,(vBandidos+i)->direccion);
             }
@@ -55,27 +56,3 @@ void moverBandidos(tLista *tablero, tBandido *vBandidos,tCola *colaMovimientos,u
         i++;
     }
 }
-//void moverBandidos(tLista *tablero, tBandido *vBandidos,tCola *colaMovimientos,unsigned cantBandidos, unsigned cantCasillas)
-//{
-//    unsigned dadoBandido, nuevaPos;
-//    int posActual,j, flagBandidos=VIVO;
-//
-//    posActual=0;
-//    while(posActual<cantCasillas && VIVO==flagBandidos)
-//    {
-//        flagBandidos=MUERTO;
-//        for(j=0; j<cantBandidos; j++)
-//        {
-//            if(VIVO==(vBandidos+j)->vivo)
-//            {
-//                flagBandidos=VIVO;
-//                (vBandidos+j)->posCasilla.bandido=MUERTO;
-//                modificarEnPosLista(tablero,(vBandidos+j)->posCasilla.numCasilla,(vBandidos+j)->posCasilla,sizeof((vBandidos+j)->posCasilla));
-//                (vBandidos+j)->posCasilla.bandido=VIVO;
-//
-//                dadoBandido=tirar_dado(DADO_BANDIDO);
-//                nuevaPos = (vBandidos+j)->direccion * dadoBandido
-//            }
-//        }
-//    }
-//}

@@ -9,7 +9,7 @@ typedef struct
 {
     tLista posicion;
     unsigned vivo;
-    int direccion;
+    char direccion;
 } tBandido;
 
 
