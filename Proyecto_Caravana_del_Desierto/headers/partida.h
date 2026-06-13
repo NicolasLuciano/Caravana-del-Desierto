@@ -22,6 +22,6 @@ typedef struct
 } tMovimiento;
 
 void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, unsigned cantCasillas, unsigned cantBandidos);
-void resolverMovimientos(tLista * posJugador, tBandido * bandidos, tCola * colaTurno,tCasilla * casillaAct, tJugador * jugador, unsigned cantBandidos);
+void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos, tCola * colaTurno,tCasilla * casillaAct, tJugador * jugador, unsigned cantBandidos,unsigned cantCasillas);
 
 #endif // PARTIDA_H_INCLUDED
