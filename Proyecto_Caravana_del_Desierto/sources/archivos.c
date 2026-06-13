@@ -33,3 +33,33 @@ int generarCaravana(const char* nombreArch,const tLista *tablero)
     fclose(fp);
     return TODO_OK;
 }
+
+int guardarPartida(tPartida partida, char * NOMARCH3)
+{
+    FILE * pf;
+
+    pf=fopen(NOMARCH3,"ab");
+    if(NULL==pf)
+        return ARCH_ERROR;
+
+    fwrite(&partida, sizeof(tPartida), 1, pf);
+    fclose(pf);
+}
+
+int verRanking(char * NOMARCH3)
+{
+    FILE * pf;
+    tPartida partida;
+
+    pf=fopen(NOMARCH3,"rb");
+    if(NULL==pf)
+        return ARCH_ERROR;
+
+    fread(&partida,sizeof(tPartida),1,pf);
+    fread(!feof(pf))
+    {
+
+    }
+
+    fclose(pf);
+}

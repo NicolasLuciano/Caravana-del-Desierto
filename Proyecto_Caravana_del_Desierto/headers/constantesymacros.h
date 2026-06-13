@@ -50,6 +50,7 @@
 #define NOMBRE_TAM 30
 #define APELLIDO_TAM 30
 #define NOMARCH2 "caravana.txt"
+#define NOMARCH3 "partidas.bin"
 
 ///MACROS
 #define MIN(x,y)(x>y?y:x)
