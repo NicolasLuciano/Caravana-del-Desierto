@@ -39,8 +39,11 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
 
         dado=tirar_dado(DADO_JUGADOR);
         if(PIERDE_TURNO==pierdeTurno)
+        {
             dado=0;
-        pierdeTurno=NO_PIERDE_TURNO;
+            pierdeTurno=NO_PIERDE_TURNO;
+        }
+
         printf("\n\nLANZANDO DADO...\n");
         Sleep(MILISEGUNDOS);
         printf("[DADO]: %d\n",dado);
@@ -61,7 +64,6 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
             printf("No es posible moverse hacia atras, sera movido hacia adelante\n");
             direccion=ADELANTE;
         }
-
         casillaAct.jugador = SIN_JUGADOR;
         modificarEnPosLista(&posJugador, 0, &casillaAct, sizeof(tCasilla));
 
