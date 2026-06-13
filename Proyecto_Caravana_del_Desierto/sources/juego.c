@@ -30,6 +30,8 @@ int inicializarJuego()
         return SIN_MEM;
     }
 
+    guardarTablero(&tablero,NOMARCH2);
+
     inicializarJugador(&jugador, configuracion.vidasIniciales);
 
     empezarPartida(&tablero,&jugador,bandidos, configuracion.cantCasillas,configuracion.cantBandidos);
