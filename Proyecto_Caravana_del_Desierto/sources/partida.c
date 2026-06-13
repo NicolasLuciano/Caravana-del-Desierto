@@ -5,6 +5,7 @@
 #include "../headers/partida.h"
 #include "../headers/bandido.h"
 #include <windows.h>
+#include <ctype.h>
 
 void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, unsigned cantCasillas, unsigned cantBandidos)
 {
@@ -21,19 +22,21 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
     crearCola(&colaRegistro);
     pierdeTurno= NO_PIERDE_TURNO;
     proteccion.proteccionActual = NO_PROTEGIDO;
-    proteccion.proteccionSiguiente = NO_PROTEGIDO;
+
     recuperarDatoLista(&posJugador,0,&casillaAct,sizeof(tCasilla));
 
     while(jugador->vidas>0 && casillaAct.tipo!=SALIDA )
     {
         proteccion.proteccionActual = proteccion.proteccionSiguiente;
         proteccion.proteccionSiguiente = NO_PROTEGIDO;
-        //system("cls");
+
         printf("====================================\n");
         printf("\tESTADISTICAS JUGADOR\n");
         printf("====================================\n");
         printf("VIDAS: %d\tPUNTOS: %d\n\n",jugador->vidas,jugador->puntos);
+
         mostrarTablero(*tablero,cantCasillas);
+
         dado=tirar_dado(DADO_JUGADOR);
         if(PIERDE_TURNO==pierdeTurno)
             dado=0;
@@ -46,16 +49,13 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
 
         do
         {
-
             scanf(" %c", &direccion);
+            direccion=toupper(direccion);
             if(direccion!=ADELANTE && direccion!=ATRAS)
-            {
                 printf("INGRESE ENTRADA VALIDA.\n %c o %c\n",ADELANTE,ATRAS);
-            }
         }
         while(direccion!=ADELANTE && direccion!=ATRAS);
 
-        printf("CASILLA: %d\n", casillaAct.numCasilla);
         if(direccion==ATRAS && (int)casillaAct.numCasilla-dado<1)
         {
             printf("No es posible moverse hacia atras, sera movido hacia adelante\n");
@@ -68,9 +68,10 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
         encolarJugador(&posJugador,casillaAct,&colaTurno,&colaRegistro,direccion,dado,cantCasillas);
         encolarBandidos(bandidos,&colaTurno,cantBandidos,cantCasillas);
         resolverMovimientos(*tablero,&posJugador,bandidos,&colaTurno,&casillaAct,jugador,cantBandidos,cantCasillas,&proteccion,&pierdeTurno);
-
+        system("cls");
         recuperarDatoLista(&posJugador,0,&casillaAct,sizeof(tCasilla));
     }
+    printf("PARTIDA FINALIZADA\n");
 }
 
 void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos, tCola * colaTurno,tCasilla * casillaAct, tJugador * jugador, unsigned cantBandidos, unsigned cantCasillas, tProteccion *proteccion,unsigned *pierdeTurno)
@@ -102,7 +103,7 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
     }
     else
     {
-        if(casillaAct->tipo!=VACIA)
+        if(casillaAct->tipo!=VACIA && casillaAct->tipo!=SALIDA)
         {
             switch(casillaAct->tipo)
             {

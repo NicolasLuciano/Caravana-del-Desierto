@@ -1,6 +1,6 @@
-cantidad_posiciones: 25
+cantidad_posiciones: 18
 vidas_inicio: 3
-maximo_bandidos: 7
+maximo_bandidos: 1
 maximo_premios: 2
 maximo_vidas_extra: 1
 maximo_oasis: 4

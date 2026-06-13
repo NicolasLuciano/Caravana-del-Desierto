@@ -22,15 +22,27 @@ void encolarJugador(tLista *posJugador, tCasilla casillaAct, tCola *colaTurno, t
         movJugador.direccion=ADELANTE;
         ponerEnCola(colaRegistro,&movJugador,sizeof(tMovimiento));
 
-        movJugador.casillas=pasosAdelante;
-        movJugador.direccion=ADELANTE;
+        movJugador.casillas=pasosAtras;
+        movJugador.direccion=ATRAS;
         ponerEnCola(colaRegistro,&movJugador,sizeof(tMovimiento));
 
-        dado=pasosAdelante-pasosAtras;
+        if(pasosAdelante > pasosAtras)
+        {
+            movJugador.casillas = pasosAdelante - pasosAtras;
+            movJugador.direccion = ADELANTE;
+        }
+        else
+        {
+            movJugador.casillas = pasosAtras - pasosAdelante;
+            movJugador.direccion = ATRAS;
+        }
     }
-    movJugador.direccion=direccion;
-    movJugador.casillas=dado;
+    else
+    {
+        movJugador.direccion = direccion;
+        movJugador.casillas = dado;
+        ponerEnCola(colaRegistro,&movJugador,sizeof(tMovimiento));
+    }
 
     ponerEnCola(colaTurno,&movJugador,sizeof(tMovimiento));
-    //moverEnLista(posJugador,direccion);
 }
