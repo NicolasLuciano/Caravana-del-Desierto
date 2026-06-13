@@ -22,6 +22,11 @@
 #define ATRAS 'B'
 #define SIN_COLISION -5
 #define HAY_COLISION 5
+#define PROTEGIDO 1
+#define NO_PROTEGIDO 0
+#define PIERDE_TURNO 1
+#define NO_PIERDE_TURNO 0
+#define MILISEGUNDOS 1000
 ///CONSTANTES DE MENU
 #define MENSAJE_MENU "R - Ver el ranking de jugadores\nP - Jugar una nueva partida\nQ - Salir del juego\n-> "
 #define OPCIONES_MENU "RPQ"

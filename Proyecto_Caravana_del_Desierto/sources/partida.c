@@ -4,6 +4,7 @@
 #include "../headers/dado.h"
 #include "../headers/partida.h"
 #include "../headers/bandido.h"
+#include <windows.h>
 
 void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, unsigned cantCasillas, unsigned cantBandidos)
 {
@@ -12,24 +13,40 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
     tCasilla casillaAct;
     tCola colaTurno, colaRegistro;
     char direccion;
-
+    unsigned proteccion, pierdeTurno;
     copiarPosicionLista(&posJugador,*tablero);
     crearCola(&colaTurno);
     crearCola(&colaRegistro);
-
+    proteccion= NO_PROTEGIDO;
+    pierdeTurno= NO_PIERDE_TURNO;
     recuperarDatoLista(&posJugador,0,&casillaAct,sizeof(tCasilla));
     while(jugador->vidas>0 && casillaAct.tipo!=SALIDA )
     {
-
+        system("cls");
+        printf("====================================\n");
+        printf("\tESTADISTICAS JUGADOR\n");
+        printf("====================================\n");
+        printf("VIDAS: %d\tPUNTOS: %d\n\n",jugador->vidas,jugador->puntos);
+        if(PROTEGIDO == proteccion)
+            printf("\t---PROTECCION A LAS TORMENTAS---\n");
         mostrarTablero(*tablero,cantCasillas);
-
-        printf("El dado esta siendo lanzado\n");
         dado=tirar_dado(DADO_JUGADOR);
-        printf("DADO: %d\n", dado);
-        printf("Elija la direccion a moverse\n");
-        printf("ADELANTE: %c\tATRAS: %c\n",ADELANTE,ATRAS);
-        printf("\n");
-        scanf(" %c", &direccion);
+        printf("\n\nLANZANDO DADO...\n");
+        Sleep(MILISEGUNDOS);
+        printf("[DADO]: %d\n",dado);
+        printf("[MOVERSE]\n");
+        printf("(%c) ADELANTE\n(%c) ATRAS\n",ADELANTE,ATRAS);
+
+        do
+        {
+
+            scanf(" %c", &direccion);
+            if(direccion!=ADELANTE && direccion!=ATRAS)
+            {
+                printf("INGRESE ENTRADA VALIDA.\n %c o %c\n",ADELANTE,ATRAS);
+            }
+        }
+        while(direccion!=ADELANTE && direccion!=ATRAS);
 
         printf("CASILLA: %d\n", casillaAct.numCasilla);
         if(direccion==ATRAS && (int)casillaAct.numCasilla-dado<1)
@@ -43,13 +60,13 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
 
         encolarJugador(&posJugador,casillaAct,&colaTurno,&colaRegistro,direccion,dado,cantCasillas);
         encolarBandidos(bandidos,&colaTurno,cantBandidos,cantCasillas);
-        resolverMovimientos(*tablero,&posJugador,bandidos,&colaTurno,&casillaAct,jugador,cantBandidos,cantCasillas);
+        resolverMovimientos(*tablero,&posJugador,bandidos,&colaTurno,&casillaAct,jugador,cantBandidos,cantCasillas,&proteccion,&pierdeTurno);
 
         recuperarDatoLista(&posJugador,0,&casillaAct,sizeof(tCasilla));
     }
 }
 
-void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos, tCola * colaTurno,tCasilla * casillaAct, tJugador * jugador, unsigned cantBandidos, unsigned cantCasillas)
+void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos, tCola * colaTurno,tCasilla * casillaAct, tJugador * jugador, unsigned cantBandidos, unsigned cantCasillas, unsigned *proteccion,unsigned *pierdeTurno)
 {
     tMovimiento mov;
     tCasilla casillaBandido;
@@ -88,7 +105,41 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
 
         colision=HAY_COLISION;
     }
-
+    else
+    {
+        if(casillaAct->tipo!=VACIA)
+        {
+            system("cls");
+            printf("====================================\n");
+            printf("\tESTADISTICAS JUGADOR\n");
+            printf("====================================\n");
+            printf("VIDAS: %d\tPUNTOS: %d\n\n",jugador->vidas,jugador->puntos);
+            switch(casillaAct->tipo)
+            {
+            case VIDAEXTRA:
+                jugador->vidas++;
+                printf("OBTUVISTE UNA VIDA EXTRA\n");
+                break;
+            case PREMIO:
+                jugador->puntos++;
+                printf("OBTUVISTE UNA VIDA EXTRA\n");
+                break;
+            case TORMENTA:
+                if(NO_PROTEGIDO==*proteccion)
+                    *pierdeTurno = PIERDE_TURNO;
+                break;
+            case OASIS:
+                *proteccion = PROTEGIDO;
+                break;
+            default:
+                break;
+            }
+            mostrarTablero(tablero,cantCasillas);
+            Sleep(MILISEGUNDOS);
+            casillaAct->tipo=VACIA;
+            modificarEnPosLista(posJugador, 0, casillaAct, sizeof(tCasilla));
+        }
+    }
 
     contBandido=0;
     while(!colaVacia(colaTurno))
@@ -111,9 +162,13 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
             if(compararLista(posJugador,&(bandidos+contBandido)->posicion)== LISTAS_IGUALES )
             {
                 (bandidos+contBandido)->vivo=MUERTO;
-
+                system("cls");
+                printf("====================================\n");
+                printf("\tESTADISTICAS JUGADOR\n");
+                printf("====================================\n");
+                printf("VIDAS: %d\tPUNTOS: %d\n\n",jugador->vidas,jugador->puntos);
                 mostrarTablero(tablero,cantCasillas);
-
+                Sleep(MILISEGUNDOS);
                 casillaBandido.bandido=SIN_BANDIDO;
                 modificarEnPosLista(&(bandidos+contBandido)->posicion,0,&casillaBandido,sizeof(tCasilla));
 

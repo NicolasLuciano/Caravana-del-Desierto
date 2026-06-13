@@ -11,18 +11,19 @@
 	"../headers/lista.h"
 	"../headers/constantesymacros.h"
 
-1780960079 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\bandido.c
+1781304733 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\bandido.c
 	"../headers/bandido.h"
 	"../headers/constantesymacros.h"
 	"../headers/dado.h"
-
-1780960099 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\jugador.c
-	"../headers/jugador.h"
-	"../headers/constantesymacros.h"
 	"../headers/tablero.h"
-	"../headers/dado.h"
+	"../headers/partida.h"
 
-1781036717 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\lista.c
+1781235087 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\jugador.c
+	"../headers/jugador.h"
+	"../headers/dado.h"
+	"../headers/partida.h"
+
+1781301154 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\lista.c
 	"../headers/lista.h"
 	"../headers/constantesymacros.h"
 
@@ -41,7 +42,7 @@
 	<string.h>
 	<ctype.h>
 
-1781215072 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\tablero.c
+1781312429 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\tablero.c
 	"../headers/tablero.h"
 	"../headers/constantesymacros.h"
 	<time.h>
@@ -133,12 +134,12 @@
 	<stdlib.h>
 	<stdio.h>
 
-1781213503 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\lista.h
+1781301154 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\lista.h
 	<string.h>
 	<stdio.h>
 	<stdlib.h>
 
-1781220668 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\constantesymacros.h
+1781315036 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\constantesymacros.h
 
 1781109324 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\dado.c
 	<stdio.h>
@@ -149,7 +150,7 @@
 
 1780437553 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\dado.h
 
-1781213503 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\tablero.h
+1781301154 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\tablero.h
 	"../headers/bandido.h"
 	<stdio.h>
 	"archivos.h"
@@ -372,14 +373,16 @@
 
 1780946268 c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\headers\menu.h
 
-1781228867 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\bandido.h
+1781304733 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\bandido.h
 	"../headers/lista.h"
 	"../headers/cola.h"
 	"../headers/constantesymacros.h"
 
-1780941501 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\jugador.h
+1781235087 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\jugador.h
 	"lista.h"
 	"cola.h"
+	"constantesymacros.h"
+	"tablero.h"
 
 1780945107 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\menu.h
 
@@ -427,4 +430,28 @@
 	"../headers/dado.h"
 	"../headers/partida.h"
 	"../headers/bandido.h"
+
+1781313301 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\partida.h
+	"lista.h"
+	"bandido.h"
+	"jugador.h"
+	"cola.h"
+
+1781301154 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\juego.c
+	"../headers/lista.h"
+	"../headers/archivos.h"
+	"../headers/tablero.h"
+	"../headers/bandido.h"
+	"../headers/jugador.h"
+	"../headers/constantesymacros.h"
+	"../headers/partida.h"
+
+1781316045 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\partida.c
+	"../headers/archivos.h"
+	"../headers/tablero.h"
+	"../headers/constantesymacros.h"
+	"../headers/dado.h"
+	"../headers/partida.h"
+	"../headers/bandido.h"
+	<windows.h>
 
