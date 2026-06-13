@@ -6,6 +6,7 @@
 #include "constantesymacros.h"
 #include "tablero.h"
 
+
 typedef struct
 {
     char nombreDeUsuario[NOMBRE_DE_USUARIO_TAM];
@@ -22,7 +23,7 @@ typedef struct
 
 
 
-void encolarJugador(tLista *posJugador, tCasilla casillaAct, tCola *colaTurno, tCola *colaRegistro, int direccion, unsigned dado,unsigned cantCasillas);
+void encolarJugador(tLista *posJugador, tCasilla casillaAct, tCola *colaTurno, tCola *colaRegistro, int direccion, unsigned dado,unsigned cantCasillas, unsigned *movimientos);
 void inicializarJugador(tJugador * jugador, int vidasInicio);
 
 

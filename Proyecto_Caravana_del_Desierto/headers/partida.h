@@ -8,7 +8,6 @@
 
 typedef struct
 {
-    int idPartida;
     char nombreDeUsuario[NOMBRE_DE_USUARIO_TAM];
     unsigned puntos;
     unsigned movimientos;

@@ -16,12 +16,14 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
     char direccion;
     unsigned pierdeTurno;
     tProteccion proteccion;
+    tPartida partida;
 
     copiarPosicionLista(&posJugador,*tablero);
     crearCola(&colaTurno);
     crearCola(&colaRegistro);
     pierdeTurno= NO_PIERDE_TURNO;
     proteccion.proteccionActual = NO_PROTEGIDO;
+    partida.movimientos=0;
 
     recuperarDatoLista(&posJugador,0,&casillaAct,sizeof(tCasilla));
 
@@ -30,12 +32,7 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
         proteccion.proteccionActual = proteccion.proteccionSiguiente;
         proteccion.proteccionSiguiente = NO_PROTEGIDO;
 
-        printf("====================================\n");
-        printf("\tESTADISTICAS JUGADOR\n");
-        printf("====================================\n");
-        printf("VIDAS: %d\tPUNTOS: %d\n\n",jugador->vidas,jugador->puntos);
-
-        mostrarTablero(*tablero,cantCasillas);
+        mostrarPantalla();
 
         dado=tirar_dado(DADO_JUGADOR);
         if(PIERDE_TURNO==pierdeTurno)
@@ -47,7 +44,7 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
         printf("\n\nLANZANDO DADO...\n");
         Sleep(MILISEGUNDOS);
         printf("[DADO]: %d\n",dado);
-        printf("[MOVERSE]\n");
+        printf("\t[MOVERSE]\n");
         printf("(%c) ADELANTE\n(%c) ATRAS\n",ADELANTE,ATRAS);
 
         do
@@ -67,13 +64,20 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
         casillaAct.jugador = SIN_JUGADOR;
         modificarEnPosLista(&posJugador, 0, &casillaAct, sizeof(tCasilla));
 
-        encolarJugador(&posJugador,casillaAct,&colaTurno,&colaRegistro,direccion,dado,cantCasillas);
+        encolarJugador(&posJugador,casillaAct,&colaTurno,&colaRegistro,direccion,dado,cantCasillas, &(partida.movimientos));
         encolarBandidos(bandidos,&colaTurno,cantBandidos,cantCasillas);
         resolverMovimientos(*tablero,&posJugador,bandidos,&colaTurno,&casillaAct,jugador,cantBandidos,cantCasillas,&proteccion,&pierdeTurno);
         system("cls");
         recuperarDatoLista(&posJugador,0,&casillaAct,sizeof(tCasilla));
     }
     printf("PARTIDA FINALIZADA\n");
+
+    partida.puntos = jugador->puntos;
+    strcpy(partida.nombreDeUsuario,jugador->usuario.nombreDeUsuario);
+    if(jugador->vidas<=0)
+        partida.resultado = DERROTA;
+    else
+        partida.resultado = VICTORIA;
 }
 
 void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos, tCola * colaTurno,tCasilla * casillaAct, tJugador * jugador, unsigned cantBandidos, unsigned cantCasillas, tProteccion *proteccion,unsigned *pierdeTurno)
@@ -201,4 +205,14 @@ void moverBandido(tBandido *bandidos, tCasilla *casilla,tMovimiento mov,unsigned
 int hayColision(const tBandido *bandido, tLista *posJugador)
 {
     return compararLista(posJugador,&bandido->posicion)== LISTAS_IGUALES;
+}
+
+void mostrarPantalla()
+{
+    printf("====================================\n");
+    printf("\tESTADISTICAS JUGADOR\n");
+    printf("====================================\n");
+    printf("VIDAS: %d\tPUNTOS: %d\n\n",jugador->vidas,jugador->puntos);
+
+    mostrarTablero(*tablero,cantCasillas);
 }
