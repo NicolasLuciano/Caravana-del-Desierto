@@ -31,6 +31,8 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
             printf("\t---PROTECCION A LAS TORMENTAS---\n");
         mostrarTablero(*tablero,cantCasillas);
         dado=tirar_dado(DADO_JUGADOR);
+        if(pierdeTurno)
+            dado=0;
         printf("\n\nLANZANDO DADO...\n");
         Sleep(MILISEGUNDOS);
         printf("[DADO]: %d\n",dado);
@@ -122,7 +124,7 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
                 break;
             case PREMIO:
                 jugador->puntos++;
-                printf("OBTUVISTE UNA VIDA EXTRA\n");
+                printf("OBTUVISTE UN PREMIO\n");
                 break;
             case TORMENTA:
                 if(NO_PROTEGIDO==*proteccion)
