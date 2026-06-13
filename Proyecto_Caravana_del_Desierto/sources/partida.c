@@ -32,7 +32,7 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
         proteccion.proteccionActual = proteccion.proteccionSiguiente;
         proteccion.proteccionSiguiente = NO_PROTEGIDO;
 
-        mostrarPantalla();
+        mostrarPantalla(tablero,jugador,cantCasillas);
 
         dado=tirar_dado(DADO_JUGADOR);
         if(PIERDE_TURNO==pierdeTurno)
@@ -67,7 +67,6 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
         encolarJugador(&posJugador,casillaAct,&colaTurno,&colaRegistro,direccion,dado,cantCasillas, &(partida.movimientos));
         encolarBandidos(bandidos,&colaTurno,cantBandidos,cantCasillas);
         resolverMovimientos(*tablero,&posJugador,bandidos,&colaTurno,&casillaAct,jugador,cantBandidos,cantCasillas,&proteccion,&pierdeTurno);
-        system("cls");
         recuperarDatoLista(&posJugador,0,&casillaAct,sizeof(tCasilla));
     }
     printf("PARTIDA FINALIZADA\n");
@@ -99,7 +98,7 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
     bandidoColision=0;
     if(casillaAct->bandido==HAY_BANDIDO)
     {
-        mostrarTablero(tablero,cantCasillas);
+        mostrarPantalla(tablero,jugador,cantCasillas);
 
         casillaAct->bandido=SIN_BANDIDO;
         while(bandidoColision<cantBandidos && compararLista(posJugador,&(bandidos+bandidoColision)->posicion)==0)
@@ -147,6 +146,7 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
 
             if(hayColision((bandidos+contBandido),posJugador))
             {
+                mostrarPantalla(tablero,jugador,cantCasillas);
                 (bandidos+contBandido)->vivo=MUERTO;
                 casillaBandido.bandido=SIN_BANDIDO;
                 modificarEnPosLista(&(bandidos+contBandido)->posicion,0,&casillaBandido,sizeof(tCasilla));
@@ -207,12 +207,14 @@ int hayColision(const tBandido *bandido, tLista *posJugador)
     return compararLista(posJugador,&bandido->posicion)== LISTAS_IGUALES;
 }
 
-void mostrarPantalla()
+void mostrarPantalla(tLista tablero, tJugador *jugador, unsigned cantCasillas)
 {
+    system("cls");
     printf("====================================\n");
     printf("\tESTADISTICAS JUGADOR\n");
     printf("====================================\n");
     printf("VIDAS: %d\tPUNTOS: %d\n\n",jugador->vidas,jugador->puntos);
 
     mostrarTablero(*tablero,cantCasillas);
+    Sleep(MILISEGUNDOS);
 }
