@@ -21,7 +21,15 @@ typedef struct
     unsigned casillas;
 } tMovimiento;
 
-void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, unsigned cantCasillas, unsigned cantBandidos);
-void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos, tCola * colaTurno,tCasilla * casillaAct, tJugador * jugador, unsigned cantBandidos, unsigned cantCasillas, unsigned *proteccion,unsigned *pierdeTurno);
+typedef struct
+{
+    unsigned proteccionActual;
+    unsigned proteccionSiguiente;
+} tProteccion;
 
+void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, unsigned cantCasillas, unsigned cantBandidos);
+void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos, tCola * colaTurno,tCasilla * casillaAct, tJugador * jugador, unsigned cantBandidos, unsigned cantCasillas, tProteccion *proteccion,unsigned *pierdeTurno);
+void recibirDmg(tLista tablero, tLista *posJugador, tCasilla * casillaAct, tJugador *jugador);
+void moverBandido(tBandido *bandidos, tCasilla *casilla,tMovimiento mov,unsigned posBandido, unsigned cantBandidos);
+int hayColision(const tBandido *bandido, tLista *posJugador);
 #endif // PARTIDA_H_INCLUDED

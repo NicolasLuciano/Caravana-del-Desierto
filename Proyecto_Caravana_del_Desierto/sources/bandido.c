@@ -47,3 +47,5 @@ void encolarBandidos(tBandido *vBandidos,tCola *colaMovimientos,unsigned cantBan
         i++;
     }
 }
+
+

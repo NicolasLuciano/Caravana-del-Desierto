@@ -17,3 +17,4 @@ tBandido * crearBandidos( unsigned cantBandidos);
 
 void encolarBandidos(tBandido *vBandidos,tCola *colaMovimientos,unsigned cantBandidos, unsigned cantCasillas);
 #endif // BANDIDO_H_INCLUDED
+

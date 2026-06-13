@@ -111,16 +111,26 @@ int compararLista(const tLista *lista1, const tLista *lista2)
     return *lista1==*lista2;
 }
 
-void vaciarLista(tLista* lista)
+void vaciarLista(tLista *lista)
 {
-    tNodoLista * nodoElim;
-    while(NULL != lista)
+    tNodoLista *elim;
+
+    if(*lista == NULL)
+        return;
+
+    while((*lista)->nodoSig != *lista)
     {
-        nodoElim = *lista;
-        lista = &(*lista)->nodoSig;
-        free(nodoElim->dato);
+        elim = (*lista)->nodoSig;
+        (*lista)->nodoSig = elim->nodoSig;
+        elim->nodoSig->nodoAnt = *lista;
+
+        free(elim->dato);
+        free(elim);
     }
-    free(nodoElim);
+
+    free((*lista)->dato);
+    free(*lista);
+    *lista = NULL;
 }
 
 void copiarPosicionLista(tLista *destino, tLista origen)
