@@ -16,6 +16,12 @@ int inicializarJuego()
     crearLista(&tablero);
     cargarConfig(NOMARCH, &configuracion);
 
+    if(validarTablero(configuracion)==TABLERO_INVALIDO)
+    {
+        printf("El tablero a generar es invalido\n");
+        return TABLERO_INVALIDO;
+    }
+
     bandidos = crearBandidos(configuracion.cantBandidos);
     if(NULL == bandidos)
     {
@@ -38,7 +44,7 @@ int inicializarJuego()
     system("pause");
     system("cls");
 
-
+    free(bandidos);
     vaciarLista(&tablero);
     return TODO_OK;
 }

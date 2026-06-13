@@ -17,7 +17,9 @@ int main()
             printf("Cargando Ranking...\n");
             break;
         case 'P':
-            inicializarJuego();
+            if(inicializarJuego() != TODO_OK)
+                printf("No se pudo iniciar la partida. Volviendo al menu...\n");
+            system("pause");
             break;
         case 'Q':
             printf("Saliendo...\n");

@@ -196,3 +196,27 @@ void guardarTablero(const tLista* tablero, const char* nombreArchivo)
     recorrerListaArchivo(tablero, fp, escribirCasilla);
     fclose(fp);
 }
+
+int validarTablero(tConfig config)
+{
+    int totalElementos;
+
+    if(config.cantBandidos < 1 || config.cantPremios < 1 ||
+       config.cantOasis < 1 || config.cantTormentas < 1 ||
+       config.cantVidasExtra < 1)
+        return  TABLERO_INVALIDO;
+
+    totalElementos = config.cantBandidos + config.cantPremios + config.cantOasis
+                        + config.cantTormentas + config.cantVidasExtra;
+
+    if(totalElementos < (int)(config.cantCasillas * MIN_OCUPACION))
+        return  TABLERO_INVALIDO;
+
+    if(totalElementos > (int)(config.cantCasillas * MAX_OCUPACION))
+        return  TABLERO_INVALIDO;
+
+    return TODO_OK;
+}
+
+
+

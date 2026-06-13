@@ -1,7 +1,7 @@
 #ifndef TABLERO_H_INCLUDED
 #define TABLERO_H_INCLUDED
 
-#include "../headers/bandido.h"
+#include "bandido.h"
 #include <stdio.h>
 #include "archivos.h"
 
@@ -20,4 +20,5 @@ void mostrarTablero(const tLista tablero, unsigned cantCasillas);
 void distribuirBandidos(const tLista *tablero, tBandido *vBandidos, unsigned cantBandidos, int *posBandidos);
 void escribirCasilla(FILE* fp, const void* dato);
 void guardarTablero(const tLista* tablero, const char* nombreArchivo);
+int validarTablero(tConfig config);
 #endif // TABLERO_H_INCLUDED
