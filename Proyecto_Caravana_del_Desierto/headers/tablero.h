@@ -3,8 +3,7 @@
 
 #include "bandido.h"
 #include <stdio.h>
-#include "archivos.h"
-
+#include "config.h"
 typedef struct
 {
     char tipo;

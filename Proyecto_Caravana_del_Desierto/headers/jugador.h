@@ -3,9 +3,8 @@
 
 #include "lista.h"
 #include "cola.h"
-#include "constantesymacros.h"
 #include "tablero.h"
-
+#include "constantesymacros.h"
 
 typedef struct
 {

@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+
 void crearCola(tCola* pc)
 {
     pc->pri = NULL;

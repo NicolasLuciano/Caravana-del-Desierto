@@ -4,18 +4,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct
-{
-    unsigned cantCasillas;
-    unsigned vidasIniciales;
-    unsigned cantPremios;
-    unsigned cantOasis;
-    unsigned cantTormentas;
-    unsigned cantBandidos;
-    unsigned cantVidasExtra;
-} tConfig;
+#include "partida.h"
+#include "config.h"
 
 int cargarConfig(const char* nombreArch, tConfig* configuracion);
 void generaraArchivoTablero();
+int guardarPartida(tPartida partida, char * NOMARCH3);
 
 #endif // ARCHIVOS_H_INCLUDED

@@ -1,5 +1,6 @@
 #include "../headers/jugador.h"
 #include "../headers/dado.h"
+#include "../headers/constantesymacros.h"
 #include "../headers/partida.h"
 
 void inicializarJugador(tJugador * jugador, int vidasInicio)

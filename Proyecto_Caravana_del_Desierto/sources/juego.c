@@ -47,3 +47,22 @@ int inicializarJuego()
     vaciarLista(&tablero);
     return TODO_OK;
 }
+
+int verRanking(char * NOMARCH3)
+{
+    FILE * pf;
+    tPartida;
+
+    pf=fopen(NOMARCH3,"rb");
+    if(NULL==pf)
+        return ARCH_ERROR;
+
+    fread(&partida,sizeof(tPartida),1,pf);
+    /*while(!feof(pf))
+    {
+
+    }*/
+
+    fclose(pf);
+}
+

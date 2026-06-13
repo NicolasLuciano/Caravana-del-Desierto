@@ -45,21 +45,3 @@ int guardarPartida(tPartida partida, char * NOMARCH3)
     fwrite(&partida, sizeof(tPartida), 1, pf);
     fclose(pf);
 }
-
-int verRanking(char * NOMARCH3)
-{
-    FILE * pf;
-    tPartida partida;
-
-    pf=fopen(NOMARCH3,"rb");
-    if(NULL==pf)
-        return ARCH_ERROR;
-
-    fread(&partida,sizeof(tPartida),1,pf);
-    fread(!feof(pf))
-    {
-
-    }
-
-    fclose(pf);
-}
