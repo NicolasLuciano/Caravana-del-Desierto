@@ -15,6 +15,7 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
     char direccion;
     unsigned pierdeTurno;
     tProteccion proteccion;
+
     copiarPosicionLista(&posJugador,*tablero);
     crearCola(&colaTurno);
     crearCola(&colaRegistro);
@@ -22,11 +23,12 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
     proteccion.proteccionActual = NO_PROTEGIDO;
     proteccion.proteccionSiguiente = NO_PROTEGIDO;
     recuperarDatoLista(&posJugador,0,&casillaAct,sizeof(tCasilla));
+
     while(jugador->vidas>0 && casillaAct.tipo!=SALIDA )
     {
         proteccion.proteccionActual = proteccion.proteccionSiguiente;
         proteccion.proteccionSiguiente = NO_PROTEGIDO;
-        system("cls");
+        //system("cls");
         printf("====================================\n");
         printf("\tESTADISTICAS JUGADOR\n");
         printf("====================================\n");

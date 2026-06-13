@@ -126,7 +126,7 @@ void mostrarTablero(const tLista tablero, unsigned cantCasillas)
         if(casilla.jugador == HAY_JUGADOR)
             sprintf(linea + strlen(linea), "%c ", JUGADOR);
 
-        if(casilla.bandido == VIVO)
+        if(casilla.bandido == HAY_BANDIDO)
             sprintf(linea + strlen(linea), "%c ", BANDIDO);
 
         if(strlen(linea) > 0)
@@ -172,7 +172,7 @@ void escribirCasilla(FILE* fp, const void* dato)
     if(casilla.jugador == HAY_JUGADOR)
         sprintf(linea + strlen(linea), "%c ", JUGADOR);
 
-    if(casilla.bandido == VIVO)
+    if(casilla.bandido == HAY_BANDIDO)
         sprintf(linea + strlen(linea), "%c ", BANDIDO);
 
     if(strlen(linea) > 0)

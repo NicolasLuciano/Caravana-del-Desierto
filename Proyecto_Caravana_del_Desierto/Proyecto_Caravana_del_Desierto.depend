@@ -79,7 +79,7 @@
 	<string.h>
 	<ctype.h>
 
-1781376688 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\tablero.c
+1781382213 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\tablero.c
 	"../headers/tablero.h"
 	"../headers/constantesymacros.h"
 	<time.h>
@@ -386,7 +386,7 @@
 
 1780945107 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\menu.h
 
-1781379750 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\juego.c
+1781382109 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\juego.c
 	"../headers/lista.h"
 	"../headers/archivos.h"
 	"../headers/tablero.h"
@@ -423,7 +423,7 @@
 	"jugador.h"
 	"cola.h"
 
-1781380279 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\partida.c
+1781382023 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\partida.c
 	"../headers/archivos.h"
 	"../headers/tablero.h"
 	"../headers/constantesymacros.h"

@@ -35,7 +35,6 @@ int inicializarJuego()
         free(bandidos);
         return SIN_MEM;
     }
-
     guardarTablero(&tablero,NOMARCH2);
 
     inicializarJugador(&jugador, configuracion.vidasIniciales);
