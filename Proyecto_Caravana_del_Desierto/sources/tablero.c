@@ -159,44 +159,6 @@ void distribuirBandidos(const tLista *tablero, tBandido *vBandidos, unsigned can
     }
 }
 
-void escribirCasilla(FILE* fp, const void* dato)
-{
-    tCasilla casilla = *(tCasilla*)dato;
-    char linea[10];
-
-    linea[0] = '\0';
-
-    if(casilla.tipo != VACIA)
-        sprintf(linea, "%c ", casilla.tipo);
-
-    if(casilla.jugador == HAY_JUGADOR)
-        sprintf(linea + strlen(linea), "%c ", JUGADOR);
-
-    if(casilla.bandido == HAY_BANDIDO)
-        sprintf(linea + strlen(linea), "%c ", BANDIDO);
-
-    if(strlen(linea) > 0)
-    {
-        linea[strlen(linea)-1] = '\0';
-
-        if(strlen(linea) > 1)
-            fprintf(fp,"%02d: [%s]\n", casilla.numCasilla, linea);
-        else
-            fprintf(fp,"%02d: %s\n", casilla.numCasilla, linea);
-    }
-    else
-        fprintf(fp,"%02d: %c\n", casilla.numCasilla, casilla.tipo);
-}
-
-void guardarTablero(const tLista* tablero, const char* nombreArchivo)
-{
-    FILE* fp = fopen(nombreArchivo, "wt");
-    if(fp == NULL)
-        return;
-    recorrerListaArchivo(tablero, fp, escribirCasilla);
-    fclose(fp);
-}
-
 int validarTablero(tConfig config)
 {
     int totalElementos;
@@ -217,6 +179,4 @@ int validarTablero(tConfig config)
 
     return TODO_OK;
 }
-
-
 

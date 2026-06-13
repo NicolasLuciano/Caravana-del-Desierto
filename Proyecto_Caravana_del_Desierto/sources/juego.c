@@ -51,7 +51,7 @@ int inicializarJuego()
 int verRanking(char * NOMARCH3)
 {
     FILE * pf;
-    tPartida;
+    tPartida partida;
 
     pf=fopen(NOMARCH3,"rb");
     if(NULL==pf)
