@@ -31,7 +31,6 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
         printf("\tESTADISTICAS JUGADOR\n");
         printf("====================================\n");
         printf("VIDAS: %d\tPUNTOS: %d\n\n",jugador->vidas,jugador->puntos);
-        if(PROTEGIDO == proteccion.proteccionActual)
         mostrarTablero(*tablero,cantCasillas);
         dado=tirar_dado(DADO_JUGADOR);
         if(PIERDE_TURNO==pierdeTurno)
