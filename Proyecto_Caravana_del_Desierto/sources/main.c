@@ -13,7 +13,7 @@ int main()
     char opcion;
 
     //identificarUsuario(&usuarioActual);
-    printf("Ingrese nombre de usuario");
+    printf("Ingrese nombre de usuario\n");
     scanf("%s", usuarioActual.nombreDeUsuario);
     do
     {
@@ -21,6 +21,7 @@ int main()
         {
         case 'R':
             printf("Cargando Ranking...\n");
+            verRanking();
             break;
 
         case 'P':
