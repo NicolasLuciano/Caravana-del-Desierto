@@ -7,7 +7,7 @@
 #include <windows.h>
 #include <ctype.h>
 
-void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, unsigned cantCasillas, unsigned cantBandidos)
+void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, unsigned cantCasillas, unsigned cantBandidos, tPartida *partida)
 {
     tLista posJugador;
     int dado;
@@ -16,7 +16,6 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
     char direccion;
     unsigned pierdeTurno;
     tProteccion proteccion;
-    tPartida partida;
 
     copiarPosicionLista(&posJugador,*tablero);
     crearCola(&colaTurno);
@@ -24,7 +23,7 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
     pierdeTurno= NO_PIERDE_TURNO;
     proteccion.proteccionActual = NO_PROTEGIDO;
     proteccion.proteccionSiguiente = NO_PROTEGIDO;
-    partida.movimientos=0;
+    partida->movimientos=0;
 
     recuperarDatoLista(&posJugador,0,&casillaAct,sizeof(tCasilla));
 
@@ -35,7 +34,7 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
 
         mostrarPantalla(*tablero,jugador,cantCasillas,proteccion);
 
-        dado=tirar_dado(DADO_JUGADOR);
+
         if(PIERDE_TURNO==pierdeTurno)
         {
             dado=0;
@@ -43,44 +42,30 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
         }
         else
         {
-            printf("\n\nLANZANDO DADO...\n");
-            Sleep(MILISEGUNDOS);
-            printf("[DADO]: %d\n",dado);
-            printf("[MOVERSE]\n");
-            printf("(%c) ADELANTE\n(%c) ATRAS\n",ADELANTE,ATRAS);
-
-            do
-            {
-                scanf(" %c", &direccion);
-                direccion=toupper(direccion);
-                if(direccion!=ADELANTE && direccion!=ATRAS)
-                    printf("INGRESE ENTRADA VALIDA.\n %c o %c\n",ADELANTE,ATRAS);
-            }
-            while(direccion!=ADELANTE && direccion!=ATRAS);
-
-            if(direccion==ATRAS && (int)casillaAct.numCasilla-dado<1)
-            {
-                printf("No es posible moverse hacia atras, sera movido hacia adelante\n");
-                system("pause");
-                direccion=ADELANTE;
-            }
-            casillaAct.jugador = SIN_JUGADOR;
-            modificarEnPosLista(&posJugador, 0, &casillaAct, sizeof(tCasilla));
+            dado=resolverDadoJugador(&posJugador,&direccion,&casillaAct);
         }
 
-        encolarJugador(&posJugador,casillaAct,&colaTurno,&colaRegistro,direccion,dado,cantCasillas, &(partida.movimientos));
+        encolarJugador(&posJugador,casillaAct,&colaTurno,&colaRegistro,direccion,dado,cantCasillas, &(partida->movimientos));
         encolarBandidos(bandidos,&colaTurno,cantBandidos,cantCasillas);
         resolverMovimientos(*tablero,&posJugador,bandidos,&colaTurno,&casillaAct,jugador,cantBandidos,cantCasillas,&proteccion,&pierdeTurno);
         recuperarDatoLista(&posJugador,0,&casillaAct,sizeof(tCasilla));
     }
-    printf("PARTIDA FINALIZADA\n");
 
-    partida.puntos = jugador->puntos;
+    partida->puntos = jugador->puntos;
     //strcpy(partida.nombreDeUsuario,jugador->usuario.nombreDeUsuario);
     if(jugador->vidas<=0)
-        partida.resultado = DERROTA;
+    {
+        printf("\n\nTE QUEDASTE SIN RECURSOS. LOS BANDIDOS SON IMPARABLES!\n\n");
+        printf("\n\n--------GAME OVER--------\n\n");
+        partida->resultado = DERROTA;
+    }
     else
-        partida.resultado = VICTORIA;
+    {
+        printf("\n\nFELICITACIONES. LLEGASTE SANO Y SALVO A LA CIUDAD REFUGIO\n\n");
+        printf("\n\n--------VICTORIA--------\n\n");
+        partida->resultado = VICTORIA;
+    }
+    system("pause");
 }
 
 void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos, tCola * colaTurno,tCasilla * casillaAct, tJugador * jugador, unsigned cantBandidos, unsigned cantCasillas, tProteccion *proteccion,unsigned *pierdeTurno)
@@ -249,6 +234,36 @@ void moverBandido(tBandido *bandidos, tCasilla *casilla,tMovimiento mov,unsigned
 int hayColision(const tBandido *bandido, tLista *posJugador)
 {
     return compararLista(posJugador,&bandido->posicion)== LISTAS_IGUALES;
+}
+
+unsigned resolverDadoJugador(tLista *posJugador,char *direccion, tCasilla *casillaAct)
+{
+    unsigned dado;
+    dado=tirar_dado(DADO_JUGADOR);
+    printf("\n\nLANZANDO DADO...\n");
+    Sleep(MILISEGUNDOS);
+    printf("[DADO]: %d\n",dado);
+    printf("[MOVERSE]\n");
+    printf("(%c) ADELANTE\n(%c) ATRAS\n",ADELANTE,ATRAS);
+
+    do
+    {
+        scanf(" %c", direccion);
+        *direccion=toupper(*direccion);
+        if(*direccion!=ADELANTE && *direccion!=ATRAS)
+            printf("INGRESE ENTRADA VALIDA.\n %c o %c\n",ADELANTE,ATRAS);
+    }
+    while(*direccion!=ADELANTE && *direccion!=ATRAS);
+
+    if(*direccion==ATRAS && (int)casillaAct->numCasilla-dado<1)
+    {
+        printf("No es posible moverse hacia atras, sera movido hacia adelante\n");
+        system("pause");
+        *direccion=ADELANTE;
+    }
+    casillaAct->jugador = SIN_JUGADOR;
+    modificarEnPosLista(posJugador, 0, &casillaAct, sizeof(tCasilla));
+    return dado;
 }
 
 void mostrarPantalla(tLista tablero, tJugador *jugador, unsigned cantCasillas, tProteccion proteccion)

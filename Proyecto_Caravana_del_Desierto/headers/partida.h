@@ -26,10 +26,15 @@ typedef struct
     unsigned proteccionSiguiente;
 } tProteccion;
 
-void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, unsigned cantCasillas, unsigned cantBandidos);
+void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, unsigned cantCasillas, unsigned cantBandidos, tPartida *partida);
+
+
+unsigned resolverDadoJugador(tLista *posJugador,char *direccion, tCasilla *casillaAct);
 void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos, tCola * colaTurno,tCasilla * casillaAct, tJugador * jugador, unsigned cantBandidos, unsigned cantCasillas, tProteccion *proteccion,unsigned *pierdeTurno);
+
 void recibirDmg(tLista tablero, tLista *posJugador, tCasilla * casillaAct, tJugador *jugador);
 void moverBandido(tBandido *bandidos, tCasilla *casilla,tMovimiento mov,unsigned posBandido, unsigned cantBandidos);
 int hayColision(const tBandido *bandido, tLista *posJugador);
+
 void mostrarPantalla(tLista tablero, tJugador *jugador, unsigned cantCasillas, tProteccion proteccion);
 #endif // PARTIDA_H_INCLUDED
