@@ -262,7 +262,7 @@ unsigned resolverDadoJugador(tLista *posJugador,char *direccion, tCasilla *casil
         *direccion=ADELANTE;
     }
     casillaAct->jugador = SIN_JUGADOR;
-    modificarEnPosLista(posJugador, 0, &casillaAct, sizeof(tCasilla));
+    modificarEnPosLista(posJugador, 0, casillaAct, sizeof(tCasilla));
     return dado;
 }
 
