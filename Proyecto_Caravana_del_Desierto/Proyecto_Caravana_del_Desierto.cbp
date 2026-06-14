@@ -35,6 +35,7 @@
 		<Unit filename="headers/archivos.h" />
 		<Unit filename="headers/bandido.h" />
 		<Unit filename="headers/cola.h" />
+		<Unit filename="headers/config.h" />
 		<Unit filename="headers/constantesymacros.h" />
 		<Unit filename="headers/dado.h" />
 		<Unit filename="headers/juego.h" />
