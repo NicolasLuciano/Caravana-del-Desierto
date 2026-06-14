@@ -31,5 +31,5 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
 void recibirDmg(tLista tablero, tLista *posJugador, tCasilla * casillaAct, tJugador *jugador);
 void moverBandido(tBandido *bandidos, tCasilla *casilla,tMovimiento mov,unsigned posBandido, unsigned cantBandidos);
 int hayColision(const tBandido *bandido, tLista *posJugador);
-void mostrarPantalla(tLista tablero, tJugador *jugador, unsigned cantCasillas);
+void mostrarPantalla(tLista tablero, tJugador *jugador, unsigned cantCasillas, tProteccion proteccion);
 #endif // PARTIDA_H_INCLUDED
