@@ -54,23 +54,90 @@ void verRanking()
 {
     FILE * pf;
     tPartida partida;
-    tRanking * jugador;
+    tRanking * vecJugador,*vecAux;
+    unsigned cantJugadores,capacidad;
+    int pos;
+
+    capacidad=JUGADORES_MAX;
+    vecJugador=malloc(sizeof(tRanking)*capacidad);
+    if(NULL==vecJugador)
+    {
+        printf("No fue posible acceder al ranking");
+        return;
+    }
 
     pf=fopen(NOMARCH3,"rb");
     if(pf==NULL)
     {
         printf("No fue posible abrir el archivo %s", NOMARCH3);
+        free(vecJugador);
         return;
     }
 
-
-    fread(&partida,sizeof(tPartida),1,pf);
-    while(!feof(pf))
+    cantJugadores=0;
+    while(fread(&partida,sizeof(tPartida),1,pf)==1)
     {
+        pos=buscarJugador(partida.nombreDeUsuario,vecJugador,cantJugadores);
+        if(pos!=NO_ENCONTRADO)
+            (vecJugador+pos)->puntos+=partida.puntos;
+        else
+        {
+            if(cantJugadores==JUGADORES_MAX)
+            {
+                capacidad *=2;
+                vecAux=realloc(vecJugador, sizeof(tRanking)*capacidad);
+                if(vecAux == NULL)
+                {
+                    printf("No fue posible acceder al ranking");
+                    fclose(pf);
+                    free(vecJugador);
+                    return;
+                }
+                vecJugador=vecAux;
+            }
 
-        fread(&partida,sizeof(tPartida),1,pf);
+            strcpy((vecJugador+cantJugadores)->nombreDeUsuario,partida.nombreDeUsuario);
+            (vecJugador+cantJugadores)->puntos=partida.puntos;
+            cantJugadores++;
+        }
     }
+    qsort(vecJugador,cantJugadores,sizeof(tRanking),compararRanking);
+    printf("---RANKING---\n");
+    mostrarVec();
 
     fclose(pf);
+    free(vecJugador);
 }
 
+int buscarJugador(char * clave, tRanking * vecJugador, unsigned cantJugadores)
+{
+    int pos;
+    unsigned i;
+
+    pos=-1;
+    i=0;
+    while(pos==-1 && i<cantJugadores)
+    {
+        if(strcmp(clave,(vecJugador+i)->nombreDeUsuario)==0)
+            pos=i;
+        i++;
+    }
+    return pos;
+}
+
+int compararRanking(const void* a,const void* b)
+{
+    const tRanking* ranking_1=a;
+    const tRanking* ranking_2=b;
+
+    return ranking_2->puntos - ranking_1->puntos;
+}
+
+void mostrarVec(tRanking * vecJugador, unsigned cantJugadores)
+{
+    unsigned i;
+
+    for(i=0;i<cantJugadores;i++)
+        printf("Jugador: %s\tPuntaje: %d",(vecJugador+i)->nombreDeUsuario,(vecJugador+i)->puntos);
+
+}

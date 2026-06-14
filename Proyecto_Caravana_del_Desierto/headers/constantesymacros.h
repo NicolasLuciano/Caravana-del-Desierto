@@ -7,7 +7,6 @@
 #define DUPLICADO_ERROR -3
 #define COLA_ERROR -4
 #define LIMITE_INVALIDO -5
-#define NO_ENCONTRADO -6
 #define LISTAS_IGUALES 1
 ///CONSTANTES DE JUEGO
 #define DADO_BANDIDO 4
@@ -53,6 +52,8 @@
 #define APELLIDO_TAM 30
 #define NOMARCH2 "caravana.txt"
 #define NOMARCH3 "partidas.bin"
+#define JUGADORES_MAX 50
+#define NO_ENCONTRADO -6
 
 ///MACROS
 #define MIN(x,y)(x>y?y:x)
