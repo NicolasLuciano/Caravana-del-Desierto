@@ -15,7 +15,7 @@ typedef struct
 
 typedef struct
 {
-    tUsuario usuario;
+    char nombreDeUsuario[NOMBRE_DE_USUARIO_TAM];
     unsigned vidas;
     unsigned puntos;
 } tJugador;

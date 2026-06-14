@@ -75,11 +75,3 @@ void escribirCasilla(FILE* fp, const void* dato)
     else
         fprintf(fp,"%02d: %c\n", casilla.numCasilla, casilla.tipo);
 }
-
-int abrirArchPartidas(const char * nombreArchivo, FILE * pf)
-{
-    pf=fopen(nombreArchivo,"rb");
-    if(pf==NULL)
-        return ARCH_ERROR;
-    return TODO_OK;
-}

@@ -77,7 +77,7 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
     printf("PARTIDA FINALIZADA\n");
 
     partida.puntos = jugador->puntos;
-    strcpy(partida.nombreDeUsuario,jugador->usuario.nombreDeUsuario);
+    //strcpy(partida.nombreDeUsuario,jugador->usuario.nombreDeUsuario);
     if(jugador->vidas<=0)
         partida.resultado = DERROTA;
     else

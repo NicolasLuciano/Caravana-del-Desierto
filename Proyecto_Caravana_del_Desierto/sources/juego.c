@@ -3,8 +3,8 @@
 #include "../headers/tablero.h"
 #include "../headers/bandido.h"
 #include "../headers/jugador.h"
-#include "../headers/constantesymacros.h"
 #include "../headers/partida.h"
+#include "../headers/juego.h"
 
 int inicializarJuego()
 {
@@ -50,14 +50,18 @@ int inicializarJuego()
     return TODO_OK;
 }
 
-int verRanking()
+void verRanking()
 {
     FILE * pf;
     tPartida partida;
-    tJugador jugador;
+    tRanking * jugador;
 
-    if(abrirArchPartidas(NOMARCH3)==ARCH_ERROR)
+    pf=fopen(NOMARCH3,"rb");
+    if(pf==NULL)
+    {
         printf("No fue posible abrir el archivo %s", NOMARCH3);
+        return;
+    }
 
 
     fread(&partida,sizeof(tPartida),1,pf);
