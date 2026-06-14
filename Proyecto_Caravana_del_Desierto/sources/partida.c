@@ -23,6 +23,7 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
     crearCola(&colaRegistro);
     pierdeTurno= NO_PIERDE_TURNO;
     proteccion.proteccionActual = NO_PROTEGIDO;
+    proteccion.proteccionSiguiente = NO_PROTEGIDO;
     partida.movimientos=0;
 
     recuperarDatoLista(&posJugador,0,&casillaAct,sizeof(tCasilla));
