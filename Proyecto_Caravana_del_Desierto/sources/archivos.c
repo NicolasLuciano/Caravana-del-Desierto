@@ -22,11 +22,11 @@ int cargarConfig(const char* nombreArch, tConfig* configuracion)
     return TODO_OK;
 }
 
-int guardarPartida(tPartida partida, char * NOMARCH3)
+int guardarPartida(tPartida partida, const char * nombreArchivo)
 {
     FILE * pf;
 
-    pf=fopen(NOMARCH3,"ab");
+    pf=fopen(nombreArchivo,"ab");
     if(NULL==pf)
         return ARCH_ERROR;
 
@@ -74,4 +74,12 @@ void escribirCasilla(FILE* fp, const void* dato)
     }
     else
         fprintf(fp,"%02d: %c\n", casilla.numCasilla, casilla.tipo);
+}
+
+int abrirArchPartidas(const char * nombreArchivo, FILE * pf)
+{
+    pf=fopen(nombreArchivo,"rb");
+    if(pf==NULL)
+        return ARCH_ERROR;
+    return TODO_OK;
 }

@@ -35,7 +35,9 @@ int inicializarJuego()
         free(bandidos);
         return SIN_MEM;
     }
-    guardarTablero(&tablero,NOMARCH2);
+
+    if(guardarTablero(&tablero,NOMARCH2)==ARCH_ERROR)
+        printf("No fue posible abrir el archivo %s", NOMARCH2);
 
     inicializarJugador(&jugador, configuracion.vidasIniciales);
 
@@ -48,20 +50,22 @@ int inicializarJuego()
     return TODO_OK;
 }
 
-int verRanking(char * NOMARCH3)
+int verRanking()
 {
     FILE * pf;
     tPartida partida;
+    tJugador jugador;
 
-    pf=fopen(NOMARCH3,"rb");
-    if(NULL==pf)
-        return ARCH_ERROR;
+    if(abrirArchPartidas(NOMARCH3)==ARCH_ERROR)
+        printf("No fue posible abrir el archivo %s", NOMARCH3);
+
 
     fread(&partida,sizeof(tPartida),1,pf);
-    /*while(!feof(pf))
+    while(!feof(pf))
     {
 
-    }*/
+        fread(&partida,sizeof(tPartida),1,pf);
+    }
 
     fclose(pf);
 }
