@@ -103,7 +103,7 @@ void verRanking()
     }
     qsort(vecJugador,cantJugadores,sizeof(tRanking),compararRanking);
     printf("---RANKING---\n");
-    mostrarVec();
+    mostrarVec(vecJugador,cantJugadores);
 
     fclose(pf);
     free(vecJugador);
