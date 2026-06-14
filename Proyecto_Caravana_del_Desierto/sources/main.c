@@ -1,6 +1,7 @@
 #include "../headers/constantesymacros.h"
 #include "../headers/menu.h"
 #include "../headers/juego.h"
+#include "../headers/jugador.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -8,7 +9,12 @@
 
 int main()
 {
+    tUsuario usuarioActual;
     char opcion;
+
+    //identificarUsuario(&usuarioActual);
+    printf("Ingrese nombre de usuario");
+    scanf("%s", usuarioActual.nombreDeUsuario);
     do
     {
         switch(opcion = menu(MENSAJE_MENU, OPCIONES_MENU))
@@ -16,16 +22,19 @@ int main()
         case 'R':
             printf("Cargando Ranking...\n");
             break;
+
         case 'P':
-            if(inicializarJuego() != TODO_OK)
+            if(inicializarJuego(usuarioActual.nombreDeUsuario) != TODO_OK)
                 printf("No se pudo iniciar la partida. Volviendo al menu...\n");
             system("pause");
             break;
+
         case 'Q':
             printf("Saliendo...\n");
             break;
         }
     }
-    while('Q' != opcion );
+    while(opcion != 'Q');
+
     return TODO_OK;
 }

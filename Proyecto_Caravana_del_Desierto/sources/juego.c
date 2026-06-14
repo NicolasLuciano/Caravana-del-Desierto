@@ -6,15 +6,17 @@
 #include "../headers/partida.h"
 #include "../headers/juego.h"
 
-int inicializarJuego()
+int inicializarJuego(char * usuario)
 {
     tLista tablero;
     tBandido* bandidos;
     tConfig configuracion;
     tJugador jugador;
+    tPartida partida;
 
     crearLista(&tablero);
     cargarConfig(NOMARCH, &configuracion);
+    strcpy(partida.nombreDeUsuario,usuario);
 
     if(validarTablero(configuracion)==TABLERO_INVALIDO)
     {
@@ -41,16 +43,19 @@ int inicializarJuego()
 
     inicializarJugador(&jugador, configuracion.vidasIniciales);
 
-    empezarPartida(&tablero,&jugador,bandidos, configuracion.cantCasillas,configuracion.cantBandidos);
+    empezarPartida(&tablero,&jugador,bandidos, configuracion.cantCasillas,configuracion.cantBandidos,&partida);
     system("pause");
     system("cls");
+
+
+    guardarPartida(partida,NOMARCH3);
 
     free(bandidos);
     vaciarLista(&tablero);
     return TODO_OK;
 }
 
-void verRanking()
+int verRanking()
 {
     FILE * pf;
     tPartida partida;
@@ -63,7 +68,7 @@ void verRanking()
     if(NULL==vecJugador)
     {
         printf("No fue posible acceder al ranking");
-        return;
+        return SIN_MEM;
     }
 
     pf=fopen(NOMARCH3,"rb");
@@ -71,7 +76,7 @@ void verRanking()
     {
         printf("No fue posible abrir el archivo %s", NOMARCH3);
         free(vecJugador);
-        return;
+        return ARCH_ERROR;
     }
 
     cantJugadores=0;
@@ -91,7 +96,7 @@ void verRanking()
                     printf("No fue posible acceder al ranking");
                     fclose(pf);
                     free(vecJugador);
-                    return;
+                    return SIN_MEM;
                 }
                 vecJugador=vecAux;
             }
@@ -107,6 +112,7 @@ void verRanking()
 
     fclose(pf);
     free(vecJugador);
+    return TODO_OK;
 }
 
 int buscarJugador(char * clave, tRanking * vecJugador, unsigned cantJugadores)

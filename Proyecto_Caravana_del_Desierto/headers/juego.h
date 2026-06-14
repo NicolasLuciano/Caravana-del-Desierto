@@ -9,7 +9,7 @@ typedef struct{
 }tRanking;
 
 int inicializarJuego();
-void verRanking();
+int verRanking();
 int buscarJugador(char * clave, tRanking * vecJugador, unsigned cantJugadores);
 int compararRanking(const void* a,const void* b);
 void mostrarVec(tRanking * vecJugador, unsigned cantJugadores);
