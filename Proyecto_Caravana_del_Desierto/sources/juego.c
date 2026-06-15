@@ -44,7 +44,6 @@ int inicializarJuego(char * usuario)
     inicializarJugador(&jugador, configuracion.vidasIniciales);
 
     empezarPartida(&tablero,&jugador,bandidos, configuracion.cantCasillas,configuracion.cantBandidos,&partida);
-    system("pause");
     system("cls");
 
 
