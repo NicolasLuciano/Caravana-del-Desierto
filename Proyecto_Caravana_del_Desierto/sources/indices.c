@@ -1,8 +1,102 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 #include "../headers/indices.h"
 #include "../headers/archivos.h"
-#include <ctype.h>
+#include "../headers/constantesymacros.h"
+
+int compararUsuarios(const void *a, const void *b)
+{
+    const tIndice *ua = (tIndice *)a;
+    const tIndice *ub = (tIndice *)b;
+    return strcmp(ua->nombreDeUsuario,ub->nombreDeUsuario);
+}
+
+int validarUsuario(const char* usuario)
+{
+    if(*usuario == '\0')
+        return CADENA_INVALIDA;
+
+    while(*usuario)
+    {
+        if(!isalpha(*usuario) && !isdigit(*usuario) && *usuario != '_' && *usuario != '.')
+            return CADENA_INVALIDA;
+
+        usuario++;
+    }
+
+    return TODO_OK;
+}
+
+int validarNombreApellido(const char* texto)
+{
+    if(*texto == '\0')
+        return CADENA_INVALIDA;
+    while(*texto)
+    {
+        if(!isalpha(*texto) && *texto != ' ')
+            return CADENA_INVALIDA;
+
+        texto++;
+    }
+
+    return TODO_OK;
+}
+
+int leerCadena(char * cadena, int (*validarCad)(const char *))
+{
+    int validacion;
+    if(strchr(cadena, '\n') == NULL)
+    {
+        int c;
+        while((c = getchar()) != '\n' && c != EOF)
+            ;
+
+        printf("Demasiados caracteres.\n");
+        validacion = CADENA_INVALIDA;
+    }
+    else
+    {
+        cadena[strlen(cadena)-1] = '\0';
+        validacion = validarCad(cadena);
+    }
+    return validacion;
+}
+
+void cargarArchivoOrdenadoEnIndiceBalanceadoEnvoltorio(tArbol *pa, FILE *fp)
+{
+    size_t bytes;
+    int cantidad;
+
+    fseek(fp, 0, SEEK_END);
+    bytes = ftell(fp);
+    cantidad = bytes / sizeof(tUsuario);
+
+    if (cantidad > 0)
+        cargarArchivoOrdenadoEnIndiceBalanceado(pa, fp, INICIO_DEL_ARCHIVO, cantidad-1);
+}
+
+void cargarArchivoOrdenadoEnIndiceBalanceado(tArbol *pa, FILE *fp, int inicio,int fin)
+{
+    size_t medio = (fin+inicio)/2;
+    tIndice indice;
+    tUsuario usuario;
+
+    if (inicio > fin)
+        return;
+
+    fseek(fp, medio*sizeof(tUsuario), SEEK_SET);
+    fread(&usuario, 1, sizeof(tUsuario), fp);
+
+    strcpy(indice.nombreDeUsuario,usuario.nombreDeUsuario);
+    indice.numRegistro = medio;
+
+
+    insertarArbol(pa, &indice, sizeof(tIndice), compararUsuarios);
+
+    cargarArchivoOrdenadoEnIndiceBalanceado(pa, fp, inicio, medio-1);
+    cargarArchivoOrdenadoEnIndiceBalanceado(pa, fp, medio+1, fin);
+}
 
 
 void identificarUsuario(tUsuario *usuario, tArbol *arbol)
@@ -27,7 +121,7 @@ void identificarUsuario(tUsuario *usuario, tArbol *arbol)
         perror(NOMARCH_INDEX);
         return;
     }
-    cargarIndices(arbol,NOMARCH_INDEX);
+    cargarArchivoOrdenadoEnIndiceBalanceadoEnvoltorio(arbol,pfIndice);
     opcion=NO;
 
     do
@@ -120,62 +214,4 @@ void identificarUsuario(tUsuario *usuario, tArbol *arbol)
 
     fclose(pfIndice);
     fclose(pfUsuarios);
-}
-
-int compararUsuarios(const void *a, const void *b)
-{
-    const tIndice *ua = (tIndice *)a;
-    const tIndice *ub = (tIndice *)b;
-    return strcmp(ua->nombreDeUsuario,ub->nombreDeUsuario);
-}
-
-int validarUsuario(const char* usuario)
-{
-    if(*usuario == '\0')
-        return CADENA_INVALIDA;
-
-    while(*usuario)
-    {
-        if(!isalpha(*usuario) && !isdigit(*usuario) && *usuario != '_' && *usuario != '.')
-            return CADENA_INVALIDA;
-
-        usuario++;
-    }
-
-    return TODO_OK;
-}
-
-int validarNombreApellido(const char* texto)
-{
-    if(*texto == '\0')
-        return CADENA_INVALIDA;
-    while(*texto)
-    {
-        if(!isalpha(*texto) && *texto != ' ')
-            return CADENA_INVALIDA;
-
-        texto++;
-    }
-
-    return TODO_OK;
-}
-
-int leerCadena(char * cadena, int (*validarCad)(const char *))
-{
-    int validacion;
-    if(strchr(cadena, '\n') == NULL)
-    {
-        int c;
-        while((c = getchar()) != '\n' && c != EOF)
-            ;
-
-        printf("Demasiados caracteres.\n");
-        validacion = CADENA_INVALIDA;
-    }
-    else
-    {
-        cadena[strlen(cadena)-1] = '\0';
-        validacion = validarCad(cadena);
-    }
-    return validacion;
 }
