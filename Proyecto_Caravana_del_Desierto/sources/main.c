@@ -10,8 +10,9 @@ int main()
 {
     tUsuario usuarioActual;
     char opcion;
-
-    identificarUsuario(&usuarioActual);
+    tArbol arbol;
+    crearArbol(&arbol);
+    identificarUsuario(&usuarioActual, &arbol);
 
     do
     {

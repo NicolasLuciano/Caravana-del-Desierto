@@ -27,7 +27,7 @@ typedef struct
 } tProteccion;
 
 void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, unsigned cantCasillas, unsigned cantBandidos, tPartida *partida);
-void finalizarPartida(tLista *tablero,tJugador jugador,tPartida partida, tProteccion proteccion, unsigned cantCasillas);
+void finalizarPartida(tLista *tablero,tJugador jugador,tPartida partida, tProteccion proteccion, unsigned cantCasillas, tCola *colaMovimientos);
 
 unsigned resolverDadoJugador(tLista *posJugador,char *direccion, tCasilla *casillaAct);
 void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos, tCola * colaTurno,tCasilla * casillaAct, tJugador * jugador, unsigned cantBandidos, unsigned cantCasillas, tProteccion *proteccion,unsigned *pierdeTurno);

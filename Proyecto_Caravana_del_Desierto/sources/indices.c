@@ -1,18 +1,16 @@
 #include <stdio.h>
 #include <string.h>
 #include "../headers/indices.h"
-#include "../headers/arbol.h"
 #include "../headers/archivos.h"
 #include <ctype.h>
 
 
-void identificarUsuario(tUsuario *usuario)
+void identificarUsuario(tUsuario *usuario, tArbol *arbol)
 {
     FILE *pfIndice, *pfUsuarios;
     int resultadoBusqueda, validacion;
     char opcion;
     tIndice indice;
-    tArbol arbol;
     char cadValidacion[NOMBRE_DE_USUARIO_TAM];
 
     pfUsuarios = fopen(NOMARCH_USER,"a+b");
@@ -29,8 +27,7 @@ void identificarUsuario(tUsuario *usuario)
         perror(NOMARCH_INDEX);
         return;
     }
-    crearArbol(&arbol);
-    cargarIndices(&arbol,NOMARCH_INDEX);
+    cargarIndices(arbol,NOMARCH_INDEX);
     opcion=NO;
 
     do
@@ -51,7 +48,7 @@ void identificarUsuario(tUsuario *usuario)
         while(validacion==CADENA_INVALIDA);
         strcpy(indice.nombreDeUsuario,cadValidacion);
 
-        resultadoBusqueda=buscarEnArbol(&arbol,&indice,sizeof(indice),compararUsuarios);
+        resultadoBusqueda=buscarEnArbol(arbol,&indice,sizeof(indice),compararUsuarios);
 
         if(NO_ENCONTRADO!=resultadoBusqueda)
         {

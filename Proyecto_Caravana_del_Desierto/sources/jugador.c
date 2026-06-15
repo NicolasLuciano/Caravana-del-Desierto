@@ -13,37 +13,40 @@ void encolarJugador(tLista *posJugador, tCasilla casillaAct, tCola *colaTurno, t
 {
     unsigned pasosAdelante, pasosAtras;
     tMovimiento movJugador;
-    if(ADELANTE==direccion && casillaAct.numCasilla+dado >cantCasillas)
+    if(dado)
     {
-        pasosAdelante=cantCasillas-casillaAct.numCasilla;
-        pasosAtras=dado-pasosAdelante;
-
-        movJugador.casillas=pasosAdelante;
-        movJugador.direccion=ADELANTE;
-        ponerEnCola(colaRegistro,&movJugador,sizeof(tMovimiento));
-
-        movJugador.casillas=pasosAtras;
-        movJugador.direccion=ATRAS;
-        ponerEnCola(colaRegistro,&movJugador,sizeof(tMovimiento));
-        (*movimientos)++;
-        if(pasosAdelante > pasosAtras)
+        if(ADELANTE==direccion && casillaAct.numCasilla+dado >cantCasillas)
         {
-            movJugador.casillas = pasosAdelante - pasosAtras;
-            movJugador.direccion = ADELANTE;
+            pasosAdelante=cantCasillas-casillaAct.numCasilla;
+            pasosAtras=dado-pasosAdelante;
+
+            movJugador.casillas=pasosAdelante;
+            movJugador.direccion=ADELANTE;
+            ponerEnCola(colaRegistro,&movJugador,sizeof(tMovimiento));
+
+            movJugador.casillas=pasosAtras;
+            movJugador.direccion=ATRAS;
+            ponerEnCola(colaRegistro,&movJugador,sizeof(tMovimiento));
+            (*movimientos)++;
+            if(pasosAdelante > pasosAtras)
+            {
+                movJugador.casillas = pasosAdelante - pasosAtras;
+                movJugador.direccion = ADELANTE;
+            }
+            else
+            {
+                movJugador.casillas = pasosAtras - pasosAdelante;
+                movJugador.direccion = ATRAS;
+            }
         }
         else
         {
-            movJugador.casillas = pasosAtras - pasosAdelante;
-            movJugador.direccion = ATRAS;
+            movJugador.direccion = direccion;
+            movJugador.casillas = dado;
+            ponerEnCola(colaRegistro,&movJugador,sizeof(tMovimiento));
         }
-    }
-    else
-    {
-        movJugador.direccion = direccion;
-        movJugador.casillas = dado;
-        ponerEnCola(colaRegistro,&movJugador,sizeof(tMovimiento));
-    }
 
-    ponerEnCola(colaTurno,&movJugador,sizeof(tMovimiento));
-    (*movimientos)++;
+        ponerEnCola(colaTurno,&movJugador,sizeof(tMovimiento));
+        (*movimientos)++;
+    }
 }
