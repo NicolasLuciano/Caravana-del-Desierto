@@ -4,13 +4,16 @@
 #include "../headers/arbol.h"
 #include "../headers/archivos.h"
 #include <ctype.h>
+
+
 void identificarUsuario(tUsuario *usuario)
 {
     FILE *pfIndice, *pfUsuarios;
-    int resultadoBusqueda;
-    char validacion;
+    int resultadoBusqueda, validacion;
+    char opcion;
     tIndice indice;
     tArbol arbol;
+    char cadValidacion[NOMBRE_DE_USUARIO_TAM];
 
     pfUsuarios = fopen(NOMARCH_USER,"a+b");
     if(!pfUsuarios)
@@ -28,7 +31,7 @@ void identificarUsuario(tUsuario *usuario)
     }
     crearArbol(&arbol);
     cargarIndices(&arbol,NOMARCH_INDEX);
-    validacion=NO;
+    opcion=NO;
 
     do
     {
@@ -37,7 +40,17 @@ void identificarUsuario(tUsuario *usuario)
         printf("         INICIO DE SESION\n");
         printf("====================================\n");
         printf("INGRESE NOMBRE DE USUARIO: ");
-        scanf("%s", indice.nombreDeUsuario);
+
+        do
+        {
+            fgets(cadValidacion, sizeof(cadValidacion), stdin);
+            validacion=leerCadena(cadValidacion,validarUsuario);
+            if(validacion==CADENA_INVALIDA)
+                printf("\n---NOMBRE DE USUARIO INVALIDO---\nINGRESE NUEVAMENTE: ");
+        }
+        while(validacion==CADENA_INVALIDA);
+        strcpy(indice.nombreDeUsuario,cadValidacion);
+
         resultadoBusqueda=buscarEnArbol(&arbol,&indice,sizeof(indice),compararUsuarios);
 
         if(NO_ENCONTRADO!=resultadoBusqueda)
@@ -49,13 +62,13 @@ void identificarUsuario(tUsuario *usuario)
             printf("SOS %s %s? (S/N)", usuario->nombre, usuario->apellido);
             do
             {
-                scanf(" %c",&validacion);
-                validacion=toupper(validacion);
-                if(validacion!=SI && validacion!=NO)
+                scanf(" %c",&opcion);
+                opcion=toupper(opcion);
+                if(opcion!=SI && opcion!=NO)
                     printf("OPCION INVALIDA. INGRESE NUEVAMENTE\n");
             }
-            while(validacion!=SI && validacion!=NO);
-            if(SI==validacion)
+            while(opcion!=SI && opcion!=NO);
+            if(SI==opcion)
             {
                 printf("_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_\n");
                 printf("   BIENVENIDO NUEVAMENTE %s!\n",usuario->nombreDeUsuario);
@@ -65,7 +78,7 @@ void identificarUsuario(tUsuario *usuario)
         }
 
     }
-    while( NO==validacion && NO_ENCONTRADO!=resultadoBusqueda);
+    while( NO==opcion && NO_ENCONTRADO!=resultadoBusqueda);
 
     if(NO_ENCONTRADO==resultadoBusqueda)
     {
@@ -73,10 +86,28 @@ void identificarUsuario(tUsuario *usuario)
         printf("        REGISTRO DE USUARIO\n");
         printf("====================================\n");
         printf("\nINGRESE SU NOMBRE: ");
-        scanf("%s",usuario->nombre);
+
+        do
+        {
+            fgets(cadValidacion, sizeof(cadValidacion), stdin);
+            validacion=leerCadena(cadValidacion,validarNombreApellido);
+            if(validacion==CADENA_INVALIDA)
+                printf("\n---NOMBRE DE USUARIO INVALIDO---\nINGRESE NUEVAMENTE: ");
+        }
+        while(validacion==CADENA_INVALIDA);
+        strcpy(usuario->nombre,cadValidacion);
+
         printf("\nINGRESE SU APELLIDO: ");
-        scanf("%s",usuario->apellido);
-        strcpy(usuario->nombreDeUsuario,indice.nombreDeUsuario);
+
+        do
+        {
+            fgets(cadValidacion, sizeof(cadValidacion), stdin);
+            validacion=leerCadena(cadValidacion,validarNombreApellido);
+            if(validacion==CADENA_INVALIDA)
+                printf("\n---NOMBRE DE USUARIO INVALIDO---\nINGRESE NUEVAMENTE: ");
+        }
+        while(validacion==CADENA_INVALIDA);
+        strcpy(usuario->apellido,cadValidacion);
 
         fflush(pfUsuarios);
         fseek(pfUsuarios,0,SEEK_END);
@@ -100,3 +131,53 @@ int compararUsuarios(const void *a, const void *b)
     return strcmp(ua->nombreDeUsuario,ub->nombreDeUsuario);
 }
 
+int validarUsuario(const char* usuario)
+{
+    if(*usuario == '\0')
+        return CADENA_INVALIDA;
+
+    while(*usuario)
+    {
+        if(!isalpha(*usuario) && !isdigit(*usuario) && *usuario != '_' && *usuario != '.')
+            return CADENA_INVALIDA;
+
+        usuario++;
+    }
+
+    return TODO_OK;
+}
+
+int validarNombreApellido(const char* texto)
+{
+    if(*texto == '\0')
+        return CADENA_INVALIDA;
+    while(*texto)
+    {
+        if(!isalpha(*texto) && *texto != ' ')
+            return CADENA_INVALIDA;
+
+        texto++;
+    }
+
+    return TODO_OK;
+}
+
+int leerCadena(char * cadena, int (*validarCad)(const char *))
+{
+    int validacion;
+    if(strchr(cadena, '\n') == NULL)
+    {
+        int c;
+        while((c = getchar()) != '\n' && c != EOF)
+            ;
+
+        printf("Demasiados caracteres.\n");
+        validacion = CADENA_INVALIDA;
+    }
+    else
+    {
+        cadena[strlen(cadena)-1] = '\0';
+        validacion = validarCad(cadena);
+    }
+    return validacion;
+}

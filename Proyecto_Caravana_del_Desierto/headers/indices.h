@@ -19,4 +19,7 @@ typedef struct
 void identificarUsuario(tUsuario *usuario);
 
 int compararUsuarios(const void *a, const void *b);
+int validarUsuario(const char* usuario);
+int validarNombreApellido(const char* texto);
+int leerCadena(char * cadena, int(*validarCad)(const char *));
 #endif // INDICES_H_INCLUDED
