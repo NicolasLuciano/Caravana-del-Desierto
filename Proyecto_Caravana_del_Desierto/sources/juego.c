@@ -1,5 +1,4 @@
 #include "../headers/lista.h"
-#include "../headers/archivos.h"
 #include "../headers/tablero.h"
 #include "../headers/bandido.h"
 #include "../headers/jugador.h"
@@ -20,26 +19,27 @@ int inicializarJuego(char * usuario)
 
     if(validarTablero(configuracion)==TABLERO_INVALIDO)
     {
-        printf("El tablero a generar es invalido\n");
+        fprintf(stderr,"El tablero a generar es invalido\n");
         return TABLERO_INVALIDO;
     }
 
     bandidos = crearBandidos(configuracion.cantBandidos);
     if(NULL == bandidos)
     {
-        printf("No hay memoria suficiente para iniciar la partida\n");
+        fprintf(stderr,"No hay memoria suficiente para iniciar la partida\n");
         return SIN_MEM;
     }
 
     if(SIN_MEM == generarTablero(&tablero, configuracion, bandidos))
     {
-        printf("No hay memoria suficiente para iniciar la partida\n");
+       fprintf(stderr,"No hay memoria suficiente para iniciar la partida\n");
         free(bandidos);
-        return SIN_MEM;
+        return SIN_MEM;;
     }
 
-    if(guardarTablero(&tablero,NOMARCH2)==ARCH_ERROR)
-        printf("No fue posible abrir el archivo %s", NOMARCH2);
+    if(guardarTablero(&tablero,NOMARCH2)!=TODO_OK)
+        return ARCH_ERROR;
+
 
     inicializarJugador(&jugador, configuracion.vidasIniciales);
 
@@ -57,93 +57,43 @@ int inicializarJuego(char * usuario)
 
 int verRanking()
 {
-    FILE * pf;
-    tPartida partida;
-    tRanking * vecJugador,*vecAux;
-    unsigned cantJugadores,capacidad;
-    int pos;
+    tRanking * vecRanking;
+    unsigned capacidad,cantJugadores;
+    int res;
 
     capacidad=JUGADORES_MAX;
-    vecJugador=malloc(sizeof(tRanking)*capacidad);
-    if(NULL==vecJugador)
+    vecRanking=malloc(sizeof(tRanking)*capacidad);
+    if(NULL==vecRanking)
     {
-        printf("No fue posible acceder al ranking");
+        fprintf(stderr,"Error: memoria insuficiente para crear el ranking\n");
         return SIN_MEM;
     }
-    pf=fopen(NOMARCH3,"rb");
-    if(pf==NULL)
+
+    res=cargarRanking(&vecRanking,NOMARCH3,capacidad,&cantJugadores);
+    if(res!=TODO_OK)
     {
-        printf("No fue posible abrir el archivo %s", NOMARCH3);
-        free(vecJugador);
-        return ARCH_ERROR;
+        free(vecRanking);
+        return res;
     }
 
-    cantJugadores=0;
-    while(fread(&partida,sizeof(tPartida),1,pf)==1)
-    {
-        pos=buscarJugador(partida.nombreDeUsuario,vecJugador,cantJugadores);
-        printf("%d\n", pos);
-        if(pos!=NO_ENCONTRADO)
-            (vecJugador+pos)->puntos+=partida.puntos;
-        else
-        {
-            if(cantJugadores==capacidad)
-            {
-                capacidad *=2;
-                vecAux=realloc(vecJugador, sizeof(tRanking)*capacidad);
-                if(vecAux == NULL)
-                {
-                    printf("No fue posible acceder al ranking");
-                    fclose(pf);
-                    free(vecJugador);
-                    return SIN_MEM;
-                }
-                vecJugador=vecAux;
-            }
-
-            strcpy((vecJugador+cantJugadores)->nombreDeUsuario,partida.nombreDeUsuario);
-            (vecJugador+cantJugadores)->puntos=partida.puntos;
-            cantJugadores++;
-        }
-    }
-    qsort(vecJugador,cantJugadores,sizeof(tRanking),compararRanking);
-    printf("---RANKING---\n");
-    mostrarVec(vecJugador,cantJugadores);
-
-    fclose(pf);
-    free(vecJugador);
+    qsort(vecRanking,cantJugadores,sizeof(tRanking),compararRanking);
+    printf("========================================\n");
+    printf("              RANKING\n");
+    printf("========================================\n\n");
+    mostrarVec(vecRanking,cantJugadores);
+    free(vecRanking);
     return TODO_OK;
 }
 
-int buscarJugador(char * clave, tRanking * vecJugador, unsigned cantJugadores)
-{
-    int pos;
-    unsigned i;
-
-    pos=NO_ENCONTRADO;
-    i=0;
-    while(pos==NO_ENCONTRADO && i<cantJugadores)
-    {
-        if(strcmp(clave,(vecJugador+i)->nombreDeUsuario)==0)
-            pos=i;
-        i++;
-    }
-    return pos;
-}
-
-int compararRanking(const void* a,const void* b)
-{
-    const tRanking* ranking_1=a;
-    const tRanking* ranking_2=b;
-
-    return ranking_2->puntos - ranking_1->puntos;
-}
-
-void mostrarVec(tRanking * vecJugador, unsigned cantJugadores)
+void mostrarVec(tRanking *vecJugador, unsigned cantJugadores)
 {
     unsigned i;
 
-    for(i=0;i<cantJugadores;i++)
-        printf("Jugador: %s\tPuntaje: %d\n",(vecJugador+i)->nombreDeUsuario,(vecJugador+i)->puntos);
+    printf("%-25s %-10s\n", "JUGADOR", "PUNTAJE");
+    printf("%-25s %-10s\n", "-------------------------", "----------");
 
+    for(i = 0; i < cantJugadores; i++)
+        printf("%-25s %-10u\n",
+               vecJugador[i].nombreDeUsuario,
+               vecJugador[i].puntos);
 }

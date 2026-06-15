@@ -3,23 +3,26 @@
 #include "../headers/constantesymacros.h"
 #include "../headers/arbol.h"
 
-int cargarConfig(const char* nombreArch, tConfig* configuracion)
+int cargarConfig(const char* nombreArchivo, tConfig* configuracion)
 {
-    FILE *fp;
-    fp=fopen(nombreArch, "rt");
-    if(!fp)
+    FILE *pf;
+    pf=fopen(nombreArchivo, "rt");
+    if(!pf)
+    {
+        perror(nombreArchivo);
         return ARCH_ERROR;
+    }
 
-    fscanf(fp, "cantidad_posiciones: %d\n", &configuracion->cantCasillas);
-    fscanf(fp, "vidas_inicio: %d\n", &configuracion->vidasIniciales);
-    fscanf(fp, "maximo_bandidos: %d\n", &configuracion->cantBandidos);
-    fscanf(fp, "maximo_premios: %d\n", &configuracion->cantPremios);
-    fscanf(fp, "maximo_vidas_extra: %d\n", &configuracion->cantVidasExtra);
-    fscanf(fp, "maximo_oasis: %d\n", &configuracion->cantOasis);
-    fscanf(fp, "maximo_tormentas: %d", &configuracion->cantTormentas);
+    fscanf(pf, "cantidad_posiciones: %d\n", &configuracion->cantCasillas);
+    fscanf(pf, "vidas_inicio: %d\n", &configuracion->vidasIniciales);
+    fscanf(pf, "maximo_bandidos: %d\n", &configuracion->cantBandidos);
+    fscanf(pf, "maximo_premios: %d\n", &configuracion->cantPremios);
+    fscanf(pf, "maximo_vidas_extra: %d\n", &configuracion->cantVidasExtra);
+    fscanf(pf, "maximo_oasis: %d\n", &configuracion->cantOasis);
+    fscanf(pf, "maximo_tormentas: %d", &configuracion->cantTormentas);
 
 
-    fclose(fp);
+    fclose(pf);
     return TODO_OK;
 }
 
@@ -28,8 +31,11 @@ int guardarPartida(tPartida partida, const char * nombreArchivo)
     FILE * pf;
 
     pf=fopen(nombreArchivo,"ab");
-    if(NULL==pf)
+    if(!pf)
+    {
+        perror(nombreArchivo);
         return ARCH_ERROR;
+    }
 
     fwrite(&partida, sizeof(tPartida), 1, pf);
     fclose(pf);
@@ -39,11 +45,14 @@ int guardarPartida(tPartida partida, const char * nombreArchivo)
 
 int guardarTablero(const tLista* tablero, const char* nombreArchivo)
 {
-    FILE* fp = fopen(nombreArchivo, "wt");
-    if(fp == NULL)
+    FILE* pf = fopen(nombreArchivo, "wt");
+    if(!pf)
+    {
+        perror(nombreArchivo);
         return ARCH_ERROR;
-    recorrerListaArchivo(tablero, fp, escribirCasilla);
-    fclose(fp);
+    }
+    recorrerListaArchivo(tablero, pf, escribirCasilla);
+    fclose(pf);
 
     return TODO_OK;
 }
@@ -83,7 +92,10 @@ int cargarIndices(tArbol *arbol,char *nombreArchivo)
     tIndice indice;
     fp = fopen(nombreArchivo,"rb");
     if(!fp)
+    {
+        perror(nombreArchivo);
         return ARCH_ERROR;
+    }
     while(fread(&indice,sizeof(indice),1,fp)==1)
         insertarArbol(arbol,&indice,sizeof(indice),compararUsuarios);
     fclose(fp);
@@ -95,6 +107,71 @@ int compararUsuarios(const void *a, const void *b)
     const tIndice *ua = (tIndice *)a;
     const tIndice *ub = (tIndice *)b;
     return strcmp(ua->nombreDeUsuario,ub->nombreDeUsuario);
+}
+int cargarRanking(tRanking ** vecRanking, char * nombreArchivo,unsigned capacidad, unsigned * cantJugadores)
+{
+    FILE * pf;
+    tRanking * vecAux;
+    tPartida partida;
+    int pos;
+
+    pf=fopen(nombreArchivo,"rb");
+    if(!pf)
+    {
+        perror(nombreArchivo);
+        return ARCH_ERROR;
+    }
+
+    (*cantJugadores)=0;
+    while(fread(&partida,sizeof(tPartida),1,pf)==1)
+    {
+        pos=buscarJugador(partida.nombreDeUsuario,*vecRanking,*cantJugadores);
+        if(pos!=NO_ENCONTRADO)
+            ((*vecRanking)+pos)->puntos+=partida.puntos;
+        else
+        {
+            if((*cantJugadores)==capacidad)
+            {
+                capacidad *=2;
+                vecAux=realloc((*vecRanking), sizeof(tRanking)*capacidad);
+                if(vecAux == NULL)
+                {
+                    fclose(pf);
+                    return SIN_MEM;
+                }
+                (*vecRanking)=vecAux;
+            }
+
+            strcpy(((*vecRanking)+(*cantJugadores))->nombreDeUsuario,partida.nombreDeUsuario);
+            ((*vecRanking)+ (*cantJugadores))->puntos=partida.puntos;
+            (*cantJugadores)++;
+        }
+    }
+    fclose(pf);
+    return TODO_OK;
+}
+int compararRanking(const void* a,const void* b)
+{
+    const tRanking* ranking_1=a;
+    const tRanking* ranking_2=b;
+
+    return ranking_2->puntos - ranking_1->puntos;
+}
+
+int buscarJugador(char * clave, tRanking * vecJugador, unsigned cantJugadores)
+{
+    int pos;
+    unsigned i;
+
+    pos=NO_ENCONTRADO;
+    i=0;
+    while(pos==NO_ENCONTRADO && i<cantJugadores)
+    {
+        if(strcmp(clave,(vecJugador+i)->nombreDeUsuario)==0)
+            pos=i;
+        i++;
+    }
+    return pos;
 }
 
 

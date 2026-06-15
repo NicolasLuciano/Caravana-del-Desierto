@@ -20,8 +20,8 @@ int main()
         switch(opcion = menu(MENSAJE_MENU, OPCIONES_MENU))
         {
         case 'R':
-            printf("Cargando Ranking...\n");
-            verRanking();
+            if(verRanking() != TODO_OK)
+                printf("No se pudo cargar el ranking. Volviendo al menu...\n");
             system("pause");
             break;
 
