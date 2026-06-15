@@ -56,9 +56,10 @@
 #define NOMARCH_USER "usuarios.bin"
 #define JUGADORES_MAX 50
 #define NO_ENCONTRADO -6
-///CONSTANTE DE INDICE
+///CONSTANTE DE INDICE/USUARIO
 #define SI 'S'
 #define NO 'N'
+#define CADENA_INVALIDA -14
 ///MACROS
 #define MIN(x,y)(x>y?y:x)
 
