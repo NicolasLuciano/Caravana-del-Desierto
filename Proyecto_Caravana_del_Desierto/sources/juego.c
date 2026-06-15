@@ -32,7 +32,7 @@ int inicializarJuego(char * usuario)
 
     if(SIN_MEM == generarTablero(&tablero, configuracion, bandidos))
     {
-       fprintf(stderr,"No hay memoria suficiente para iniciar la partida\n");
+        fprintf(stderr,"No hay memoria suficiente para iniciar la partida\n");
         free(bandidos);
         return SIN_MEM;;
     }
@@ -47,6 +47,11 @@ int inicializarJuego(char * usuario)
     system("pause");
     system("cls");
 
+    printf("Guardando partida:\n");
+    printf("Usuario: [%s]\n", partida.nombreDeUsuario);
+    printf("Puntos: %u\n", partida.puntos);
+    printf("Movimientos: %u\n", partida.movimientos);
+    printf("Resultado: %c\n", partida.resultado);
 
     guardarPartida(partida,NOMARCH3);
 
