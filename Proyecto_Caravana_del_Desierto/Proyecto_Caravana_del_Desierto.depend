@@ -29,7 +29,7 @@
 	"../headers/lista.h"
 	"../headers/constantesymacros.h"
 
-1781545135 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\main.c
+1781558370 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\main.c
 	"../headers/constantesymacros.h"
 	"../headers/menu.h"
 	"../headers/juego.h"
@@ -145,7 +145,7 @@
 	"arbol.h"
 	"ranking.h"
 
-1781535889 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\arbol.h
+1781558367 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\arbol.h
 
 1781550299 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\archivos.h
 	<stdlib.h>
@@ -484,14 +484,14 @@
 
 1781393005 c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\headers\config.h
 
-1781553050 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\indices.h
+1781557303 c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\headers\indices.h
 	"constantesymacros.h"
+	"arbol.h"
 
-1781554827 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\indices.c
+1781557325 source:c:\users\nahuel\desktop\caravana\caravana-del-desierto\proyecto_caravana_del_desierto\sources\indices.c
 	<stdio.h>
 	<string.h>
 	"../headers/indices.h"
-	"../headers/arbol.h"
 	"../headers/archivos.h"
 	<ctype.h>
 

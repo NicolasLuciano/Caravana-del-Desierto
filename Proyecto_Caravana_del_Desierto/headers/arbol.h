@@ -15,5 +15,6 @@ void crearArbol(tArbol *arbol);
 //void recorrerInOrden(tArbol *arbol, void(*accion)(void*,unsigned));
 int insertarArbol(tArbol *arbol,void *dato,unsigned tam, int(*cmp)(const void*,const void*));
 int buscarEnArbol(tArbol *arbol,void *dato,unsigned tam, int(*cmp)(const void*,const void*));
+int cargarVectorInOrden(tArbol *arbol,void **vec,unsigned *pos, unsigned tam, unsigned *capacidad);
 
 #endif // ARBOL_H_INCLUDED

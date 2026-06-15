@@ -51,7 +51,7 @@
 #define NOMBRE_TAM 30
 #define APELLIDO_TAM 30
 #define NOMARCH2 "caravana.txt"
-#define NOMARCH3 "partidas.bin"
+#define nombreArchivo_Par "partidas.bin"
 #define NOMARCH_INDEX "indice.bin"
 #define NOMARCH_USER "usuarios.bin"
 #define JUGADORES_MAX 50

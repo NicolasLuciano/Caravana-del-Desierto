@@ -2,6 +2,7 @@
 #include "../headers/lista.h"
 #include "../headers/constantesymacros.h"
 #include "../headers/indices.h"
+#include "../headers/arbol.h"
 
 int cargarConfig(const char* nombreArchivo, tConfig* configuracion)
 {
@@ -114,7 +115,7 @@ int cargarRanking(tRanking ** vecRanking, char * nombreArchivo,unsigned capacida
 
 
     (*cantJugadores)=0;
-    cargarVectorInOrden(arbol,**vecRanking,sizeof(tRanking),capacidad);
+    cargarVectorInOrden(arbol,vecRanking,0,sizeof(tRanking),&capacidad);
 
 
     pfPartida=fopen(nombreArchivo_Par,"rb");

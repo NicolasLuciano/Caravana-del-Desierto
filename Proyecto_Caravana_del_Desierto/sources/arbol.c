@@ -9,14 +9,29 @@ void crearArbol(tArbol *arbol)
     *arbol = NULL;
 }
 
-int cargarVectorInOrden(tArbol arbol,void * dato,unsigned tam)
+int cargarVectorInOrden(tArbol *arbol,void **vec,unsigned *pos, unsigned tam, unsigned *capacidad)
 {
-    if(!*arbol)
-        return;
-    recorrerInOrden(&(*arbol)->nodoIzq, accion);
-    accion((*arbol)->dato,(*arbol)->tam);
-    recorrerInOrden(&(*arbol)->nodoDer, accion);
+    if(!(*arbol))
+        return TODO_OK;
+    if(cargarVectorInOrden(&(*arbol)->nodoIzq,vec,pos,tam,capacidad)!=TODO_OK)
+        return SIN_MEM;
 
+    if(*pos>=*capacidad)
+    {
+        void *aux;
+        *capacidad = *capacidad *2;
+        aux = realloc(*vec, *capacidad * tam);
+        if(!aux)
+            return SIN_MEM;
+        *vec = aux;
+    }
+
+    memcpy((char*)*vec + (*pos) * tam,(*arbol)->dato,tam);
+    (*pos)++;
+
+     if(cargarVectorInOrden(&(*arbol)->nodoDer,vec,pos,tam,capacidad)!=TODO_OK)
+        return SIN_MEM;
+    return TODO_OK;
 }
 
 int buscarEnArbol(tArbol *arbol,void *dato,unsigned tam, int(*cmp)(const void*,const void*))
