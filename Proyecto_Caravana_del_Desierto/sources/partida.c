@@ -35,14 +35,12 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
         mostrarPantalla(*tablero,jugador,cantCasillas,proteccion);
 
 
-        if(PIERDE_TURNO==pierdeTurno)
+        if(NO_PIERDE_TURNO==pierdeTurno)
+            dado=resolverDadoJugador(&posJugador,&direccion,&casillaAct);
+        else
         {
             dado=0;
             pierdeTurno=NO_PIERDE_TURNO;
-        }
-        else
-        {
-            dado=resolverDadoJugador(&posJugador,&direccion,&casillaAct);
         }
 
         encolarJugador(&posJugador,casillaAct,&colaTurno,&colaRegistro,direccion,dado,cantCasillas, &(partida->movimientos));
@@ -52,18 +50,30 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
     }
 
     partida->puntos = jugador->puntos;
-    //strcpy(partida.nombreDeUsuario,jugador->usuario.nombreDeUsuario);
+
     if(jugador->vidas<=0)
-    {
-        printf("\n\nTE QUEDASTE SIN RECURSOS. LOS BANDIDOS SON IMPARABLES!\n\n");
-        printf("\n\n--------GAME OVER--------\n\n");
         partida->resultado = DERROTA;
+    else
+    {
+        casillaAct.jugador=HAY_JUGADOR;
+        modificarEnPosLista(&posJugador,0,&casillaAct,sizeof(tCasilla));
+        partida->resultado = VICTORIA;
+    }
+    finalizarPartida(tablero,*jugador,*partida,proteccion,cantCasillas);
+}
+
+void finalizarPartida(tLista *tablero,tJugador jugador,tPartida partida, tProteccion proteccion, unsigned cantCasillas)
+{
+    mostrarPantalla(*tablero,&jugador,cantCasillas,proteccion);
+    if(VICTORIA==partida.resultado)
+    {
+        printf("\n\nFELICITACIONES. LLEGASTE SANO Y SALVO A LA CIUDAD REFUGIO\n\n");
+        printf("\n\t--------VICTORIA--------\n\n");
     }
     else
     {
-        printf("\n\nFELICITACIONES. LLEGASTE SANO Y SALVO A LA CIUDAD REFUGIO\n\n");
-        printf("\n\n--------VICTORIA--------\n\n");
-        partida->resultado = VICTORIA;
+        printf("\n\nTE QUEDASTE SIN RECURSOS. LOS BANDIDOS SON IMPARABLES!\n\n");
+        printf("\n\t--------GAME OVER--------\n");
     }
     system("pause");
 }
@@ -72,7 +82,7 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
 {
     tMovimiento mov;
     tCasilla casillaBandido;
-    unsigned i,contBandido, colision, bandidoColision;
+    unsigned i,j,contBandido, colision, bandidoColision;
 
     colision=SIN_COLISION;
 
@@ -89,7 +99,7 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
     {
         casillaAct->bandido=SIN_BANDIDO;
         bandidoColision=0;
-        while(bandidoColision<cantBandidos && compararLista(posJugador,&(bandidos+bandidoColision)->posicion)==0)
+        while(bandidoColision<cantBandidos && !hayColision((bandidos+bandidoColision),posJugador))//compararLista(posJugador,&(bandidos+bandidoColision)->posicion)==0
             bandidoColision++;
         if(NO_PROTEGIDO==proteccion->proteccionActual)
         {
@@ -101,6 +111,7 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
         }
         else
             proteccion->proteccionActual=NO_PROTEGIDO;
+        (bandidos+bandidoColision)->vivo=MUERTO;
 
     }
     else
@@ -150,13 +161,27 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
                 modificarEnPosLista(&(bandidos+contBandido)->posicion,0,&casillaBandido,sizeof(tCasilla));
                 if(NO_PROTEGIDO==proteccion->proteccionActual)
                 {
-                    if(colision==SIN_COLISION) //Si hubo colision, significa que el jugador esta en el inicio, asique si hay una segunda colision en el inicio, solo mato al bandido
+                    if(SIN_COLISION==colision) //jugador en cualquier lado
                     {
                         printf("\nLOS BANDIDOS TE ATRAPARON! REGRESAS AL INICIO [-1 VIDA]\n");
                         recibirDmg(tablero,posJugador,casillaAct,jugador);
                         colision=HAY_COLISION;
+                        if(HAY_BANDIDO==casillaAct->bandido)
+                        {
+                            j=0;
+                            while(j<contBandido && !hayColision((bandidos+j),posJugador))
+                                j++;
+                            (bandidos+j)->vivo=MUERTO;
+                            mostrarPantalla(tablero,jugador,cantCasillas,*proteccion);
+                            casillaAct->bandido=SIN_BANDIDO;
+                            modificarEnPosLista(posJugador, 0, casillaAct, sizeof(tCasilla));
+                            printf("\nUN BANDIDO TE ESTABA ESPERANDO EN TU CAMPAMENTO.\n");
+                            printf("SIENTE LASTIMA POR TI Y SE VA\n");
+                            system("pause");
+
+                        }
                     }
-                    else
+                    else //jugador si o si en el inicio (recibio danio en este turno)
                     {
                         printf("LOS BANDIDOS TE ENCONTRARON PERO TE REFUGIAS EN TU CAMPAMENTO - LOS BANDIDOS SE CANSAN Y SE VAN.\n\n");
                     }
@@ -210,6 +235,7 @@ void recibirDmg(tLista tablero, tLista *posJugador, tCasilla * casillaAct, tJuga
 
     jugador->vidas--;
 }
+
 
 void moverBandido(tBandido *bandidos, tCasilla *casilla,tMovimiento mov,unsigned posBandido, unsigned cantBandidos)
 {
