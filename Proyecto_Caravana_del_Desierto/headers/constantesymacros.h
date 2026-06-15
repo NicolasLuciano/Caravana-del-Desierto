@@ -46,12 +46,12 @@
 #define TABLERO_INVALIDO -7
 ///CONSTANTES DE ARCHIVOS
 #define ARCH_ERROR -8
-#define NOMARCH "config.txt"
 #define NOMBRE_DE_USUARIO_TAM 30
 #define NOMBRE_TAM 30
 #define APELLIDO_TAM 30
-#define NOMARCH2 "caravana.txt"
-#define nombreArchivo_Par "partidas.bin"
+#define NOMARCH_CONFIG "config.txt"
+#define NOMARCH_CARAVANA "caravana.txt"
+#define NOMARCH_PARTIDA "partidas.bin"
 #define NOMARCH_INDEX "indice.bin"
 #define NOMARCH_USER "usuarios.bin"
 #define JUGADORES_MAX 50

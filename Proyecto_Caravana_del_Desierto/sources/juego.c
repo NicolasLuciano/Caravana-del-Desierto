@@ -14,7 +14,7 @@ int inicializarJuego(char * usuario)
     tPartida partida;
 
     crearLista(&tablero);
-    cargarConfig(NOMARCH, &configuracion);
+    cargarConfig(NOMARCH_CONFIG, &configuracion);
     strcpy(partida.nombreDeUsuario,usuario);
     if(validarTablero(configuracion)==TABLERO_INVALIDO)
     {
@@ -36,7 +36,7 @@ int inicializarJuego(char * usuario)
         return SIN_MEM;;
     }
 
-    if(guardarTablero(&tablero,NOMARCH2)!=TODO_OK)
+    if(guardarTablero(&tablero,NOMARCH_CARAVANA)!=TODO_OK)
         return ARCH_ERROR;
 
 
@@ -45,7 +45,7 @@ int inicializarJuego(char * usuario)
     empezarPartida(&tablero,&jugador,bandidos, configuracion.cantCasillas,configuracion.cantBandidos,&partida);
     system("cls");
 
-    guardarPartida(partida,NOMARCH3);
+    guardarPartida(partida,NOMARCH_PARTIDA);
 
     free(bandidos);
     vaciarLista(&tablero);
@@ -66,7 +66,7 @@ int verRanking(tArbol * arbol)
         return SIN_MEM;
     }
 
-    res=cargarRanking(&vecRanking,NOMARCH3,capacidad,&cantJugadores,arbol);
+    res=cargarRanking(&vecRanking,NOMARCH_PARTIDA,capacidad,&cantJugadores,arbol);
     if(res!=TODO_OK)
     {
         free(vecRanking);

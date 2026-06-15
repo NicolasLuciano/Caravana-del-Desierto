@@ -106,20 +106,19 @@ int cargarIndices(tArbol *arbol,char *nombreArchivo)
 
 int cargarRanking(tRanking ** vecRanking, char * nombreArchivo,unsigned capacidad, unsigned * cantJugadores, tArbol * arbol)
 {
-    FILE * pfPartida,*pfJugadores;
+    FILE * pf;
     tRanking * vecAux;
     tPartida partida;
-    tUsuario usuario;
     int pos;
 
 
 
     (*cantJugadores)=0;
-    cargarVectorInOrden(arbol,vecRanking,0,sizeof(tRanking),&capacidad);
+    cargarVectorInOrden(arbol,(void**)vecRanking,0,sizeof(tRanking),&capacidad);
 
 
-    pfPartida=fopen(nombreArchivo_Par,"rb");
-    if(!pfPartida)
+    pf=fopen(NOMARCH_PARTIDA,"rb");
+    if(!pf)
     {
         perror(nombreArchivo);
         return ARCH_ERROR;
