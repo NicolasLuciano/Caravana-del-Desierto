@@ -25,21 +25,18 @@ void identificarUsuario(tUsuario *usuario)
         perror(NOMARCH_INDEX);
         return;
     }
-
+    crearArbol(&arbol);
     cargarIndices(&arbol,NOMARCH_INDEX);
-    rewind(pfIndice);
-
+    validacion=NO;
     do
     {
         printf("INGRESE NOMBRE DE USUARIO: ");
         scanf("%s", indice.nombreDeUsuario);
         resultadoBusqueda=buscarEnArbol(&arbol,&indice,sizeof(indice),compararUsuarios);
-        printf("-->%d",resultadoBusqueda);
-        system("pause");
 
         if(NO_ENCONTRADO!=resultadoBusqueda)
         {
-            fseek(pfUsuarios,indice.numRegistro,SEEK_SET);
+            fseek(pfUsuarios,indice.numRegistro * sizeof(tUsuario),SEEK_SET);
 
             fread(usuario,sizeof(tUsuario),1,pfUsuarios);
             printf("SOS %s %s? SI(S)/NO(N)", usuario->nombre, usuario->apellido);
@@ -56,12 +53,10 @@ void identificarUsuario(tUsuario *usuario)
         }
 
     }
-    while(NO_ENCONTRADO==resultadoBusqueda && NO==validacion);
+    while( NO==validacion && NO_ENCONTRADO!=resultadoBusqueda);
 
     if(NO_ENCONTRADO==resultadoBusqueda)
     {
-
-
         printf("BIENVENIDO %s POR FAVOR INGRESE SU NOMBRE: ",indice.nombreDeUsuario);
         scanf("%s",usuario->nombre);
         printf("\nINGRESE SU APELLIDO: ");
@@ -69,9 +64,10 @@ void identificarUsuario(tUsuario *usuario)
         strcpy(usuario->nombreDeUsuario,indice.nombreDeUsuario);
 
         fflush(pfUsuarios);
+        fseek(pfUsuarios,0,SEEK_END);
+        indice.numRegistro = ftell(pfUsuarios) / sizeof(tUsuario);
+
         fwrite(usuario,sizeof(*usuario),1,pfUsuarios);
-        fseek(pfUsuarios,-1,SEEK_CUR);
-        indice.numRegistro = ftell(pfUsuarios)/sizeof(tUsuario);
 
         fflush(pfIndice);
         fwrite(&indice,sizeof(indice),1,pfIndice);
