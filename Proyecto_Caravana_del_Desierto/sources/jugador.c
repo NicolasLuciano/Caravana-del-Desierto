@@ -9,11 +9,11 @@ void inicializarJugador(tJugador * jugador, int vidasInicio)
     jugador->puntos = 0;
 }
 
-void encolarJugador(tLista *posJugador, tCasilla casillaAct, tCola *colaTurno, tCola *colaRegistro, int direccion, unsigned dado,unsigned cantCasillas, unsigned *movimientos){
+void encolarJugador(tLista *posJugador, tCasilla casillaAct, tCola *colaTurno, tCola *colaRegistro, int direccion, unsigned dado,unsigned cantCasillas, unsigned *movimientos)
+{
     unsigned pasosAdelante, pasosAtras;
     tMovimiento movJugador;
-
-    if(casillaAct.numCasilla+dado >cantCasillas)
+    if(ADELANTE==direccion && casillaAct.numCasilla+dado >cantCasillas)
     {
         pasosAdelante=cantCasillas-casillaAct.numCasilla;
         pasosAtras=dado-pasosAdelante;
