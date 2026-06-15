@@ -82,6 +82,7 @@ int verRanking()
     while(fread(&partida,sizeof(tPartida),1,pf)==1)
     {
         pos=buscarJugador(partida.nombreDeUsuario,vecJugador,cantJugadores);
+        printf("%d\n", pos);
         if(pos!=NO_ENCONTRADO)
             (vecJugador+pos)->puntos+=partida.puntos;
         else
@@ -121,7 +122,7 @@ int buscarJugador(char * clave, tRanking * vecJugador, unsigned cantJugadores)
 
     pos=NO_ENCONTRADO;
     i=0;
-    while(pos==-1 && i<cantJugadores)
+    while(pos==NO_ENCONTRADO && i<cantJugadores)
     {
         if(strcmp(clave,(vecJugador+i)->nombreDeUsuario)==0)
             pos=i;
