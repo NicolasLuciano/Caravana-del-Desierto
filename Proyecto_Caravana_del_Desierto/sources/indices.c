@@ -3,6 +3,7 @@
 #include "../headers/indices.h"
 #include "../headers/arbol.h"
 #include "../headers/archivos.h"
+#include <ctype.h>
 void identificarUsuario(tUsuario *usuario)
 {
     FILE *pfIndice, *pfUsuarios;
@@ -28,8 +29,13 @@ void identificarUsuario(tUsuario *usuario)
     crearArbol(&arbol);
     cargarIndices(&arbol,NOMARCH_INDEX);
     validacion=NO;
+
     do
     {
+        system("cls");
+        printf("\n====================================\n");
+        printf("         INICIO DE SESION\n");
+        printf("====================================\n");
         printf("INGRESE NOMBRE DE USUARIO: ");
         scanf("%s", indice.nombreDeUsuario);
         resultadoBusqueda=buscarEnArbol(&arbol,&indice,sizeof(indice),compararUsuarios);
@@ -39,17 +45,23 @@ void identificarUsuario(tUsuario *usuario)
             fseek(pfUsuarios,indice.numRegistro * sizeof(tUsuario),SEEK_SET);
 
             fread(usuario,sizeof(tUsuario),1,pfUsuarios);
-            printf("SOS %s %s? SI(S)/NO(N)", usuario->nombre, usuario->apellido);
+            printf("\nUSUARIO ENCONTRADO.\n");
+            printf("SOS %s %s? (S/N)", usuario->nombre, usuario->apellido);
             do
             {
                 scanf(" %c",&validacion);
+                validacion=toupper(validacion);
                 if(validacion!=SI && validacion!=NO)
                     printf("OPCION INVALIDA. INGRESE NUEVAMENTE\n");
             }
             while(validacion!=SI && validacion!=NO);
             if(SI==validacion)
-                printf("BIENVENIDO NUEVAMENTE %s!\n",usuario->nombreDeUsuario);
-            system("pause");
+            {
+                printf("_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_\n");
+                printf("   BIENVENIDO NUEVAMENTE %s!\n",usuario->nombreDeUsuario);
+                printf("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\n");
+                system("pause");
+            }
         }
 
     }
@@ -57,7 +69,10 @@ void identificarUsuario(tUsuario *usuario)
 
     if(NO_ENCONTRADO==resultadoBusqueda)
     {
-        printf("BIENVENIDO %s POR FAVOR INGRESE SU NOMBRE: ",indice.nombreDeUsuario);
+        printf("\n\n====================================\n");
+        printf("        REGISTRO DE USUARIO\n");
+        printf("====================================\n");
+        printf("\nINGRESE SU NOMBRE: ");
         scanf("%s",usuario->nombre);
         printf("\nINGRESE SU APELLIDO: ");
         scanf("%s",usuario->apellido);
