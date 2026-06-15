@@ -87,12 +87,13 @@ void identificarUsuario(tUsuario *usuario)
         printf("====================================\n");
         printf("\nINGRESE SU NOMBRE: ");
 
+        strcpy(usuario->nombreDeUsuario,indice.nombreDeUsuario);
         do
         {
             fgets(cadValidacion, sizeof(cadValidacion), stdin);
             validacion=leerCadena(cadValidacion,validarNombreApellido);
             if(validacion==CADENA_INVALIDA)
-                printf("\n---NOMBRE DE USUARIO INVALIDO---\nINGRESE NUEVAMENTE: ");
+                printf("\n---NOMBRE INVALIDO---\nINGRESE NUEVAMENTE: ");
         }
         while(validacion==CADENA_INVALIDA);
         strcpy(usuario->nombre,cadValidacion);
@@ -104,7 +105,7 @@ void identificarUsuario(tUsuario *usuario)
             fgets(cadValidacion, sizeof(cadValidacion), stdin);
             validacion=leerCadena(cadValidacion,validarNombreApellido);
             if(validacion==CADENA_INVALIDA)
-                printf("\n---NOMBRE DE USUARIO INVALIDO---\nINGRESE NUEVAMENTE: ");
+                printf("\n---APELLIDO INVALIDO---\nINGRESE NUEVAMENTE: ");
         }
         while(validacion==CADENA_INVALIDA);
         strcpy(usuario->apellido,cadValidacion);

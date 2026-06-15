@@ -16,7 +16,6 @@ int inicializarJuego(char * usuario)
     crearLista(&tablero);
     cargarConfig(NOMARCH, &configuracion);
     strcpy(partida.nombreDeUsuario,usuario);
-
     if(validarTablero(configuracion)==TABLERO_INVALIDO)
     {
         fprintf(stderr,"El tablero a generar es invalido\n");
@@ -45,12 +44,6 @@ int inicializarJuego(char * usuario)
 
     empezarPartida(&tablero,&jugador,bandidos, configuracion.cantCasillas,configuracion.cantBandidos,&partida);
     system("cls");
-
-    printf("Guardando partida:\n");
-    printf("Usuario: [%s]\n", partida.nombreDeUsuario);
-    printf("Puntos: %u\n", partida.puntos);
-    printf("Movimientos: %u\n", partida.movimientos);
-    printf("Resultado: %c\n", partida.resultado);
 
     guardarPartida(partida,NOMARCH3);
 
