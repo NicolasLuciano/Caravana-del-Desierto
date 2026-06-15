@@ -4,6 +4,7 @@
 #include "../headers/jugador.h"
 #include "../headers/partida.h"
 #include "../headers/juego.h"
+#include "../headers/indices.h"
 
 int inicializarJuego(char * usuario)
 {
@@ -52,33 +53,46 @@ int inicializarJuego(char * usuario)
     return TODO_OK;
 }
 
-int verRanking(tArbol * arbol)
+int verRanking()
 {
     tRanking * vecRanking;
-    unsigned capacidad,cantJugadores;
+    unsigned cantActual,cantJugadores;
     int res;
+    FILE * pfUsuario;
 
-    capacidad=JUGADORES_MAX;
-    vecRanking=malloc(sizeof(tRanking)*capacidad);
+    pfUsuario=fopen(NOMARCH_USER,"rb");
+    if(!pfUsuario)
+    {
+        perror(NOMARCH_USER);
+        return ARCH_ERROR;
+    }
+    fseek(pfUsuario,0,SEEK_END);
+
+    cantJugadores=ftell(pfUsuario)/sizeof(tUsuario);
+
+    vecRanking=malloc(sizeof(tRanking)*cantJugadores);
     if(NULL==vecRanking)
     {
         fprintf(stderr,"Error: memoria insuficiente para crear el ranking\n");
+        fclose(pfUsuario);
         return SIN_MEM;
     }
-
-    res=cargarRanking(&vecRanking,NOMARCH_PARTIDA,capacidad,&cantJugadores,arbol);
+    cantActual=0;
+    res=cargarRanking(vecRanking,NOMARCH_PARTIDA,&cantActual);
     if(res!=TODO_OK)
     {
         free(vecRanking);
         return res;
     }
 
-    qsort(vecRanking,cantJugadores,sizeof(tRanking),compararRanking);
+    qsort(vecRanking,cantActual,sizeof(tRanking),compararRanking);
     printf("========================================\n");
     printf("              RANKING\n");
     printf("========================================\n\n");
-    mostrarVec(vecRanking,cantJugadores);
+    mostrarVec(vecRanking,cantActual);
+
     free(vecRanking);
+    fclose(pfUsuario);
     return TODO_OK;
 }
 

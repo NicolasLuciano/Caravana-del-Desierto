@@ -11,7 +11,7 @@
 #include "ranking.h"
 
 int cargarConfig(const char* nombreArch, tConfig* configuracion);
-int cargarRanking(tRanking ** vecRanking, char * nombreArchivo,unsigned capacidad, unsigned * cantJugadores, tArbol * arbol);
+int cargarRanking(tRanking * vecRanking, char * arch_partida,unsigned * cantActual);
 int cargarIndices(tArbol *arbol,char *nombreArchivo);
 void generaraArchivoTablero();
 int guardarTablero(const tLista* tablero, const char* nombreArchivo);

@@ -104,51 +104,32 @@ int cargarIndices(tArbol *arbol,char *nombreArchivo)
 }
 
 
-int cargarRanking(tRanking ** vecRanking, char * nombreArchivo,unsigned capacidad, unsigned * cantJugadores, tArbol * arbol)
+int cargarRanking(tRanking * vecRanking, char * arch_partida,unsigned * cantActual)
 {
-    FILE * pf;
-    tRanking * vecAux;
+    FILE * pfPartida;
     tPartida partida;
     int pos;
 
-
-
-    (*cantJugadores)=0;
-    cargarVectorInOrden(arbol,(void**)vecRanking,0,sizeof(tRanking),&capacidad);
-
-
-    pf=fopen(NOMARCH_PARTIDA,"rb");
-    if(!pf)
+    pfPartida=fopen(arch_partida,"rb");
+    if(!pfPartida)
     {
-        perror(nombreArchivo);
+        perror(arch_partida);
         return ARCH_ERROR;
     }
 
-    while(fread(&partida,sizeof(tPartida),1,pf)==1)
+    while(fread(&partida,sizeof(tPartida),1,pfPartida)==1)
     {
-        pos=buscarJugador(partida.nombreDeUsuario,*vecRanking,*cantJugadores);
+        pos=buscarJugador(partida.nombreDeUsuario,vecRanking,*cantActual);
         if(pos!=NO_ENCONTRADO)
-            ((*vecRanking)+pos)->puntos+=partida.puntos;
+            (vecRanking+pos)->puntos+=partida.puntos;
         else
         {
-            if((*cantJugadores)==capacidad)
-            {
-                capacidad *=2;
-                vecAux=realloc((*vecRanking), sizeof(tRanking)*capacidad);
-                if(vecAux == NULL)
-                {
-                    fclose(pf);
-                    return SIN_MEM;
-                }
-                (*vecRanking)=vecAux;
-            }
-
-            strcpy(((*vecRanking)+(*cantJugadores))->nombreDeUsuario,partida.nombreDeUsuario);
-            ((*vecRanking)+ (*cantJugadores))->puntos=partida.puntos;
-            (*cantJugadores)++;
+            strcpy((vecRanking+(*cantActual))->nombreDeUsuario,partida.nombreDeUsuario);
+            (vecRanking+ (*cantActual))->puntos=partida.puntos;
+            (*cantActual)++;
         }
     }
-    fclose(pf);
+    fclose(pfPartida);
     return TODO_OK;
 }
 
