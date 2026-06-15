@@ -19,6 +19,23 @@ void recorrerInOrden(tArbol *arbol, void(*accion)(void*,unsigned))
 
 }
 
+int buscarEnArbol(tArbol *arbol,void *dato,unsigned tam, int(*cmp)(void*,void*))
+{
+    int comp;
+    if(!*arbol)
+        return NO_ENCONTRADO;
+    comp =cmp(dato,(*arbol)->dato);
+    if(0==comp)
+    {
+        memcpy(dato,(*arbol)->dato,MIN(tam,(*arbol)->tam));
+        return TODO_OK;
+    }
+    if(comp<0)
+        return buscarEnArbol(&(*arbol)->nodoIzq,dato,tam,cmp);
+
+    return buscarEnArbol(&(*arbol)->nodoDer,dato,tam,cmp);
+}
+
 int insertarArbol(tArbol *arbol,void *dato,unsigned tam, int(*cmp)(void*,void*))
 {
     if(!*arbol)
