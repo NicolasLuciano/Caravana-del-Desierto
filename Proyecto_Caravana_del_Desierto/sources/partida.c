@@ -101,7 +101,7 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
         bandidoColision=0;
         while(bandidoColision<cantBandidos && !hayColision((bandidos+bandidoColision),posJugador))//compararLista(posJugador,&(bandidos+bandidoColision)->posicion)==0
             bandidoColision++;
-        if(NO_PROTEGIDO==proteccion->proteccionActual)
+        if(NO_PROTEGIDO==proteccion->proteccionActual) //SI NO ESTA PROTEGIDO, EL JUGADOR MUERE
         {
             mostrarPantalla(tablero,jugador,cantCasillas,*proteccion);
             printf("\nLOS BANDIDOS TE ATRAPARON! REGRESAS AL INICIO [-1 VIDA]\n");
@@ -110,7 +110,7 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
             colision=HAY_COLISION;
         }
         else
-            proteccion->proteccionActual=NO_PROTEGIDO;
+            proteccion->proteccionActual=NO_PROTEGIDO;//SI ESTA PROTEGIDO, PASA A PERDER LA PROTECCION
         (bandidos+bandidoColision)->vivo=MUERTO;
 
     }
@@ -161,12 +161,12 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
                 modificarEnPosLista(&(bandidos+contBandido)->posicion,0,&casillaBandido,sizeof(tCasilla));
                 if(NO_PROTEGIDO==proteccion->proteccionActual)
                 {
-                    if(SIN_COLISION==colision) //jugador en cualquier lado
+                    if(SIN_COLISION==colision) //SI NO HUBO UNA COLISION PREVIA, SIGNIFICA QUE EL JUGADOR NO ESTA EN EL INICIO, ENTONCES MUERE
                     {
                         printf("\nLOS BANDIDOS TE ATRAPARON! REGRESAS AL INICIO [-1 VIDA]\n");
                         recibirDmg(tablero,posJugador,casillaAct,jugador);
                         colision=HAY_COLISION;
-                        if(HAY_BANDIDO==casillaAct->bandido)
+                        if(HAY_BANDIDO==casillaAct->bandido) //SI OCURRE QUE UN BANDIDO DE LA COLA SE MOVIO PREVIAMENTE A LA SALIDA CUANDO EL JUGADOR VUELVE, TENGO QUE SABER CUAL FUE PARA MATARLO
                         {
                             j=0;
                             while(j<contBandido && !hayColision((bandidos+j),posJugador))
@@ -181,7 +181,7 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
 
                         }
                     }
-                    else //jugador si o si en el inicio (recibio danio en este turno)
+                    else //SI HUBO UNA COLISION PREVIA, SIGNIFICA QUE EL JUGADOR ESTA EN EL INICIO, ENTONCES NO MUERE, PERO EL BANDIDO SI
                     {
                         printf("LOS BANDIDOS TE ENCONTRARON PERO TE REFUGIAS EN TU CAMPAMENTO - LOS BANDIDOS SE CANSAN Y SE VAN.\n\n");
                     }
@@ -194,7 +194,7 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
         }
         else
         {
-            if(contBandido==bandidoColision)
+            if(contBandido==bandidoColision) //SI EL BANDIDO ESTA MUERTO, PREGUNTO SI ES EL QUE COLISIONO CON EL JUGADOR EN ESTE TURNO PARA SACARLO DE LA COLA
                 sacarDeCola(colaTurno, &mov, sizeof(tMovimiento));
         }
         contBandido++;
