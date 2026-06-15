@@ -21,7 +21,7 @@ char menu(const char* msj, const char* opciones)
     return clave;
 }
 
-void identificarUsuario(tUsuario* usuario)
+/*void identificarUsuario(tUsuario* usuario)
 {
     char nombreUsuario[NOMBRE_DE_USUARIO_TAM];
 
@@ -43,6 +43,8 @@ void identificarUsuario(tUsuario* usuario)
     }
     else
     {
+        pf = fopen("usuarios.dat","ab");
+
         printf("Usuario inexistente.\n");
         printf("Ingrese nombre: ");
         printf("Ingrese apellido: ");
@@ -52,4 +54,4 @@ void identificarUsuario(tUsuario* usuario)
         nroRegistro = ftell(pf)/sizeof(tUsuario)-1;
 
     }
-}
+}*/
