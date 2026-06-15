@@ -21,6 +21,7 @@ char menu(const char* msj, const char* opciones)
     return clave;
 }
 
+<<<<<<< HEAD
 //void identificarUsuario(tUsuario* usuario)
 //{
 //    char nombreUsuario[NOMBRE_DE_USUARIO_TAM];
@@ -53,3 +54,39 @@ char menu(const char* msj, const char* opciones)
 //
 //    }
 //}
+=======
+/*void identificarUsuario(tUsuario* usuario)
+{
+    char nombreUsuario[NOMBRE_DE_USUARIO_TAM];
+
+    printf("Ingrese nombre de usuario: ");
+    scanf("%s", nombreUsuario);
+
+    buscarIndice(arbol, "luciano");
+    //devuelve numRegistro de luciano
+
+    if(existe)
+    {
+        pf = fopen("usuarios.dat","rb");
+        fseek(pf,numRegistro * sizeof(tUsuario),SEEK_SET);
+
+        printf("Usuario encontrado:\n");
+        printf("%s %s\n", usuario->nombre, usuario->apellido);
+
+        printf("Es usted? (S/N): ");
+    }
+    else
+    {
+        pf = fopen("usuarios.dat","ab");
+
+        printf("Usuario inexistente.\n");
+        printf("Ingrese nombre: ");
+        printf("Ingrese apellido: ");
+
+        fseek(pf,0,SEEK_END);
+        fwrite(&nuevo,sizeof(tUsuario),1,pf);
+        nroRegistro = ftell(pf)/sizeof(tUsuario)-1;
+
+    }
+}*/
+>>>>>>> 902a0e04cb75147652737b584232edc8f705c1c1
