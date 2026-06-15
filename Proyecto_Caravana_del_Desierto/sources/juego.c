@@ -70,7 +70,6 @@ int verRanking()
         printf("No fue posible acceder al ranking");
         return SIN_MEM;
     }
-
     pf=fopen(NOMARCH3,"rb");
     if(pf==NULL)
     {
@@ -87,7 +86,7 @@ int verRanking()
             (vecJugador+pos)->puntos+=partida.puntos;
         else
         {
-            if(cantJugadores==JUGADORES_MAX)
+            if(cantJugadores==capacidad)
             {
                 capacidad *=2;
                 vecAux=realloc(vecJugador, sizeof(tRanking)*capacidad);
@@ -120,7 +119,7 @@ int buscarJugador(char * clave, tRanking * vecJugador, unsigned cantJugadores)
     int pos;
     unsigned i;
 
-    pos=-1;
+    pos=NO_ENCONTRADO;
     i=0;
     while(pos==-1 && i<cantJugadores)
     {
@@ -144,6 +143,6 @@ void mostrarVec(tRanking * vecJugador, unsigned cantJugadores)
     unsigned i;
 
     for(i=0;i<cantJugadores;i++)
-        printf("Jugador: %s\tPuntaje: %d",(vecJugador+i)->nombreDeUsuario,(vecJugador+i)->puntos);
+        printf("Jugador: %s\tPuntaje: %d\n",(vecJugador+i)->nombreDeUsuario,(vecJugador+i)->puntos);
 
 }

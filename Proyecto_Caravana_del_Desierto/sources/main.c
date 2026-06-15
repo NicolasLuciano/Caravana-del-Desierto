@@ -22,6 +22,7 @@ int main()
         case 'R':
             printf("Cargando Ranking...\n");
             verRanking();
+            system("pause");
             break;
 
         case 'P':
