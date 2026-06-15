@@ -1,8 +1,7 @@
 #include "../headers/constantesymacros.h"
 #include "../headers/menu.h"
 #include "../headers/juego.h"
-#include "../headers/jugador.h"
-
+#include "../headers/indices.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -12,9 +11,8 @@ int main()
     tUsuario usuarioActual;
     char opcion;
 
-    //identificarUsuario(&usuarioActual);
-    printf("Ingrese nombre de usuario\n");
-    scanf("%s", usuarioActual.nombreDeUsuario);
+    identificarUsuario(&usuarioActual);
+
     do
     {
         switch(opcion = menu(MENSAJE_MENU, OPCIONES_MENU))

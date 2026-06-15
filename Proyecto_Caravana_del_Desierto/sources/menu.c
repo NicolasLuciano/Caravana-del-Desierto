@@ -4,6 +4,8 @@
 #include <string.h>
 #include <ctype.h>
 #include "../headers/jugador.h"
+#include "../headers/archivos.h"
+#include "../headers/arbol.h"
 
 char menu(const char* msj, const char* opciones)
 {
@@ -21,14 +23,9 @@ char menu(const char* msj, const char* opciones)
     while(NULL == strchr(opciones, clave));
     return clave;
 }
-void identificarUsuario(tUsuario *usuario)
-{
-    char nombreUsuario[NOMBRE_DE_USUARIO_TAM];
 
-    printf("Ingrese nombre de usuario: ");
-    scanf("%s", nombreUsuario);
 
-}
+
 //void identificarUsuario(tUsuario* usuario)
 //{
 //    char nombreUsuario[NOMBRE_DE_USUARIO_TAM];

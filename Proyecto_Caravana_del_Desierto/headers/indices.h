@@ -6,14 +6,17 @@
 typedef struct
 {
     char nombreDeUsuario[NOMBRE_DE_USUARIO_TAM];
-} tClave;
+    char nombre[NOMBRE_TAM];
+    char apellido[APELLIDO_TAM];
+} tUsuario;
 
 typedef struct
 {
-    unsigned indice;
-    tClave clave;
-} tIndice;
+    char nombreDeUsuario[NOMBRE_DE_USUARIO_TAM];
+    int numRegistro;
+}tIndice;
 
-int compararPorNombreDeUsuario(void* a, void* b);
-void cargarArchivoEnIndice(const char* nombreArchivo, tArbol* arbol);
+void identificarUsuario(tUsuario *usuario);
+
+int compararUsuarios(const void *a, const void *b);
 #endif // INDICES_H_INCLUDED

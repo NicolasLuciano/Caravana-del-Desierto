@@ -6,12 +6,7 @@
 #include "tablero.h"
 #include "constantesymacros.h"
 
-typedef struct
-{
-    char nombreDeUsuario[NOMBRE_DE_USUARIO_TAM];
-    char nombre[NOMBRE_TAM];
-    char apellido[APELLIDO_TAM];
-} tUsuario;
+
 
 typedef struct
 {

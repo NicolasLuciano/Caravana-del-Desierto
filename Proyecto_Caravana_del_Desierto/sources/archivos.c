@@ -1,7 +1,7 @@
 #include "../headers/archivos.h"
 #include "../headers/lista.h"
 #include "../headers/constantesymacros.h"
-#include "../headers/arbol.h"
+#include "../headers/indices.h"
 
 int cargarConfig(const char* nombreArchivo, tConfig* configuracion)
 {
@@ -102,12 +102,7 @@ int cargarIndices(tArbol *arbol,char *nombreArchivo)
     return TODO_OK;
 }
 
-int compararUsuarios(const void *a, const void *b)
-{
-    const tIndice *ua = (tIndice *)a;
-    const tIndice *ub = (tIndice *)b;
-    return strcmp(ua->nombreDeUsuario,ub->nombreDeUsuario);
-}
+
 int cargarRanking(tRanking ** vecRanking, char * nombreArchivo,unsigned capacidad, unsigned * cantJugadores)
 {
     FILE * pf;

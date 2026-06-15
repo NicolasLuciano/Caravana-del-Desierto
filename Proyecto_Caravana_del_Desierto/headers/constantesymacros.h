@@ -52,9 +52,13 @@
 #define APELLIDO_TAM 30
 #define NOMARCH2 "caravana.txt"
 #define NOMARCH3 "partidas.bin"
+#define NOMARCH_INDEX "indice.bin"
+#define NOMARCH_USER "usuarios.bin"
 #define JUGADORES_MAX 50
 #define NO_ENCONTRADO -6
-
+///CONSTANTE DE INDICE
+#define SI 'S'
+#define NO 'N'
 ///MACROS
 #define MIN(x,y)(x>y?y:x)
 
