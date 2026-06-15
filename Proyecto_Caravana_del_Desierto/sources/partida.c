@@ -82,7 +82,7 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
 {
     tMovimiento mov;
     tCasilla casillaBandido;
-    unsigned i,j,contBandido, colision, bandidoColision;
+    unsigned i,contBandido, colision, bandidoColision;
 
     colision=SIN_COLISION;
 
@@ -112,7 +112,10 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
         else
             proteccion->proteccionActual=NO_PROTEGIDO;//SI ESTA PROTEGIDO, PASA A PERDER LA PROTECCION
         (bandidos+bandidoColision)->vivo=MUERTO;
-
+        if(HAY_BANDIDO==casillaAct->bandido) //SI OCURRE QUE UN BANDIDO DE LA COLA SE MOVIO PREVIAMENTE A LA SALIDA CUANDO EL JUGADOR VUELVE, TENGO QUE SABER CUAL FUE PARA MATARLO
+        {
+            eliminarBandidosEnPosicion(tablero,posJugador,jugador,bandidos,casillaAct,cantBandidos,cantCasillas,*proteccion);
+        }
     }
     else
     {
@@ -168,17 +171,7 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
                         colision=HAY_COLISION;
                         if(HAY_BANDIDO==casillaAct->bandido) //SI OCURRE QUE UN BANDIDO DE LA COLA SE MOVIO PREVIAMENTE A LA SALIDA CUANDO EL JUGADOR VUELVE, TENGO QUE SABER CUAL FUE PARA MATARLO
                         {
-                            j=0;
-                            while(j<contBandido && !hayColision((bandidos+j),posJugador))
-                                j++;
-                            (bandidos+j)->vivo=MUERTO;
-                            mostrarPantalla(tablero,jugador,cantCasillas,*proteccion);
-                            casillaAct->bandido=SIN_BANDIDO;
-                            modificarEnPosLista(posJugador, 0, casillaAct, sizeof(tCasilla));
-                            printf("\nUN BANDIDO TE ESTABA ESPERANDO EN TU CAMPAMENTO.\n");
-                            printf("SIENTE LASTIMA POR TI Y SE VA\n");
-                            system("pause");
-
+                            eliminarBandidosEnPosicion(tablero,posJugador,jugador,bandidos,casillaAct,contBandido,cantCasillas,*proteccion);
                         }
                     }
                     else //SI HUBO UNA COLISION PREVIA, SIGNIFICA QUE EL JUGADOR ESTA EN EL INICIO, ENTONCES NO MUERE, PERO EL BANDIDO SI
@@ -236,6 +229,19 @@ void recibirDmg(tLista tablero, tLista *posJugador, tCasilla * casillaAct, tJuga
     jugador->vidas--;
 }
 
+void eliminarBandidosEnPosicion(tLista tablero,tLista *posJugador, tJugador *jugador,tBandido *bandidos,tCasilla *casillaAct,unsigned cantBandidos, unsigned cantCasillas, tProteccion proteccion)
+{
+    int j=0;
+    while(j<cantBandidos && !hayColision((bandidos+j),posJugador))
+        j++;
+    (bandidos+j)->vivo=MUERTO;
+    mostrarPantalla(tablero,jugador,cantCasillas,proteccion);
+    casillaAct->bandido=SIN_BANDIDO;
+    modificarEnPosLista(posJugador, 0, casillaAct, sizeof(tCasilla));
+    printf("\nUN BANDIDO TE ESTABA ESPERANDO EN TU CAMPAMENTO.\n");
+    printf("SIENTE LASTIMA POR TI Y SE VA\n");
+    system("pause");
+}
 
 void moverBandido(tBandido *bandidos, tCasilla *casilla,tMovimiento mov,unsigned posBandido, unsigned cantBandidos)
 {

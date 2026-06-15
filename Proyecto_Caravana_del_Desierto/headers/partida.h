@@ -33,7 +33,7 @@ unsigned resolverDadoJugador(tLista *posJugador,char *direccion, tCasilla *casil
 void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos, tCola * colaTurno,tCasilla * casillaAct, tJugador * jugador, unsigned cantBandidos, unsigned cantCasillas, tProteccion *proteccion,unsigned *pierdeTurno);
 
 void recibirDmg(tLista tablero, tLista *posJugador, tCasilla * casillaAct, tJugador *jugador);
-void eliminarBandidosEnPosicion(tBandido *bandidos, unsigned cantBandidos, tLista *posicion);
+void eliminarBandidosEnPosicion(tLista tablero,tLista *posJugador, tJugador *jugador,tBandido *bandidos,tCasilla *casillaAct,unsigned cantBandidos, unsigned cantCasillas, tProteccion proteccion);
 void moverBandido(tBandido *bandidos, tCasilla *casilla,tMovimiento mov,unsigned posBandido, unsigned cantBandidos);
 int hayColision(const tBandido *bandido, tLista *posJugador);
 
