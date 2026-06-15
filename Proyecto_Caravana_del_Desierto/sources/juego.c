@@ -52,7 +52,7 @@ int inicializarJuego(char * usuario)
     return TODO_OK;
 }
 
-int verRanking()
+int verRanking(tArbol * arbol)
 {
     tRanking * vecRanking;
     unsigned capacidad,cantJugadores;
@@ -66,7 +66,7 @@ int verRanking()
         return SIN_MEM;
     }
 
-    res=cargarRanking(&vecRanking,NOMARCH3,capacidad,&cantJugadores);
+    res=cargarRanking(&vecRanking,NOMARCH3,capacidad,&cantJugadores,arbol);
     if(res!=TODO_OK)
     {
         free(vecRanking);

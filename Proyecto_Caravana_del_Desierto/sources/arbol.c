@@ -9,15 +9,15 @@ void crearArbol(tArbol *arbol)
     *arbol = NULL;
 }
 
-//void recorrerInOrden(tArbol *arbol, void(*accion)(void*,unsigned))
-//{
-//    if(!*arbol)
-//        return;
-//    recorrerInOrden(&(*arbol)->nodoIzq, accion);
-//    accion((*arbol)->dato,(*arbol)->tam);
-//    recorrerInOrden(&(*arbol)->nodoDer, accion);
-//
-//}
+int cargarVectorInOrden(tArbol arbol,void * dato,unsigned tam)
+{
+    if(!*arbol)
+        return;
+    recorrerInOrden(&(*arbol)->nodoIzq, accion);
+    accion((*arbol)->dato,(*arbol)->tam);
+    recorrerInOrden(&(*arbol)->nodoDer, accion);
+
+}
 
 int buscarEnArbol(tArbol *arbol,void *dato,unsigned tam, int(*cmp)(const void*,const void*))
 {

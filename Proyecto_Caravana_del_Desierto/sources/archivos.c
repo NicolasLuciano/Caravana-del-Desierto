@@ -103,7 +103,7 @@ int cargarIndices(tArbol *arbol,char *nombreArchivo)
 }
 
 
-int cargarRanking(tRanking ** vecRanking, char * nombreArchivo,unsigned capacidad, unsigned * cantJugadores)
+int cargarRanking(tRanking ** vecRanking, char * nombreArchivo,unsigned capacidad, unsigned * cantJugadores, tArbol * arbol)
 {
     FILE * pfPartida,*pfJugadores;
     tRanking * vecAux;
@@ -114,10 +114,7 @@ int cargarRanking(tRanking ** vecRanking, char * nombreArchivo,unsigned capacida
 
 
     (*cantJugadores)=0;
-    while()
-    {
-
-    }
+    cargarVectorInOrden(arbol,**vecRanking,sizeof(tRanking),capacidad);
 
 
     pfPartida=fopen(nombreArchivo_Par,"rb");
