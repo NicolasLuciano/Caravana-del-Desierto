@@ -59,11 +59,13 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
         modificarEnPosLista(&posJugador,0,&casillaAct,sizeof(tCasilla));
         partida->resultado = VICTORIA;
     }
-    finalizarPartida(tablero,*jugador,*partida,proteccion,cantCasillas);
+    finalizarPartida(tablero,*jugador,*partida,proteccion,cantCasillas,&colaRegistro);
+    vaciarCola(&colaTurno);
 }
 
-void finalizarPartida(tLista *tablero,tJugador jugador,tPartida partida, tProteccion proteccion, unsigned cantCasillas)
+void finalizarPartida(tLista *tablero,tJugador jugador,tPartida partida, tProteccion proteccion, unsigned cantCasillas, tCola *colaMovimientos)
 {
+    tMovimiento mov;
     mostrarPantalla(*tablero,&jugador,cantCasillas,proteccion);
     if(VICTORIA==partida.resultado)
     {
@@ -75,6 +77,23 @@ void finalizarPartida(tLista *tablero,tJugador jugador,tPartida partida, tProtec
         printf("\n\nTE QUEDASTE SIN RECURSOS. LOS BANDIDOS SON IMPARABLES!\n\n");
         printf("\n\t--------GAME OVER--------\n");
     }
+    system("pause");
+    system("cls");
+
+    printf("====================================\n");
+    printf("     ESTADISTICAS DE PARTIDA\n");
+    printf("====================================\n");
+    printf("PROVISIONES RESTANTES: %d\n",jugador.vidas);
+    printf("TESOROS OBTENIDOS: %d\n",jugador.puntos);
+    printf("MOVIMIENTOS DEL JUGADOR (%d MOVs): ",partida.movimientos);
+    while(!colaVacia(colaMovimientos))
+    {
+        sacarDeCola(colaMovimientos,&mov,sizeof(mov));
+        printf("%c%d",mov.direccion,mov.casillas);
+        if(!colaVacia(colaMovimientos))
+            printf(", ");
+    }
+    printf("\n");
     system("pause");
 }
 

@@ -2,7 +2,7 @@
 #define INDICES_H_INCLUDED
 
 #include "constantesymacros.h"
-
+#include "arbol.h"
 typedef struct
 {
     char nombreDeUsuario[NOMBRE_DE_USUARIO_TAM];
@@ -16,7 +16,7 @@ typedef struct
     int numRegistro;
 }tIndice;
 
-void identificarUsuario(tUsuario *usuario);
+void identificarUsuario(tUsuario *usuario, tArbol *arbol);
 
 int compararUsuarios(const void *a, const void *b);
 int validarUsuario(const char* usuario);
