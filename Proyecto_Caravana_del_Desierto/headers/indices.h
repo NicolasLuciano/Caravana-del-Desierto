@@ -22,4 +22,6 @@ int compararUsuarios(const void *a, const void *b);
 int validarUsuario(const char* usuario);
 int validarNombreApellido(const char* texto);
 int leerCadena(char * cadena, int(*validarCad)(const char *));
+void cargarArchivoOrdenadoEnIndiceBalanceadoEnvoltorio(tArbol *pa, FILE *fp);
+void cargarArchivoOrdenadoEnIndiceBalanceado(tArbol *pa, FILE *fp, int, int);
 #endif // INDICES_H_INCLUDED
