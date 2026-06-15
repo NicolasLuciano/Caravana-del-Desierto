@@ -1,6 +1,7 @@
 #include "../headers/archivos.h"
 #include "../headers/lista.h"
 #include "../headers/constantesymacros.h"
+#include "../headers/arbol.h"
 
 int cargarConfig(const char* nombreArch, tConfig* configuracion)
 {
@@ -75,3 +76,29 @@ void escribirCasilla(FILE* fp, const void* dato)
     else
         fprintf(fp,"%02d: %c\n", casilla.numCasilla, casilla.tipo);
 }
+
+int cargarIndices(tArbol *arbol,char *nombreArchivo)
+{
+    FILE *fp;
+    tIndice indice;
+    fp = fopen(nombreArchivo,"rb");
+    if(!fp)
+        return ARCH_ERROR;
+    while(fread(&indice,sizeof(indice),1,fp)==1)
+        insertarArbol(arbol,&indice,sizeof(indice),compararUsuarios);
+    fclose(fp);
+    return TODO_OK;
+}
+
+int compararUsuarios(const void *a, const void *b)
+{
+    const tIndice *ua = (tIndice *)a;
+    const tIndice *ub = (tIndice *)b;
+    return strcmp(ua->nombreDeUsuario,ub->nombreDeUsuario);
+}
+
+
+
+
+
+

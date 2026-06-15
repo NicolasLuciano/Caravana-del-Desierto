@@ -7,12 +7,13 @@ typedef struct sNodoA
     unsigned tam;
     struct sNodoA *nodoIzq;
     struct sNodoA *nodoDer;
-} tNodo;
+}tNodoArbol;
 
-typedef tNodo * tArbol;
+typedef tNodoArbol * tArbol;
 
 void crearArbol(tArbol *arbol);
-void recorrerInOrden(tArbol *arbol, void(*accion)(void*,unsigned));
-int insertarArbol(tArbol *arbol,void *dato,unsigned tam, int(*cmp)(void*,void*));
+//void recorrerInOrden(tArbol *arbol, void(*accion)(void*,unsigned));
+int insertarArbol(tArbol *arbol,void *dato,unsigned tam, int(*cmp)(const void*,const void*));
+int buscarEnArbol(tArbol *arbol,void *dato,unsigned tam, int(*cmp)(const void*,const void*));
 
 #endif // ARBOL_H_INCLUDED

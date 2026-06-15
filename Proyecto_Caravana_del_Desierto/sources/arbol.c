@@ -9,17 +9,17 @@ void crearArbol(tArbol *arbol)
     *arbol = NULL;
 }
 
-void recorrerInOrden(tArbol *arbol, void(*accion)(void*,unsigned))
-{
-    if(!*arbol)
-        return;
-    recorrerInOrden(&(*arbol)->nodoIzq, accion);
-    accion((*arbol)->dato,(*arbol)->tam);
-    recorrerInOrden(&(*arbol)->nodoDer, accion);
+//void recorrerInOrden(tArbol *arbol, void(*accion)(void*,unsigned))
+//{
+//    if(!*arbol)
+//        return;
+//    recorrerInOrden(&(*arbol)->nodoIzq, accion);
+//    accion((*arbol)->dato,(*arbol)->tam);
+//    recorrerInOrden(&(*arbol)->nodoDer, accion);
+//
+//}
 
-}
-
-int buscarEnArbol(tArbol *arbol,void *dato,unsigned tam, int(*cmp)(void*,void*))
+int buscarEnArbol(tArbol *arbol,void *dato,unsigned tam, int(*cmp)(const void*,const void*))
 {
     int comp;
     if(!*arbol)
@@ -36,12 +36,12 @@ int buscarEnArbol(tArbol *arbol,void *dato,unsigned tam, int(*cmp)(void*,void*))
     return buscarEnArbol(&(*arbol)->nodoDer,dato,tam,cmp);
 }
 
-int insertarArbol(tArbol *arbol,void *dato,unsigned tam, int(*cmp)(void*,void*))
+int insertarArbol(tArbol *arbol,void *dato,unsigned tam, int(*cmp)(const void*,const void*))
 {
     if(!*arbol)
     {
-        tNodo *nodoAux;
-        nodoAux = malloc(sizeof(tNodo));
+        tNodoArbol *nodoAux;
+        nodoAux = malloc(sizeof(tNodoArbol));
         if(!nodoAux)
             return SIN_MEM;
         nodoAux->dato = malloc(tam);
