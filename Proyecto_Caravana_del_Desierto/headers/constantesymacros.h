@@ -30,7 +30,7 @@
 #define VICTORIA 'V'
 #define PARTIDA_INEXISTENTE 'I'
 ///CONSTANTES DE MENU
-#define MENSAJE_MENU "R - Ver el ranking de jugadores\nP - Jugar una nueva partida\nQ - Salir del juego\n-> "
+#define MENSAJE_MENU "\n\nP - NUEVA PARTIDA                    R - VER RANKING                    Q - SALIR DEL JUEGO\n-> "
 #define OPCIONES_MENU "RPQ"
 ///CONSTANTES DE TABLERO
 #define OASIS 'O'
