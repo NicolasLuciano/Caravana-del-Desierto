@@ -4,7 +4,11 @@
 #include "../headers/indices.h"
 #include "../headers/archivos.h"
 #include "../headers/constantesymacros.h"
-
+void mostrarIndice(void* dato, unsigned tam)
+{
+    tIndice indice = *(tIndice*)dato;
+    printf("%s %d\n",indice.nombreDeUsuario, indice.numRegistro);
+}
 int compararUsuarios(const void *a, const void *b)
 {
     const tIndice *ua = (tIndice *)a;
@@ -70,7 +74,7 @@ void cargarArchivoOrdenadoEnIndiceBalanceadoEnvoltorio(tArbol *pa, FILE *fp)
 
     fseek(fp, 0, SEEK_END);
     bytes = ftell(fp);
-    cantidad = bytes / sizeof(tUsuario);
+    cantidad = bytes / sizeof(tIndice);
 
     if (cantidad > 0)
         cargarArchivoOrdenadoEnIndiceBalanceado(pa, fp, INICIO_DEL_ARCHIVO, cantidad-1);
@@ -80,17 +84,12 @@ void cargarArchivoOrdenadoEnIndiceBalanceado(tArbol *pa, FILE *fp, int inicio,in
 {
     size_t medio = (fin+inicio)/2;
     tIndice indice;
-    tUsuario usuario;
 
     if (inicio > fin)
         return;
 
-    fseek(fp, medio*sizeof(tUsuario), SEEK_SET);
-    fread(&usuario, 1, sizeof(tUsuario), fp);
-
-    strcpy(indice.nombreDeUsuario,usuario.nombreDeUsuario);
-    indice.numRegistro = medio;
-
+    fseek(fp, medio*sizeof(tIndice), SEEK_SET);
+    fread(&indice, 1, sizeof(tIndice), fp);
 
     insertarArbol(pa, &indice, sizeof(tIndice), compararUsuarios);
 
@@ -114,7 +113,7 @@ void identificarUsuario(tUsuario *usuario, tArbol *arbol)
         return;
     }
 
-    pfIndice = fopen(NOMARCH_INDEX, "ab");
+    pfIndice = fopen(NOMARCH_INDEX, "a+b");
     if(!pfIndice)
     {
         fclose(pfUsuarios);
@@ -122,10 +121,10 @@ void identificarUsuario(tUsuario *usuario, tArbol *arbol)
         return;
     }
     cargarArchivoOrdenadoEnIndiceBalanceadoEnvoltorio(arbol,pfIndice);
-    opcion=NO;
 
     do
     {
+        opcion=NO;
         system("cls");
         printf("\n====================================\n");
         printf("         INICIO DE SESION\n");
@@ -134,6 +133,7 @@ void identificarUsuario(tUsuario *usuario, tArbol *arbol)
 
         do
         {
+            fflush(stdin);
             fgets(cadValidacion, sizeof(cadValidacion), stdin);
             validacion=leerCadena(cadValidacion,validarUsuario);
             if(validacion==CADENA_INVALIDA)
@@ -181,6 +181,7 @@ void identificarUsuario(tUsuario *usuario, tArbol *arbol)
         strcpy(usuario->nombreDeUsuario,indice.nombreDeUsuario);
         do
         {
+            fflush(stdin);
             fgets(cadValidacion, sizeof(cadValidacion), stdin);
             validacion=leerCadena(cadValidacion,validarNombreApellido);
             if(validacion==CADENA_INVALIDA)
@@ -193,6 +194,7 @@ void identificarUsuario(tUsuario *usuario, tArbol *arbol)
 
         do
         {
+            fflush(stdin);
             fgets(cadValidacion, sizeof(cadValidacion), stdin);
             validacion=leerCadena(cadValidacion,validarNombreApellido);
             if(validacion==CADENA_INVALIDA)
@@ -205,10 +207,10 @@ void identificarUsuario(tUsuario *usuario, tArbol *arbol)
         fseek(pfUsuarios,0,SEEK_END);
         indice.numRegistro = ftell(pfUsuarios) / sizeof(tUsuario);
 
-        fwrite(usuario,sizeof(*usuario),1,pfUsuarios);
+        fwrite(usuario,sizeof(tUsuario),1,pfUsuarios);
 
         fflush(pfIndice);
-        fwrite(&indice,sizeof(indice),1,pfIndice);
+        fwrite(&indice,sizeof(tIndice),1,pfIndice);
 
     }
 
