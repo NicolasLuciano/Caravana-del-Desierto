@@ -34,7 +34,6 @@ void empezarPartida(tLista * tablero, tJugador * jugador, tBandido *bandidos, un
 
         mostrarPantalla(*tablero,jugador,cantCasillas,proteccion);
 
-
         if(NO_PIERDE_TURNO==pierdeTurno)
             dado=resolverDadoJugador(&posJugador,&direccion,&casillaAct);
         else
@@ -138,7 +137,7 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
     }
     else
     {
-        if(casillaAct->tipo!=VACIA && casillaAct->tipo!=SALIDA && casillaAct->tipo!=TORMENTA)
+        if(casillaAct->tipo!=INICIO && casillaAct->tipo!=VACIA && casillaAct->tipo!=SALIDA && casillaAct->tipo!=TORMENTA)
         {
             mostrarPantalla(tablero,jugador,cantCasillas,*proteccion);
             switch(casillaAct->tipo)
@@ -289,7 +288,7 @@ int hayColision(const tBandido *bandido, tLista *posJugador)
 
 unsigned resolverDadoJugador(tLista *posJugador,char *direccion, tCasilla *casillaAct)
 {
-    unsigned dado;
+    int dado;
     dado=tirar_dado(DADO_JUGADOR);
     printf("\n\nLANZANDO DADO...\n");
     Sleep(MILISEGUNDOS);

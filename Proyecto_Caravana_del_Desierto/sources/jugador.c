@@ -45,8 +45,8 @@ void encolarJugador(tLista *posJugador, tCasilla casillaAct, tCola *colaTurno, t
             movJugador.casillas = dado;
             ponerEnCola(colaRegistro,&movJugador,sizeof(tMovimiento));
         }
+    }
 
         ponerEnCola(colaTurno,&movJugador,sizeof(tMovimiento));
         (*movimientos)++;
-    }
 }
