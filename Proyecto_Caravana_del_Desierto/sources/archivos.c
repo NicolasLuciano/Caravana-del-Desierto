@@ -113,7 +113,7 @@ int cargarRanking(tRanking * vecRanking, char * arch_partida,unsigned * cantActu
     pfPartida=fopen(arch_partida,"rb");
     if(!pfPartida)
     {
-        perror(arch_partida);
+        printf("No hay partidas registradas.\n");
         return ARCH_ERROR;
     }
 

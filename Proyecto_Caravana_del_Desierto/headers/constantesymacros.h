@@ -28,6 +28,7 @@
 #define MILISEGUNDOS 500
 #define DERROTA 'D'
 #define VICTORIA 'V'
+#define PARTIDA_INEXISTENTE 'I'
 ///CONSTANTES DE MENU
 #define MENSAJE_MENU "R - Ver el ranking de jugadores\nP - Jugar una nueva partida\nQ - Salir del juego\n-> "
 #define OPCIONES_MENU "RPQ"

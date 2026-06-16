@@ -89,7 +89,7 @@ void cargarArchivoOrdenadoEnIndiceBalanceado(tArbol *pa, FILE *fp, int inicio,in
         return;
 
     fseek(fp, medio*sizeof(tIndice), SEEK_SET);
-    fread(&indice, 1, sizeof(tIndice), fp);
+    fread(&indice, sizeof(tIndice), 1, fp);
 
     insertarArbol(pa, &indice, sizeof(tIndice), compararUsuarios);
 
@@ -173,6 +173,8 @@ void identificarUsuario(tUsuario *usuario, tArbol *arbol)
 
     if(NO_ENCONTRADO==resultadoBusqueda)
     {
+        tPartida partida;
+
         printf("\n\n====================================\n");
         printf("        REGISTRO DE USUARIO\n");
         printf("====================================\n");
@@ -212,6 +214,11 @@ void identificarUsuario(tUsuario *usuario, tArbol *arbol)
         fflush(pfIndice);
         fwrite(&indice,sizeof(tIndice),1,pfIndice);
 
+        partida.movimientos=0;
+        partida.puntos=0;
+        partida.resultado=PARTIDA_INEXISTENTE;
+        strcpy(partida.nombreDeUsuario,usuario->nombreDeUsuario);
+        guardarPartida(partida,NOMARCH_PARTIDA);
     }
 
     fclose(pfIndice);
