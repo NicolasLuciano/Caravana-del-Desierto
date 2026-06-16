@@ -87,23 +87,6 @@ void escribirCasilla(FILE* fp, const void* dato)
         fprintf(fp,"%02d: %c\n", casilla.numCasilla, casilla.tipo);
 }
 
-int cargarIndices(tArbol *arbol,char *nombreArchivo)
-{
-    FILE *fp;
-    tIndice indice;
-    fp = fopen(nombreArchivo,"rb");
-    if(!fp)
-    {
-        perror(nombreArchivo);
-        return ARCH_ERROR;
-    }
-    while(fread(&indice,sizeof(indice),1,fp)==1)
-        insertarArbol(arbol,&indice,sizeof(indice),compararUsuarios);
-    fclose(fp);
-    return TODO_OK;
-}
-
-
 int cargarRanking(tRanking * vecRanking, char * arch_partida,unsigned * cantActual)
 {
     FILE * pfPartida;
