@@ -168,7 +168,7 @@ int validarTablero(tConfig config)
        config.cantVidasExtra < 1)
         return  TABLERO_INVALIDO;
 
-    if(config.cantBandidos<config.vidasIniciales+config.cantVidasExtra+config.cantOasis)
+    if(config.cantBandidos<config.vidasIniciales+config.cantVidasExtra)
         return  TABLERO_INVALIDO;
 
     totalElementos = config.cantBandidos + config.cantPremios + config.cantOasis
