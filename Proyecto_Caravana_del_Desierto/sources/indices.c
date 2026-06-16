@@ -4,7 +4,7 @@
 #include "../headers/indices.h"
 #include "../headers/archivos.h"
 #include "../headers/constantesymacros.h"
-void mostrarIndice(void* dato, unsigned tam)
+void mostrarIndice(void* dato, unsigned tam, void *ctx)
 {
     tIndice indice = *(tIndice*)dato;
     printf("%s %d\n",indice.nombreDeUsuario, indice.numRegistro);
@@ -82,7 +82,7 @@ void cargarArchivoOrdenadoEnIndiceBalanceadoEnvoltorio(tArbol *pa, FILE *fp)
 
 void cargarArchivoOrdenadoEnIndiceBalanceado(tArbol *pa, FILE *fp, int inicio,int fin)
 {
-    size_t medio = (fin+inicio)/2;
+    int medio = (fin+inicio)/2;
     tIndice indice;
 
     if (inicio > fin)
@@ -132,7 +132,6 @@ void identificarUsuario(tUsuario *usuario, tArbol *arbol)
 
         do
         {
-            fflush(stdin);
             fgets(cadValidacion, sizeof(cadValidacion), stdin);
             validacion=leerCadena(cadValidacion,validarUsuario);
             if(validacion==CADENA_INVALIDA)
@@ -180,7 +179,6 @@ void identificarUsuario(tUsuario *usuario, tArbol *arbol)
         strcpy(usuario->nombreDeUsuario,indice.nombreDeUsuario);
         do
         {
-            fflush(stdin);
             fgets(cadValidacion, sizeof(cadValidacion), stdin);
             validacion=leerCadena(cadValidacion,validarNombreApellido);
             if(validacion==CADENA_INVALIDA)
@@ -193,7 +191,6 @@ void identificarUsuario(tUsuario *usuario, tArbol *arbol)
 
         do
         {
-            fflush(stdin);
             fgets(cadValidacion, sizeof(cadValidacion), stdin);
             validacion=leerCadena(cadValidacion,validarNombreApellido);
             if(validacion==CADENA_INVALIDA)
@@ -205,12 +202,11 @@ void identificarUsuario(tUsuario *usuario, tArbol *arbol)
         fflush(pfUsuarios);
         fseek(pfUsuarios,0,SEEK_END);
         indice.numRegistro = ftell(pfUsuarios) / sizeof(tUsuario);
-
         fwrite(usuario,sizeof(tUsuario),1,pfUsuarios);
 
-        fseek(pfIndice,0,SEEK_END);
-        fflush(pfIndice);
-        fwrite(&indice,sizeof(tIndice),1,pfIndice);
+        if(insertarArbol(arbol,&indice,sizeof(tIndice),compararUsuarios)==TODO_OK)
+            actualizarArchivoIndice(arbol);
+
 
         partida.movimientos=0;
         partida.puntos=0;
@@ -221,4 +217,22 @@ void identificarUsuario(tUsuario *usuario, tArbol *arbol)
 
     fclose(pfIndice);
     fclose(pfUsuarios);
+}
+
+void guardarIndice(void* dato,unsigned tam, void * ctx)
+{
+    FILE * pfIndice = (FILE * )ctx;
+    fwrite(dato,tam,1,pfIndice);
+}
+
+void actualizarArchivoIndice(tArbol* arbol)
+{
+    FILE * pfIndice=fopen(NOMARCH_INDEX,"wb");
+
+    if(!pfIndice)
+        return;
+
+    recorrerInOrden(arbol,guardarIndice,pfIndice);
+
+    fclose(pfIndice);
 }

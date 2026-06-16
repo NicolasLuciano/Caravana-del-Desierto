@@ -24,4 +24,7 @@ int validarNombreApellido(const char* texto);
 int leerCadena(char * cadena, int(*validarCad)(const char *));
 void cargarArchivoOrdenadoEnIndiceBalanceadoEnvoltorio(tArbol *pa, FILE *fp);
 void cargarArchivoOrdenadoEnIndiceBalanceado(tArbol *pa, FILE *fp, int, int);
+void guardarIndice(void* dato,unsigned tam, void * ctx);
+void actualizarArchivoIndice(tArbol* arbol);
+void mostrarIndice(void* dato, unsigned tam, void *ctx);
 #endif // INDICES_H_INCLUDED

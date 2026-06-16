@@ -71,7 +71,7 @@
 	"../headers/tablero.h"
 	"../headers/partida.h"
 
-1781577179 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\main.c
+1781627850 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\main.c
 	"../headers/constantesymacros.h"
 	"../headers/menu.h"
 	"../headers/juego.h"
@@ -90,20 +90,20 @@
 	"../headers/archivos.h"
 	"../headers/arbol.h"
 
-1781576983 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\tablero.c
+1781578918 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\tablero.c
 	"../headers/tablero.h"
 	"../headers/constantesymacros.h"
 	<time.h>
 	<string.h>
 
-1781569696 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\arbol.c
+1781628239 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\arbol.c
 	"../headers/arbol.h"
 	"../headers/constantesymacros.h"
 	<string.h>
 	<stdlib.h>
 	<stdio.h>
 
-1781569696 c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\headers\arbol.h
+1781628233 c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\headers\arbol.h
 
 1781392533 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\cola.c
 	"../headers/cola.h"
@@ -500,11 +500,11 @@
 	"../headers/archivos.h"
 	"../headers/constantesymacros.h"
 
-1781566237 c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\headers\indices.h
+1781628553 c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\headers\indices.h
 	"constantesymacros.h"
 	"arbol.h"
 
-1781578829 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\indices.c
+1781630240 source:c:\users\luciano\desktop\tp_algorimos_2026_c1_03-3600_grupo3\caravana-del-desierto\proyecto_caravana_del_desierto\sources\indices.c
 	<stdio.h>
 	<string.h>
 	<ctype.h>

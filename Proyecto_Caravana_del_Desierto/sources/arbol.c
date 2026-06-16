@@ -9,13 +9,13 @@ void crearArbol(tArbol *arbol)
     *arbol = NULL;
 }
 
-void recorrerInOrden(tArbol *arbol,void(*accion)(void*,unsigned))
+void recorrerInOrden(tArbol *arbol,void(*accion)(void*,unsigned,void *ctx),void * ctx)
 {
     if(!*arbol)
         return;
-    recorrerInOrden(&(*arbol)->nodoIzq, accion);
-    accion((*arbol)->dato,(*arbol)->tam);
-    recorrerInOrden(&(*arbol)->nodoDer, accion);
+    recorrerInOrden(&(*arbol)->nodoIzq, accion,ctx);
+    accion((*arbol)->dato,(*arbol)->tam,ctx);
+    recorrerInOrden(&(*arbol)->nodoDer, accion,ctx);
 
 }
 
