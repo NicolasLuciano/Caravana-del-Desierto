@@ -16,6 +16,19 @@ int compararUsuarios(const void *a, const void *b)
     return strcmp(ua->nombreDeUsuario,ub->nombreDeUsuario);
 }
 
+int validarOpcion(const char *cad)
+{
+    if(strlen(cad) != 1)
+        return CADENA_INVALIDA;
+
+    char op = toupper(cad[0]);
+
+    if(op != SI && op != NO)
+        return CADENA_INVALIDA;
+
+    return TODO_OK;
+}
+
 int validarUsuario(const char* usuario)
 {
     if(*usuario == '\0')
@@ -150,12 +163,13 @@ void identificarUsuario(tUsuario *usuario, tArbol *arbol)
             printf("SOS %s %s? (S/N)", usuario->nombre, usuario->apellido);
             do
             {
-                scanf(" %c",&opcion);
-                opcion=toupper(opcion);
-                if(opcion!=SI && opcion!=NO)
+                fgets(cadValidacion, sizeof(cadValidacion), stdin);
+                validacion=leerCadena(cadValidacion,validarOpcion);
+                opcion=toupper(cadValidacion[0]);
+                if(validacion!=TODO_OK)
                     printf("OPCION INVALIDA. INGRESE NUEVAMENTE\n");
             }
-            while(opcion!=SI && opcion!=NO);
+            while(validacion!=TODO_OK);
             if(SI==opcion)
             {
                 printf("_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_\n");
