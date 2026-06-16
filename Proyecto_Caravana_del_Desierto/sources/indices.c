@@ -89,7 +89,7 @@ void cargarArchivoOrdenadoEnIndiceBalanceado(tArbol *pa, FILE *fp, int inicio,in
         return;
 
     fseek(fp, medio*sizeof(tIndice), SEEK_SET);
-    fread(&indice, sizeof(tIndice), 1, fp);
+    fread(&indice, sizeof(tIndice),1, fp);
 
     insertarArbol(pa, &indice, sizeof(tIndice), compararUsuarios);
 
@@ -121,7 +121,6 @@ void identificarUsuario(tUsuario *usuario, tArbol *arbol)
         return;
     }
     cargarArchivoOrdenadoEnIndiceBalanceadoEnvoltorio(arbol,pfIndice);
-
     do
     {
         opcion=NO;
@@ -143,7 +142,6 @@ void identificarUsuario(tUsuario *usuario, tArbol *arbol)
         strcpy(indice.nombreDeUsuario,cadValidacion);
 
         resultadoBusqueda=buscarEnArbol(arbol,&indice,sizeof(indice),compararUsuarios);
-
         if(NO_ENCONTRADO!=resultadoBusqueda)
         {
             fseek(pfUsuarios,indice.numRegistro * sizeof(tUsuario),SEEK_SET);
@@ -179,7 +177,6 @@ void identificarUsuario(tUsuario *usuario, tArbol *arbol)
         printf("        REGISTRO DE USUARIO\n");
         printf("====================================\n");
         printf("\nINGRESE SU NOMBRE: ");
-
         strcpy(usuario->nombreDeUsuario,indice.nombreDeUsuario);
         do
         {
@@ -211,6 +208,7 @@ void identificarUsuario(tUsuario *usuario, tArbol *arbol)
 
         fwrite(usuario,sizeof(tUsuario),1,pfUsuarios);
 
+        fseek(pfIndice,0,SEEK_END);
         fflush(pfIndice);
         fwrite(&indice,sizeof(tIndice),1,pfIndice);
 

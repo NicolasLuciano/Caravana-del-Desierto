@@ -55,7 +55,7 @@ int generarTablero(tLista *tablero,const tConfig configuracion, tBandido * bandi
     free(vecPosiciones);
     free(cadPosiciones);
     free(posBandidos);
-    return 0;
+    return TODO_OK;
 }
 
 void mezclarPosiciones(int *vecPosiciones, int cantCasillas)
@@ -168,7 +168,7 @@ int validarTablero(tConfig config)
        config.cantVidasExtra < 1)
         return  TABLERO_INVALIDO;
 
-    if(config.cantBandidos<config.vidasIniciales+config.cantVidasExtra)
+    if(config.cantBandidos<config.vidasIniciales+config.cantVidasExtra+config.cantOasis)
         return  TABLERO_INVALIDO;
 
     totalElementos = config.cantBandidos + config.cantPremios + config.cantOasis

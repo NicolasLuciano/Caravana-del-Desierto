@@ -19,20 +19,20 @@ int inicializarJuego(char * usuario)
     strcpy(partida.nombreDeUsuario,usuario);
     if(validarTablero(configuracion)==TABLERO_INVALIDO)
     {
-        fprintf(stderr,"El tablero a generar es invalido\n");
+        fprintf(stderr,"---El tablero a generar es invalido---\n");
         return TABLERO_INVALIDO;
     }
 
     bandidos = crearBandidos(configuracion.cantBandidos);
     if(NULL == bandidos)
     {
-        fprintf(stderr,"No hay memoria suficiente para iniciar la partida\n");
+        fprintf(stderr,"---No hay memoria suficiente para iniciar la partida---\n");
         return SIN_MEM;
     }
 
     if(SIN_MEM == generarTablero(&tablero, configuracion, bandidos))
     {
-        fprintf(stderr,"No hay memoria suficiente para iniciar la partida\n");
+        fprintf(stderr,"---No hay memoria suficiente para iniciar la partida---\n");
         free(bandidos);
         return SIN_MEM;;
     }

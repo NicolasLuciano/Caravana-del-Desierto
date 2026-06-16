@@ -20,13 +20,13 @@ int main()
         {
         case 'R':
             if(verRanking(&arbol) != TODO_OK)
-                printf("No se pudo cargar el ranking. Volviendo al menu...\n");
+                printf("---No se pudo cargar el ranking. Volviendo al menu...---\n");
             system("pause");
             break;
 
         case 'P':
             if(inicializarJuego(usuarioActual.nombreDeUsuario) != TODO_OK)
-                printf("No se pudo iniciar la partida. Volviendo al menu...\n");
+                printf("---No se pudo iniciar la partida. Volviendo al menu...---\n");
             system("pause");
             break;
 
