@@ -100,8 +100,8 @@ void resolverMovimientos(tLista tablero,tLista * posJugador, tBandido * bandidos
 {
     tMovimiento mov;
     tCasilla casillaBandido;
-    unsigned i,contBandido, colision, bandidoColision;
-
+    unsigned i,contBandido, colision;
+    int bandidoColision;
     colision=SIN_COLISION;
 
     sacarDeCola(colaTurno, &mov, sizeof(tMovimiento));
